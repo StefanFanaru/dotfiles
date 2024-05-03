@@ -1,0 +1,36 @@
+Xft.dpi: 96
+
+wm.bar.font: Ubuntu 12
+i3xrocks.value.font: Ubuntu 12
+gtk.monospace_font_name: JetBrainsMono Nerd Font 12
+gtk.font_name: Ubuntu 12
+
+wm.bar.background.color: #000000
+regolith.wallpaper.file: /mnt/x/CLI/terminal-config/wallpaper_leaves.png
+gnome.terminal.font: JetBrainsMono Nerd Font 13
+gnome.terminal.background-transparency-percent: 10
+gnome.terminal.use-transparent-background:	true
+
+## Bar hide by default, toggle with Mod+M to show, Mod+Shift+M to hide
+wm.bar.mode: hide
+
+## Gap configuration
+wm.gaps.inner.size: 0
+
+## Border configuration
+wm.window.border.size: 3
+wm.client.focused.color.child_border: #AAD3E9
+
+## Workspace names
+wm.workspace.01.name: 1:FOO
+
+
+## i3xrocks
+i3xrocks.nominal: #ffffff
+i3xrocks.value.color: #ffffff
+i3xrocks.label.color: #ffffff
+
+## Bindings
+wm.binding.exit_app: q
+wm.mod: Mod1
+wm.alt: Mod4

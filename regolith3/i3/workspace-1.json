@@ -1,0 +1,99 @@
+{
+    "layout": "splith",
+    "percent": 0.5,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 3,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 1434,
+               "width": 1701,
+               "x": 1709,
+               "y": 3
+            },
+            "marks": [],
+            "name": "i3: Layout saving in i3 - Google Chrome",
+            "percent": 0.333333333333333,
+            "swallows": [
+               {
+                "class": "^Google\\-chrome$"
+               }
+            ],
+            "type": "con"
+        },
+
+        {
+            "border": "pixel",
+            "current_border_width": 3,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 578,
+               "width": 802,
+               "x": 0,
+               "y": 0
+            },
+            "marks": [],
+            "name": "i3-save-tree --workspace 1 > ~/.config/regolith3/i3/workspace-1.json",
+            "percent": 0.333333333333333,
+            "swallows": [
+               {
+                "class": "^Gnome\\-terminal$"
+               }
+            ],
+            "type": "con"
+        },
+
+        {
+            "border": "pixel",
+            "floating": "auto_off",
+            "layout": "splitv",
+            "marks": [],
+            "percent": 0.333333333333333,
+            "type": "con",
+            "nodes": [
+                {
+                    "border": "pixel",
+                    "current_border_width": 3,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 578,
+                       "width": 802,
+                       "x": 0,
+                       "y": 0
+                    },
+                    "marks": [],
+                    "name": "stefanaru@stefanaru-PC:~",
+                    "percent": 0.5,
+                    "swallows": [
+                       {
+                        "class": "^Gnome\\-terminal$"
+                       }
+                    ],
+                    "type": "con"
+                },
+                {
+                    "border": "pixel",
+                    "current_border_width": 3,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 578,
+                       "width": 802,
+                       "x": 0,
+                       "y": 0
+                    },
+                    "marks": [],
+                    "name": "stefanaru@stefanaru-PC:~",
+                    "percent": 0.5,
+                    "swallows": [
+                       {
+                        "class": "^Gnome\\-terminal$"
+                       }
+                    ],
+                    "type": "con"
+                }
+            ]
+        }
+    ]
+}
