@@ -27,11 +27,11 @@
 					"y": 3
 				},
 				"marks": [],
-				"name": "klaxalk/i3-layout-manager: Saving, loading and managing layouts for i3wm. - Google Chrome",
+				"name": "i3 run bash command at startup - Google Search - Google Chrome",
 				"percent": 0.375375375375375,
 				"swallows": [
 				{
-					"instance": "^.+$"
+					"class": "^Google-chrome$"
 				}
 				],
 				"type": "con"
@@ -47,11 +47,11 @@
 					"y": 0
 				},
 				"marks": [],
-				"name": "./layout_manager.sh",
+				"name": "$DOT_FILES/scripts/external/i3-layout-manager/layout_manager.sh",
 				"percent": 0.38038038038038,
 				"swallows": [
 				{
-					"instance": "^.+$"
+					"class": "^Gnome-terminal$"
 				}
 				],
 				"type": "con"
@@ -79,7 +79,7 @@
 					"percent": 0.5,
 					"swallows": [
 					{
-						"instance": "^.+$"
+						"class": "^teams-for-linux$"
 					}
 					],
 					"type": "con"
@@ -99,7 +99,7 @@
 					"percent": 0.5,
 					"swallows": [
 					{
-						"instance": "^.+$"
+						"class": "^Gnome-terminal$"
 					}
 					],
 					"type": "con"

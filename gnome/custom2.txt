@@ -1,9 +1,0 @@
-[custom0]
-binding='<Shift><Alt>F10'
-command='/bin/bash /home/stefanaru/dotfiles/scripts/external/i3-layout-manager/layout_manager.sh workspace2'
-name='Workspace22'
-
-[custom1]
-binding='<Shift><Alt>F9'
-command='/bin/bash /home/stefanaru/dotfiles/scripts/external/i3-layout-manager/layout_manager.sh workspace1'
-name='Workspace 1'

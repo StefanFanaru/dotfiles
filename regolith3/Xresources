@@ -21,10 +21,6 @@ wm.gaps.inner.size: 0
 wm.window.border.size: 3
 wm.client.focused.color.child_border: #AAD3E9
 
-## Workspace names
-wm.workspace.01.name: 1:FOO
-
-
 ## i3xrocks
 i3xrocks.nominal: #ffffff
 i3xrocks.value.color: #ffffff
