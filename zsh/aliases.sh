@@ -22,3 +22,5 @@ alias vim='nvim'
 # NOTE: CDs
 alias cdvim='cd /x/CLI/terminal-config/nvim'
 
+# NOTE: Call scripts
+alias layoutmanager='$DOT_FILES/scripts/external/i3-layout-manager/layout_manager.sh'

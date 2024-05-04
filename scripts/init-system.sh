@@ -35,7 +35,7 @@ else
 fi
 
 # Install global npm packages
-npm install -g eslind_d markdownlint typescript @fsouza/prettierd jsonlint
+npm install -g eslind_d markdownlint-cli typescript @fsouza/prettierd jsonlint
 
 # Install dotnet
 ./dotnet-install.sh --version latest
