@@ -278,10 +278,10 @@
     close = ctrl+forwardslash
 
     # Close all notifications.
-    close_all = mod1+n
+    close_all = mod1+b
 
     # Redisplay last message(s).
-    history = mod1+n+d
+    history = mod1+n
 
     # Context menu.
     context = mod1+n+k

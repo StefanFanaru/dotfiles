@@ -3,10 +3,10 @@ sudo apt install zsh
 sudo apt install build-essential -y
 sudo apt install fswatch -y
 sudo apt install shellcheck -y
-sudo apt install fd
-sudo apt install xclip   # to make system cliboard work in nvim
-sudo apt install fzf     # fuzzy finder
-sudo apt install ripgrep # multi threaded grepping
+sudo apt install fd -y
+sudo apt install xclip -y   # to make system cliboard work in nvim
+sudo apt install fzf -y     # fuzzy finder
+sudo apt install ripgrep -y # multi threaded grepping
 echo "Install lsd manually from here https://github.com/lsd-rs/lsd/releases"
 
 printf "\nLinux packages where installed"
@@ -35,7 +35,7 @@ else
 fi
 
 # Install global npm packages
-npm install -g eslind_d markdownlint-cli typescript @fsouza/prettierd jsonlint
+npm install -g eslint_d markdownlint-cli typescript @fsouza/prettierd jsonlint
 
 # Install dotnet
 ./dotnet-install.sh --version latest
@@ -55,3 +55,7 @@ echo 'fs.inotify.max_queued_events=200000' >>  /tmp/sysctl.conf
 sudo cp /tmp/sysctl.conf /etc/
 
 echo "SCRIP IS DONE!"
+
+# DCONF settings - GNOME only
+gsettings set org.gnome.nm-applet disable-disconnected-notifications "true"
+gsettings set org.gnome.nm-applet disable-connected-notifications "true"

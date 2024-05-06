@@ -1,0 +1,18 @@
+blocks:
+  - name
+  - size
+  - date
+color:
+   when: auto
+   theme: custom
+date: '+%d %b %y %H:%M'
+size: short
+sorting:
+  dir-grouping: first
+literal: true
+dereference: true
+layout: oneline
+icons:
+  when: always
+  theme: fancy
+  separator: "  "

@@ -11,6 +11,7 @@ alias ..='cd ..'
 alias ...='cd ../../'
 alias ....='cd ../../../'
 alias .....='cd ../../../../'
+alias dtf='cd ~/dotfiles'
 
 # NOTE: HELPERS
 alias bashclear='echo "" > ~/.bash_history'
@@ -18,6 +19,8 @@ alias cls='clear'
 alias rm='rm -iv'
 alias v='nvim'
 alias vim='nvim'
+alias rzsh='source ~/.zshrc'
+alias time='tty-clock -c -s -C 6 -f "%d %b"'
 
 # NOTE: CDs
 alias cdvim='cd /x/CLI/terminal-config/nvim'
