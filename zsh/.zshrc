@@ -19,7 +19,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm
 
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $HOME/.oh-my-zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+# source $HOME/.oh-my-zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 # Set name of the theme to load --- if set to "random", it willa
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -92,7 +92,7 @@ export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     git
-    zsh-autocomplete
+    # zsh-autocomplete
     zsh-autosuggestions
 )
 
@@ -110,8 +110,6 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='vim'
 # else
 #   export EDITOR='mvim'
-# fibindkey              '^I' menu-select
-bindkey "$terminfo[kcbt]" menu-select
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -128,12 +126,10 @@ source $DOT_FILES/zsh/sources.sh
 
 
 # zsh-autocomplete settings
-zstyle ':autocomplete:*' min-input 3
-# zstyle ':autocomplete:*' delay 0.3
-bindkey -M menuselect '^M' .accept-line
-bindkey              '^I' menu-select
-bindkey "$terminfo[kcbt]" menu-select
-
+# zstyle ':autocomplete:*' min-input 3
+# bindkey -M menuselect '^M' .accept-line
+# bindkey              '^I' menu-select
+# bindkey "$terminfo[kcbt]" menu-select
 
 eval "$(zoxide init zsh)"
 

@@ -31,4 +31,9 @@ alias layoutmanager='$DOT_FILES/scripts/external/i3-layout-manager/layout_manage
 
 # SSH-ADD
 alias sshgithub='ssh-add ~/.id_github'
-alias sshstefanaru='ssh-add ~/.id_devops_stefanaru'
+alias sshstefanaru='ssh-add ~/.id_github'
+
+# Git
+function gcmx {
+	git commit -am "$1" && git push
+}
