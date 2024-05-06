@@ -27,3 +27,8 @@ alias cdvim='cd /x/CLI/terminal-config/nvim'
 
 # NOTE: Call scripts
 alias layoutmanager='$DOT_FILES/scripts/external/i3-layout-manager/layout_manager.sh'
+
+
+# SSH-ADD
+alias sshgithub='ssh-add ~/.id_github'
+alias sshstefanaru='ssh-add ~/.id_devops_stefanaru'

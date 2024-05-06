@@ -1,5 +1,9 @@
 # Launch tmux by default
 if [ "$TMUX" = "" ]; then tmux; fi
+
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+ eval `ssh-agent -s` &>/dev/null
+fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
