@@ -35,7 +35,7 @@
 						"y": 0
 					},
 					"marks": [],
-					"name": "Outlook (PWA) - Mail - Stefan FANARU - Outlook",
+					"name": "Outlook",
 					"percent": 0.29,
 					"swallows": [
 					{
@@ -55,7 +55,7 @@
 						"y": 0
 					},
 					"marks": [],
-					"name": "i3 Layouts - stefanaru-second-brain - Obsidian v1.5.12",
+					"name": "Obsidian",
 					"percent": 0.42,
 					"swallows": [
 					{
@@ -83,7 +83,7 @@
 							"y": 0
 						},
 						"marks": [],
-						"name": "1-team (Channel) - Lectra - 3 new items - Slack",
+						"name": "Slack",
 						"percent": 0.62,
 						"swallows": [
 						{
@@ -103,11 +103,11 @@
 							"y": 0
 						},
 						"marks": [],
-						"name": "$DOT_FILES/scripts/external/i3-layout-manager/layout_manager.sh",
+						"name": "Alacritty",
 						"percent": 0.38,
 						"swallows": [
 						{
-							"class": "^Gnome-terminal$"
+							"class": "^Alacritty$"
 						}
 						],
 						"type": "con"

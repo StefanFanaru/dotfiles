@@ -12,3 +12,6 @@ sudo ln -s /mnt/x/Stefan ~/personal
 sudo ln -s ~/dotfiles/scripts ~/scripts
 sudo ln -s ~/dotfiles/lsd ~/.config/lsd
 sudo ln -s ~/dotfiles/gnome/gtk.css ~/.config/gtk-3.0/gtk.css
+sudo ln -s ~/dotfiles/zsh/custom/custom-agnoster.zsh-theme ~/.oh-my-zsh/themes/custom-agnoster.zsh-theme
+sudo ln -s ~/dotfiles/zsh/custom/custom-fox.zsh-theme ~/.oh-my-zsh/themes/ccustom-fox.zsh-theme
+sudo ln -s  ~/dotfiles/flameshot ~/.config/flameshot

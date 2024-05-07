@@ -1,14 +1,11 @@
-cloudposh() {
-	eval "$(oh-my-posh init bash --config /x/CLI/terminal-config/oh-my-posh/pixelrobots.omp.json)"
+alias changetheme='(){ export ZSH_THEME="$@" && source $ZSH/oh-my-zsh.sh }'
+
+csh() {
+	changetheme custom-fox
 }
 
-defaultposh() {
-	eval "$(oh-my-posh init bash --config /x/CLI/terminal-config/oh-my-posh/gruvbox.omp.json)"
+dsh() {
+	changetheme custom-agnoster
 }
 
-timeposh() {
-	eval "$(oh-my-posh init bash --config /x/CLI/terminal-config/oh-my-posh/gruvbox.time.omp.json)"
-}
-
-# defaultposh
 

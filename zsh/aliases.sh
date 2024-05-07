@@ -34,6 +34,6 @@ alias sshgithub='ssh-add ~/.id_github'
 alias sshstefanaru='ssh-add ~/.id_github'
 
 # Git
-function gcmx {
+function gcm {
 	git commit -am "$1" && git push
 }

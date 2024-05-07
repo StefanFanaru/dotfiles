@@ -91,7 +91,7 @@ export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    git
+    # git
     # zsh-autocomplete
     zsh-autosuggestions
 )
@@ -134,3 +134,4 @@ source $DOT_FILES/zsh/sources.sh
 eval "$(zoxide init zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+fpath+=${ZDOTDIR:-~}/.zsh_functions

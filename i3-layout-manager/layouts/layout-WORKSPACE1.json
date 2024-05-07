@@ -27,7 +27,7 @@
 					"y": 3
 				},
 				"marks": [],
-				"name": "i3 run bash command at startup - Google Search - Google Chrome",
+				"name": "Chrome",
 				"percent": 0.375375375375375,
 				"swallows": [
 				{
@@ -47,11 +47,11 @@
 					"y": 0
 				},
 				"marks": [],
-				"name": "$DOT_FILES/scripts/external/i3-layout-manager/layout_manager.sh",
+				"name": "Alacritty",
 				"percent": 0.38038038038038,
 				"swallows": [
 				{
-					"class": "^Gnome-terminal$"
+					"class": "^Alacritty$"
 				}
 				],
 				"type": "con"
@@ -75,7 +75,7 @@
 						"y": 0
 					},
 					"marks": [],
-					"name": "(19) Chat | Stefan FANARU (You) | Microsoft Teams",
+					"name": "Teams",
 					"percent": 0.5,
 					"swallows": [
 					{
@@ -95,11 +95,11 @@
 						"y": 0
 					},
 					"marks": [],
-					"name": "stefanaru@stefanaru-PC:~",
+					"name": "Alacritty",
 					"percent": 0.5,
 					"swallows": [
 					{
-						"class": "^Gnome-terminal$"
+						"class": "^Alacritty$"
 					}
 					],
 					"type": "con"
