@@ -50,7 +50,7 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec --no-startup-id alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -151,7 +151,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -189,26 +189,25 @@ bar {
 
 
 #### CUSTOM CONFIGS #####
-# GET DEM BORDERS OUT OF HEREc:w
-#
-# Thanks Childz
 for_window [class="^.*"] border pixel 2
                           # class                 border  backgr. text    indicator child_border
 for_window [class="^.*"] client.focused          #77dd77 #285577 #ffffff #2e9ef4   #285577
 
+for_window [class="Emote"] floating enable, border pixel 0, move position mouse
+# bindsym $super+period exec --no-startup-id emoji-picker
 
 # Make ulauncher prettier
 for_window [class="Ulauncher"] floating enable, border pixel 0
 
 # resize to Full HD for better screen sharing
-bindsym $mod+Shift+o floating toggle, resize set 1920 px 1080 px, move position center
+bindsym $mod+Shift+o floating toggle, resize set 1920 px 1080 px, move position 50 50
 
 # bar toggle, hide or show
 bindsym $mod+m bar mode invisible
 bindsym $mod+Shift+m bar mode dock
 
 # Layouts
-bindsym $mod+F9 exec --no-startup-id "i3-msg '[workspace=1] kill' && ~/dotfiles//external/i3-layout-manager/layout_manager.sh workspace1"
+bindsym $mod+F9 exec --no-startup-id "i3-msg '[workspace=1] kill' && ~/dotfiles/scripts/external/i3-layout-manager/layout_manager.sh workspace1"
 bindsym $mod+F10 exec --no-startup-id "i3-msg '[workspace=2] kill' && ~/dotfiles/scripts/external/i3-layout-manager/layout_manager.sh workspace2"
 
 # Wallpaper
@@ -220,13 +219,13 @@ exec --no-startup-id ulauncher
 exec --no-startup-id "sleep 0.3 && xdotool windowunmap \"$(xdotool getactivewindow)\""
 
 # Suspend
-bindsym $mod+Shift+period exec systemctl suspend
+bindsym $mod+Shift+period exec --no-startup-id systemctl suspend
 
 # Screenshot
-bindsym --release Print exec flameshot gui
+bindsym --release Print exec --no-startup-id flameshot gui
 
 # Clipboard manager
-bindsym $super+v  exec diodon
+bindsym $super+v  exec --no-startup-id diodon
 
 
 focus_follows_mouse no
