@@ -1,0 +1,15 @@
+[Unit]
+Description=Disable unwanted devices in /proc/acpi/wakeup
+
+[Service]
+Type=oneshot
+ExecStart=bash -c '\
+    while read -r device _ status _; do \
+        [[ $device == +(XHC*|GP*) && $status == "*enabled" ]] && \
+            echo $device > /proc/acpi/wakeup; \
+    done < /proc/acpi/wakeup; \
+    true \
+'
+
+[Install]
+WantedBy=multi-user.target

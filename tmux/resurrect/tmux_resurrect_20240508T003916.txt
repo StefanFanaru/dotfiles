@@ -1,0 +1,19 @@
+pane	admin	1	1	:*	0	nvim .	:/mnt/x/Lectra/digital-platform/admin	1	nvim	:nvim .
+pane	admin	2	0	:	0	stefanaru@stefanaru-PC:/mnt/x/Lectra/digital-platform/admin/GeminiCad.Admin.Web	:/mnt/x/Lectra/digital-platform/admin/GeminiCad.Admin.Web	1	zsh	:
+pane	admin	3	0	:-	0	stefanaru@stefanaru-PC:/mnt/x/Lectra/digital-platform/admin/GeminiCad.Admin.Web/ClientApp	:/mnt/x/Lectra/digital-platform/admin/GeminiCad.Admin.Web/ClientApp	1	zsh	:
+pane	main	1	1	:*	0	stefanaru@stefanaru-PC:~	:/home/stefanaru	1	zsh	:
+pane	packages	1	1	:*	0	nvim .	:/mnt/x/Lectra/digital-platform/packages	1	nvim	:nvim .
+pane	packages	2	0	:-	0	stefanaru@stefanaru-PC:/x/Lectra/digital-platform/packages	:/mnt/x/Lectra/digital-platform/packages	1	zsh	:
+pane	storage	1	1	:*	0	nvim .	:/mnt/x/Lectra/digital-platform/storage	1	nvim	:nvim .
+pane	storage	2	0	:-	0	stefanaru@stefanaru-PC:/mnt/x/Lectra/digital-platform/storage/GeminiCad.DataManagement.Web	:/mnt/x/Lectra/digital-platform/storage/GeminiCad.DataManagement.Web	1	zsh	:
+pane	storage	3	0	:	0	stefanaru@stefanaru-PC:/mnt/x/Lectra/digital-platform/storage/GeminiCad.DataManagement.Web/ClientApp	:/mnt/x/Lectra/digital-platform/storage/GeminiCad.DataManagement.Web/ClientApp	1	zsh	:
+window	admin	1	:nvim	1	:*	c07e,108x54,0,0,1	off
+window	admin	2	:web	0	:	bfbf,116x54,0,0,2	off
+window	admin	3	:angular	0	:-	bfc0,116x54,0,0,3	off
+window	main	1	:zsh	1	:*	600f,116x54,0,0,10	off
+window	packages	1	:nvim	1	:*	bfc1,116x54,0,0,4	off
+window	packages	2	:directory	0	:-	bfc2,116x54,0,0,5	off
+window	storage	1	:nvim	1	:*	bfc3,116x54,0,0,6	off
+window	storage	2	:web	0	:-	bfc4,116x54,0,0,7	off
+window	storage	3	:angular	0	:	bfc5,116x54,0,0,8	off
+state	main	admin
