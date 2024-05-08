@@ -1,6 +1,12 @@
 # Launch tmux by default
-if [ "$TMUX" = "" ]; then tmux; fi
+# tmux exists on the system
+# we're in an interactive shell, and
+# tmux doesn't try to run within itself
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  exec tmux
+fi
 
+# Launch ssh-agent
 if [ -z "$SSH_AUTH_SOCK" ] ; then
  eval `ssh-agent -s` &>/dev/null
 fi
@@ -12,6 +18,7 @@ export ZSH=$HOME/.oh-my-zsh
 export DOTNET_ROOT=$HOME/.dotnet
 export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 export PATH="$PATH:/opt/nvim-linux64/bin"
+export PATH="$PATH:$HOME/dotfiles/scripts/external/bin"
 export DOT_FILES="$HOME/dotfiles"
 
 export NVM_DIR="$HOME/.nvm"
@@ -133,5 +140,6 @@ source $DOT_FILES/zsh/sources.sh
 
 eval "$(zoxide init zsh)"
 
+export FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git/'"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 fpath+=${ZDOTDIR:-~}/.zsh_functions

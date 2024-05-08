@@ -8,6 +8,7 @@ sudo apt install xclip -y   # to make system cliboard work in nvim
 sudo apt install fzf -y     # fuzzy finder
 sudo apt install ripgrep -y # multi threaded grepping
 echo "Install lsd manually from here https://github.com/lsd-rs/lsd/releases"
+echo "Install bad https://github.com/sharkdp/bat/releases/tag/v0.24.0"
 
 printf "\nLinux packages where installed"
 
