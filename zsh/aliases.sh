@@ -1,17 +1,25 @@
+mistakeMessage='This is not the command you are looking for'
 # NOTE: LSD-RS
 # https://github.com/lsd-rs/lsd
-alias ls='lsd'
-alias l='ls'
-alias ll='ls -la'
-alias lt='ls --tree'
+alias l='\lsd'
+alias ll='\lsd -la'
+alias lt='\lsd --tree'
+alias ls='echo $mistakeMessage; false'
 
 # Renames
 alias cat='bat'
 alias kc='kubectx'
 alias kn='kubens'
-alias v='nvim'
-alias vim='nvim'
-alias cls='clear'
+alias k='kubectl'
+alias v='\nvim'
+alias vv='\nvim .'
+alias cls='\clear'
+alias clear='echo $mistakeMessage; false'
+alias lg='lazygit'
+alias rm='trash-put'
+alias nvim='echo $mistakeMessage; false'
+alias sa='sudo'
+alias so='source'
 
 # NOTE: CD
 alias .='cd .'
@@ -33,9 +41,8 @@ alias cdvim='cd /x/CLI/terminal-config/nvim'
 alias layoutmanager='$DOT_FILES/scripts/external/i3-layout-manager/layout_manager.sh'
 
 # SSH-ADD
-alias sshgithub='ssh-add ~/.id_github'
-alias sshstefanaru='ssh-add ~/.id_github'
-
+alias sshgithub='ssh-add ~/.ssh/id_github'
+alias sshstefanaru='ssh-add ~/.ssh/id_github'
 
 # Kubectl
 alias kgp='kubectl get pods'

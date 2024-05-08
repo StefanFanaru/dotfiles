@@ -21,13 +21,13 @@ cv() {
 	if [ $cf_exit_code -eq 1 ]; then
 		echo "Directory $1 was not found" && return 1
 	fi
-	nvim .
+	\nvim .
 }
 
 fv() {
 	file=$(fzf --preview 'bat --style=numbers --color=always {}')
 	if [ -n "$file" ]; then
-		nvim "$file"
+		\nvim "$file"
 	fi
 }
 

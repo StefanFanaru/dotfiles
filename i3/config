@@ -217,6 +217,9 @@ exec_always feh --bg-scale /mnt/x/CLI/terminal-config/wallpaper_leaves.png
 exec --no-startup-id compton
 exec --no-startup-id ulauncher
 exec --no-startup-id "sleep 0.3 && xdotool windowunmap \"$(xdotool getactivewindow)\""
+# install with sudo apt install policykit-1-gnome
+exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id diodon
 
 # Suspend
 bindsym $mod+Shift+period exec --no-startup-id systemctl suspend

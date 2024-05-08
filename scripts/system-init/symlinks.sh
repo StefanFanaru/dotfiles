@@ -16,3 +16,4 @@ sudo ln -s ~/dotfiles/zsh/custom/custom-agnoster.zsh-theme ~/.oh-my-zsh/themes/c
 sudo ln -s ~/dotfiles/zsh/custom/custom-fox.zsh-theme ~/.oh-my-zsh/themes/ccustom-fox.zsh-theme
 sudo ln -s ~/dotfiles/flameshot ~/.config/flameshot
 sudo ln -s ~/dotfiles/alacritty ~/.config/alacritty
+sudo ln -s ~/dotfiles/lazygit ~/.config/lazygit
