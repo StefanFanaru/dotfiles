@@ -19,8 +19,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # must be sourced before starting tmux
-source $DOT_FILES/scripts/workflow/tmux-autostart.sh
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Launch ssh-agent
@@ -30,7 +28,6 @@ fi
 
 ZSH_THEME="custom-agnoster"
 HYPHEN_INSENSITIVE="true"
-ENABLE_CORRECTION="true"
 
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
@@ -52,4 +49,10 @@ source $DOT_FILES/zsh/sources.sh
 # Usage "z downloads" will cd into most used downloads folder
 eval "$(zoxide init zsh)"
 
+# Other things to execute
+xmodmap -e "keycode 22 ="
+xmodmap -e "keycode 66 = BackSpace"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # must be sourced before starting tmux
+source $DOT_FILES/scripts/workflow/tmux-autostart.sh
 # fpath+=${ZDOTDIR:-~}/.zsh_functions

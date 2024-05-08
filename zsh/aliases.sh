@@ -7,7 +7,6 @@ alias lt='\lsd --tree'
 alias ls='echo $mistakeMessage; false'
 
 # Renames
-alias cat='bat'
 alias kc='kubectx'
 alias kn='kubens'
 alias k='kubectl'
@@ -43,6 +42,7 @@ alias layoutmanager='$DOT_FILES/scripts/external/i3-layout-manager/layout_manage
 # SSH-ADD
 alias sshgithub='ssh-add ~/.ssh/id_github'
 alias sshstefanaru='ssh-add ~/.ssh/id_github'
+alias sshlectra='ssh-add ~/.ssh/s.fanaru_ed25519_key'
 
 # Kubectl
 alias kgp='kubectl get pods'
