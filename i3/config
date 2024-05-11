@@ -69,23 +69,11 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-
 # move focused window
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
 bindsym $mod+z split h
@@ -135,23 +123,24 @@ bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+Shift+1 move container to workspace number $ws1, workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2, workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3, workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4, workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5, workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6, workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7, workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8, workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9, workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10, workspace number $ws10
+
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'Are you shure you want to shudown?' -B 'Yes' 'shutdown now'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -161,16 +150,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
@@ -200,15 +183,36 @@ for_window [class="Emote"] floating enable, border pixel 0, move position mouse
 for_window [class="Ulauncher"] floating enable, border pixel 0
 
 # resize to Full HD for better screen sharing
-bindsym $mod+Shift+o floating toggle, resize set 1920 px 1080 px, move position 50 50
+bindsym $mod+Shift+o floating toggle, resize set 1920 px 1080 px, move absolute position center
+bindsym $mod+Shift+i move container to workspace number $ws3, workspace number $ws3, floating enable, resize set 2200 px 1440 px, move absolute position center
+bindsym $mod+Shift+u move container to workspace number $ws1, workspace number $ws1, floating disable, move right, move down, move up, move up
 
 # bar toggle, hide or show
 bindsym $mod+m bar mode invisible
 bindsym $mod+Shift+m bar mode dock
 
 # Layouts
-bindsym $mod+F9 exec --no-startup-id "i3-msg '[workspace=1] kill' && ~/dotfiles/scripts/external/i3-layout-manager/layout_manager.sh workspace1"
-bindsym $mod+F10 exec --no-startup-id "i3-msg '[workspace=2] kill' && ~/dotfiles/scripts/external/i3-layout-manager/layout_manager.sh workspace2"
+# https://github.com/klaxalk/i3-layout-manager
+bindsym $mod+F9 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-ultrawide-layout.sh 1"
+bindsym $mod+F10 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-ultrawide-layout.sh 2"
+
+# Small screen layout
+bindsym $mod+F8 exec --no-startup-id "sh -c '~/dotfiles/i3/i3-layout-manager/apply-fullscreen-layout.sh &'"
+# && i3-msg 'workspace number 1' && ~/dotfiles/i3/i3-layout-manager/layout_manager.sh ~/dotfiles/i3/i3-layout-manager/layouts/layout-FULLWORKSPACE1.json \
+#         && sleep 0.1 \
+# && i3-msg 'workspace number 2' && ~/dotfiles/i3/i3-layout-manager/layout_manager.sh ~/dotfiles/i3/i3-layout-manager/layouts/layout-FULLWORKSPACE2.json \
+#         && sleep 0.1 \
+# && i3-msg 'workspace number 3' && ~/dotfiles/i3/i3-layout-manager/layout_manager.sh ~/dotfiles/i3/i3-layout-manager/layouts/layout-FULLWORKSPACE3.json \
+#         && sleep 0.1 \
+# && i3-msg 'workspace number 4' && ~/dotfiles/i3/i3-layout-manager/layout_manager.sh ~/dotfiles/i3/i3-layout-manager/layouts/layout-FULLWORKSPACE4.json \
+#         && sleep 1 \
+# && i3-msg 'workspace number 1' && sh -c 'alacritty' && i3-msg 'fullscreen toggle' \
+#         && sleep 1 \
+# && i3-msg 'workspace number 2' && sh -c 'google-chrome-stable --profile-directory=Default' \
+#         && sleep 1 \
+# && i3-msg 'workspace number 3' && sh -c 'teams-for-linux' \
+#         && sleep 1 \
+# && i3-msg 'workspace number 4' && sh -c 'google-chrome-stable --profile-directory=Default --app-id=cifhbcnohmdccbgoicgdjpfamggdegmo' && sh -c 'google-chrome-stable --profile-directory=Default --app-id=faolnafnngnfdaknnbpnkhgohbobgegn' "
 
 # Wallpaper
 exec_always feh --bg-scale /mnt/x/CLI/terminal-config/wallpaper_leaves.png
@@ -232,8 +236,3 @@ bindsym $super+v  exec --no-startup-id diodon
 
 
 focus_follows_mouse no
-# FKeys
-# Pulse Audio controls
-# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-# bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound

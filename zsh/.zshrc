@@ -49,10 +49,6 @@ source $DOT_FILES/zsh/sources.sh
 # Usage "z downloads" will cd into most used downloads folder
 eval "$(zoxide init zsh)"
 
-# Other things to execute
-xmodmap -e "keycode 22 ="
-xmodmap -e "keycode 66 = BackSpace"
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # must be sourced before starting tmux
 source $DOT_FILES/scripts/workflow/tmux-autostart.sh
 # fpath+=${ZDOTDIR:-~}/.zsh_functions

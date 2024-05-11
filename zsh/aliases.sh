@@ -33,6 +33,8 @@ alias bashclear='echo "" > ~/.bash_history'
 alias rm='rm -iv'
 alias rzsh='source ~/.zshrc'
 alias time='tty-clock -c -s -C 6 -f "%d %b"'
+alias gitnamelectra= 'git config user.email "stefan.fanaru@geminicad.com"'
+alias logoutnow='kill -9 -1'
 
 # NOTE: CDs
 alias cdvim='cd /x/CLI/terminal-config/nvim'

@@ -29,8 +29,4 @@ fi
 
 
 ######### User custom commands
-
-# Capslock is backspace and backspace is nothing
-setxkbmap -option caps:backspace
-setxkbmap -option shift:both_capslock
-xmodmap -e "clear Lock"
+setxkbmap -option "backspace:backspace"
