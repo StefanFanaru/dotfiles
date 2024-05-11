@@ -18,3 +18,5 @@ sudo ln -s ~/dotfiles/flameshot ~/.config/flameshot
 sudo ln -s ~/dotfiles/alacritty ~/.config/alacritty
 sudo ln -s ~/dotfiles/lazygit ~/.config/lazygit
 sudo ln -s ~/dotfiles/zsh/.profile ~/.profile
+sudo ln -s ~/dotfiles/nvim ~/.config/nvim
+sudo ln -s ~/dotfiles/i3/i3-layout-manager ~/.config/i3-layout-manager

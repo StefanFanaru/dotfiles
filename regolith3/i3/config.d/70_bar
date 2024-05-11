@@ -1,4 +1,0 @@
-# bar toggle, hide or show
-bindsym $mod+m bar mode invisible
-bindsym $mod+Shift+m bar mode dock
-

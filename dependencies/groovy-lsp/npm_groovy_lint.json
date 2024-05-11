@@ -1,0 +1,12 @@
+{
+    "extends": "recommended",
+    "rules": {
+        "FieldTypeRequired": "off",
+        "VariableTypeRequired": "off",
+        "NoDef": "off",
+       "LineLength": "off",
+        "VariableName": "off",
+        "UnnecessaryGetter": "off",
+        "UnnecessaryGString": "off"
+    }
+}

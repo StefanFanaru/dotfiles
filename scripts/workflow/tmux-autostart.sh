@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ "$TERM" != "alacritty" ]; then
+  return
+fi
+
 # Launch tmux by default
 # Conditions to run tmux command
 # 1. we're in an interactive shell, and

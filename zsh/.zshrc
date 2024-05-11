@@ -4,6 +4,7 @@ export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 export PATH="$PATH:/opt/nvim-linux64/bin"
 export PATH="$PATH:~/.local/bin"
 export PATH="$PATH:$HOME/dotfiles/scripts/external/bin"
+export PATH=$PATH:/opt/gradle/gradle-8.7/bin
 
 export LANG=en_US.UTF-8
 export ZSH=$HOME/.oh-my-zsh

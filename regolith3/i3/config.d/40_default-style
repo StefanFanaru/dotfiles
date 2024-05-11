@@ -1,2 +1,0 @@
-# Make ulauncher prettier
-for_window [class="Ulauncher"] floating enable, border pixel 0

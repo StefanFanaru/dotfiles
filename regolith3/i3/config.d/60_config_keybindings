@@ -1,2 +1,0 @@
-# resize to Full HD for better screen sharing
-bindsym $mod+Shift+o floating toggle, resize set 1920 px 1080 px, move position center
