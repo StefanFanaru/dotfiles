@@ -187,6 +187,7 @@ bindsym $mod+Shift+m bar mode dock
 # https://github.com/klaxalk/i3-layout-manager
 bindsym $mod+F9 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-ultrawide-layout.sh 1"
 bindsym $mod+F10 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-ultrawide-layout.sh 2"
+bindsym $mod+F11 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-personal-layout.sh"
 
 # Small screen layout
 bindsym $mod+F8 exec --no-startup-id "sh -c '~/dotfiles/i3/i3-layout-manager/apply-fullscreen-layout.sh &'"
