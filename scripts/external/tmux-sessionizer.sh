@@ -16,7 +16,7 @@ else
 	find_result=$(find ~/work/digital-platform ~/work/ ~/personal/ ~/dotfiles/ -mindepth 1 -maxdepth 1 -type d)
 
 	# Append paths to the find results
-	find_result=$(append_paths "$find_result" "/x/CLI/terminal-config/nvim" "/home/stefanaru/dotfiles")
+	find_result=$(append_paths "$find_result" "/home/stefanaru/dotfiles")
 
 	# Pass the combined result to fzf
 	selected=$(echo "$find_result" | fzf)

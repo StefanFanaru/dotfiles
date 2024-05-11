@@ -22,10 +22,8 @@ export NVM_DIR="$HOME/.nvm"
 
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Launch ssh-agent
-if [ -z "$SSH_AUTH_SOCK" ] ; then
-  eval `ssh-agent -s` &>/dev/null
-fi
+# Launch ssh-agent and persist it across tmux sessions
+source $DOT_FILES/scripts/workflow/ssh-agent-autostart.sh
 
 ZSH_THEME="custom-agnoster"
 HYPHEN_INSENSITIVE="true"
