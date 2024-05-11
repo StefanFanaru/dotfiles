@@ -5,10 +5,9 @@ sudo ln -s /mnt/x/Lectra ~/work
 sudo ln -s /mnt/x/Stefan ~/personal
 sudo ln -s ~/dotfiles/dunst ~/.config/dunst
 sudo ln -s ~/dotfiles/ulauncher ~/.config/ulauncher
-sudo ln -s ~/dotfiles/regolith3 ~/.config/regolith3
 sudo ln -s ~/dotfiles/i3 ~/.config/i3
 sudo ln -s ~/dotfiles/i3/i3status ~/.config/i3status
-sudo ln -s ~/dotfiles/i3-layout-manager ~/.config/i3-layout-manager
+sudo ln -s ~/dotfiles/i3/i3-layout-manager ~/.config/i3-layout-manager
 sudo ln -s ~/dotfiles/scripts ~/scripts
 sudo ln -s ~/dotfiles/lsd ~/.config/lsd
 sudo ln -s ~/dotfiles/gnome/gtk.css ~/.config/gtk-3.0/gtk.css
@@ -19,4 +18,3 @@ sudo ln -s ~/dotfiles/alacritty ~/.config/alacritty
 sudo ln -s ~/dotfiles/lazygit ~/.config/lazygit
 sudo ln -s ~/dotfiles/zsh/.profile ~/.profile
 sudo ln -s ~/dotfiles/nvim ~/.config/nvim
-sudo ln -s ~/dotfiles/i3/i3-layout-manager ~/.config/i3-layout-manager
