@@ -1,0 +1,9 @@
+#!/bin/bash
+
+/usr/bin/compton &
+/usr/bin/feh --bg-scale ~/dotfiles/misc/wallpaper_leaves.png &
+/usr/bin/ulauncher &
+/usr/bin/diodon &
+/snap/bin/emote &
+/usr/bin/unclutter &
+/usr/bin/nm-applet &

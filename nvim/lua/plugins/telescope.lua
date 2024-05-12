@@ -47,8 +47,11 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		local actions = require("telescope.actions")
 		local custom_picker_options = {
 			previewer = false,
-			hidden = true
+			hidden = true,
 		}
+
+		local trouble = require("trouble.providers.telescope")
+
 		require("telescope").setup({
 			-- You can put your default mappings / updates / etc. in here
 			--  All the info you're looking for is in `:help telescope.setup()`
@@ -59,7 +62,9 @@ return { -- Fuzzy Finder (files, lsp, etc)
 						["<esc>"] = actions.close,
 						["<c-enter>"] = "to_fuzzy_refine",
 						["<C-e>"] = require("telescope.actions.layout").toggle_preview,
+						["<C-t>"] = trouble.open_with_trouble,
 					},
+					n = { ["<C-t>"] = trouble.open_with_trouble },
 				},
 				file_ignore_patterns = {
 					".git/",
@@ -84,6 +89,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 				git_files = custom_picker_options,
 				find_files = custom_picker_options,
 				live_grep = custom_picker_options,
+				current_buffer_fuzzy_find = custom_picker_options
 			},
 			-- pickers = {
 			-- 	git_files = require("stefanaru.helpers.telescopePickers").prettyFilesPicker({ picker = "git_files" }),
@@ -99,7 +105,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		local customPickers = require("stefanaru.helpers.telescopePickers")
 		-- Enable Telescope extensions if they are installed
 		pcall(require("telescope").load_extension, "fzf")
-		pcall(require("telescope").load_extension, "ui-select")
+		-- pcall(require("telescope").load_extension, "ui-select")
 		-- See `:help telescope.builtin`
 		local builtin = require("telescope.builtin")
 		vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
@@ -109,6 +115,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 		vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
 		vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+		vim.keymap.set("n", "<leader>sl", builtin.lsp_document_symbols, { desc = "[S]each [L]sp document symbols" })
 		vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 		vim.keymap.set("n", "<leader>sf", function()
 			customPickers.prettyFilesPicker()
@@ -117,20 +124,13 @@ return { -- Fuzzy Finder (files, lsp, etc)
 			customPickers.prettyGrepPicker()
 		end)
 
-		-- vim.api.nvim_set_keymap(
-		-- 	"n",
-		-- 	"<leader>sf",
-		-- 	"<CMD>lua require'stefanaru.helpers.find_files_fallback'.project_files()<CR>",
-		-- 	{ noremap = true, silent = true, desc = "[S]earch [F]iles" }
-		-- )
 		-- Slightly advanced example of overriding default behavior and theme
-		vim.keymap.set("n", "<leader>/", function()
-			-- You can pass additional configuration to Telescope to change the theme, layout, etc.
-			builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-				winblend = 10,
-				previewer = false,
-			}))
-		end, { desc = "[/] Fuzzily search in current buffer" })
+		vim.keymap.set(
+			"n",
+			"<leader>/",
+			builtin.current_buffer_fuzzy_find,
+			{ desc = "[/] Fuzzily search in current buffer" }
+		)
 
 		-- It's also possible to pass additional configuration options.
 		--  See `:help telescope.builtin.live_grep()` for information about particular keys
@@ -146,5 +146,4 @@ return { -- Fuzzy Finder (files, lsp, etc)
 			builtin.find_files({ cwd = vim.fn.stdpath("config") })
 		end, { desc = "[S]earch [N]eovim files" })
 	end,
-	-- https://github.com/nvim-telescope/telescope.nvim/issues/2014
 }

@@ -2,13 +2,22 @@ return {
 	{ "tpope/vim-sleuth", event = { "BufReadPost", "BufNewFile" } },
 	{ "tpope/vim-unimpaired", event = { "BufReadPost", "BufNewFile" } },
 	{ "tpope/vim-surround", event = { "BufReadPre", "BufNewFile" } },
+	{ "nvim-tree/nvim-web-devicons" },
+	{
+		"Wansmer/treesj",
+		keys = { "<space>bb"},
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		config = function()
+			require("treesj").setup({ use_default_keymaps = false })
+			vim.keymap.set("n", "<leader>bb", require("treesj").toggle, {desc = "Toggle treesj (split / join)"})
+		end,
+	},
 	{
 		"folke/todo-comments.nvim",
-		event = { "BufReadPre", "BufNewFile" },
+		event = "VimEnter",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = { signs = false, keywords = { TODO = { alt = { "todo" } } } },
 	},
-	{ "lewis6991/gitsigns.nvim" },
 	{
 		"ThePrimeagen/vim-be-good",
 		cmd = "VimBeGood",

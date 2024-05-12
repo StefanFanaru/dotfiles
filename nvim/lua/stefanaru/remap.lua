@@ -45,6 +45,9 @@ map("n", "<leader>q", vim.diagnostic.setloclist, "Open diagnostic [Q]uickfix lis
 -- Exit terminal mode easier
 map("t", "<Esc><Esc>", "<C-\\><C-n>", "Exit terminal mode")
 
+-- Exit hlsearch
+vim.api.nvim_set_keymap('n', '<Esc><Esc>', ':nohlsearch<CR>', { noremap = true, silent = true })
+
 -- TIP: Disable arrow keys in normal mode
 map("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
 map("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')

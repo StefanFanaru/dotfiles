@@ -157,6 +157,14 @@ return {
 				-- tsserver = {},
 				--
 				cssls = {},
+				yamlls = {
+					settings = {
+						yaml = {
+							schemaStore = { enable = false, url = "" },
+							schemas = require("schemastore").yaml.schemas()
+						}
+					}
+				},
 				jsonls = {
 					-- lazy-load schemastore when needed
 					on_new_config = function(new_config)
@@ -165,9 +173,8 @@ return {
 					end,
 					settings = {
 						json = {
-							format = {
-								enable = true,
-							},
+							schemas = require('schemastore').json.schemas(),
+							format = { enable = true },
 							validate = { enable = true },
 						},
 					},

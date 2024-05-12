@@ -36,15 +36,10 @@ alias time='tty-clock -c -s -C 6 -f "%d %b"'
 alias gitnamelectra= 'git config user.email "stefan.fanaru@geminicad.com"'
 alias logoutnow='kill -9 -1'
 
-# NOTE: CDs
-alias cdvim='cd /x/CLI/terminal-config/nvim'
-
-alias layoutmanager='$DOT_FILES/scripts/external/i3-layout-manager/layout_manager.sh'
-
-# SSH-ADD
+# NOTE: SSH-ADD
 alias sshgithub='ssh-add ~/.ssh/id_github'
 alias sshstefanaru='ssh-add ~/.ssh/id_github'
 alias sshlectra='ssh-add ~/.ssh/s.fanaru_ed25519_key'
 
-# Kubectl
+# NOTE: Kubectl
 alias kgp='kubectl get pods'

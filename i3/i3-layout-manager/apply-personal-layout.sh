@@ -19,12 +19,13 @@ open_apps() {
 	subscribe_to_window "Alacritty"
 	sh -c 'google-chrome-stable --profile-directory="Profile 2" &'
 	subscribe_to_window "Google-chrome"
+	i3-msg "focus right"
 }
 
 current_resolution=$(xrandr | grep -oP '\d{3,4}x\d{3,4}' | head -n 1)
 if [ "$current_resolution" != "5120x1440" ]; then
 	xrandr --output DP-0 --mode 5120x1440
-	feh --bg-scale /mnt/x/CLI/terminal-config/wallpaper_leaves.png
+	feh --bg-scale ~/dotfiles/misc/wallpaper_leaves.png
 fi
 
 open_apps

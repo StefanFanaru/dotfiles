@@ -54,6 +54,7 @@ return {
 				--['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
 				["<C-e>"] = cmp.mapping.abort(),
+				["<CR>"] = cmp.mapping.abort(),
 				-- Manually trigger a completon from nvim-cmp.
 				--  Generally you don't need this, because nvim-cmp will display
 				--  completions whenever it has completion options available.

@@ -76,7 +76,7 @@ open_apps() {
 current_resolution=$(xrandr | grep -oP '\d{3,4}x\d{3,4}' | head -n 1)
 if [ "$current_resolution" != "5120x1440" ]; then
 	xrandr --output DP-0 --mode 5120x1440
-	feh --bg-scale /mnt/x/CLI/terminal-config/wallpaper_leaves.png
+	feh --bg-scale ~/dotfiles/misc/wallpaper_leaves.png
 	changed_resolution=true
 fi
 open_apps
