@@ -36,6 +36,8 @@ alias time='tty-clock -c -s -C 6 -f "%d %b"'
 alias gitnamelectra= 'git config user.email "stefan.fanaru@geminicad.com"'
 alias logoutnow='kill -9 -1'
 alias xsc="xclip -selection clipboard"
+alias seejson="xclip -o -selection clipboard | jless"
+
 
 # NOTE: SSH-ADD
 alias sshgithub='ssh-add ~/.ssh/id_github'

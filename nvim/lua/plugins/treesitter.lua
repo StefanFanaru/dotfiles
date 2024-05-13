@@ -3,6 +3,10 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		lazy = false,
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			"neovim/nvim-lspconfig",
+		},
 		build = ":TSUpdate",
 		opts = {
 			ensure_installed = {
@@ -22,6 +26,7 @@ return {
 				"typescript",
 				"hcl",
 				"groovy",
+				"c_sharp",
 			},
 			-- Autoinstall languages that are not installed
 			auto_install = true,
@@ -31,7 +36,7 @@ return {
 				-- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
 				--  If you are experiencing weird indenting issues, add the language to
 				--  the list of additional_vim_regex_highlighting and disabled languages for indent.
-				additional_vim_regex_highlighting = false,
+				additional_vim_regex_highlighting = {"bash"},
 			},
 			incremental_selection = {
 				enable = true,
@@ -42,71 +47,122 @@ return {
 					node_decremental = "grm",
 				},
 			},
-			indent = { enable = true, disable = { "ruby" } },
+			indent = { enable = true, disable = { "ruby", "bash" } },
+			textobjects = {
+				select = {
+					enable = true,
+					lookahead = true,
+					keymaps = {
+						["aa"] = "@parameter.outer",
+						["ia"] = "@parameter.inner",
+						["af"] = "@function.outer",
+						["if"] = "@function.inner",
+						["ac"] = "@class.outer",
+						["ic"] = "@class.inner",
+						["ii"] = "@conditional.inner",
+						["ai"] = "@conditional.outer",
+						["il"] = "@loop.inner",
+						["al"] = "@loop.outer",
+						["it"] = "@comment.inner",
+						["at"] = "@comment.outer",
+						["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+					},
+					selection_modes = {
+						["@parameter.outer"] = "v", -- charwise
+						["@function.outer"] = "V", -- linewise
+						["@class.outer"] = "<c-v>", -- blockwise
+					},
+				},
+				move = {
+					enable = true,
+					set_jumps = true, -- whether to set jumps in the jumplist
+					goto_next_start = {
+						["]]"] = { query = "@function.outer", desc = "Next func start" },
+						["]c"] = { query = "@class.outer", desc = "Next class start" },
+						["]l"] = { query = { "@loop.inner", "@loop.outer" }, desc = "Next loop inner/outer" },
+						["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
+						["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
+					},
+					goto_next_end = {
+						["]["] = { query = "@function.outer", desc = "Next func end" },
+						["]C"] = { query = "@class.outer", desc = "Next class end" },
+					},
+					goto_previous_start = {
+						["[["] = { query = "@function.outer", desc = "Previous func start" },
+						["[c"] = { query = "@class.outer", desc = "Previous class start" },
+					},
+					goto_previous_end = {
+						["[]"] = { query = "@function.outer", desc = "Previous func start" },
+						["[C"] = { query = "@class.outer", desc = "Previous func end" },
+					},
+					goto_next = {
+						["]i"] = { query = "@conditional.outer", desc = "Next conditional" },
+					},
+					goto_previous = {
+						["[i"] = { query = "@conditional.outer", desc = "Previous conditional" },
+					},
+				},
+				swap = {
+					enable = true,
+					swap_next = {
+						["<leader>cp"] = { query = "@parameter.inner", desc = "Swap param with next" },
+						["<leader>cf"] = { query = "@function.outer", desc = "Swap func with next" },
+					},
+					swap_previous = {
+						["<leader>cP"] = { query = "@parameter.inner", desc = "Swap param with prev" },
+						["<leader>cF"] = { query = "@function.outer", desc = "Swap func with next" },
+					},
+				},
+				lsp_interop = {
+					enable = true,
+					border = "rounded",
+					floating_preview_opts = {},
+					peek_definition_code = {
+						["<leader>df"] = { query = "@function.outer", desc = "Show func def" },
+						["<leader>dF"] = { query = "@class.outer", desc = "Show class def" },
+					},
+				},
+			},
 		},
 		config = function(_, opts)
-			-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-
 			-- Prefer git instead of curl in order to improve connectivity in some environments
 			require("nvim-treesitter.install").prefer_git = true
 			---@diagnostic disable-next-line: missing-fields
 			require("nvim-treesitter.configs").setup(opts)
 
 			vim.treesitter.language.register("groovy", "jenkins")
-			-- There are additional nvim-treesitter modules that you can use to interact
-			-- with nvim-treesitter. You should go explore a few and see what interests you:
-			--
-			--    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-			--    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-			--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+
+			-- NOTE: Make more moves repeatable
+			local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+
+			-- Repeat movement with ; and ,
+			--  ; goes forward and , goes backward regardless of the last direction
+			vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
+			vim.keymap.set({ "n", "x", "o" }, "'", ts_repeat_move.repeat_last_move_previous)
+
+			-- Make builtin f, F, t, T also repeatable with ; and ,
+			vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f)
+			vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F)
+			vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t)
+			vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
+
+			local gs = require("gitsigns")
+
+			local next_hunk_repeat, prev_hunk_repeat =
+				ts_repeat_move.make_repeatable_move_pair(gs.next_hunk, gs.prev_hunk)
+
+			vim.keymap.set({ "n", "x", "o" }, "]h", next_hunk_repeat, { desc = "Git Hunk repeat Next" })
+			vim.keymap.set({ "n", "x", "o" }, "[h", prev_hunk_repeat, { desc = "Git Hunk repeat Next" })
 		end,
 	},
 	{
-		"nvim-treesitter/nvim-treesitter-textobjects",
+		"nvim-treesitter/nvim-treesitter-context",
 		opts = {
-			textobjects = {
-				select = {
-					enable = true,
-
-					-- Automatically jump forward to textobj, similar to targets.vim
-					lookahead = true,
-
-					keymaps = {
-						-- You can use the capture groups defined in textobjects.scm
-						["a="] = { query = "@function.outer", desc = "Around function" },
-						["if"] = { query = "@function.inner", desc = "Inside function" },
-						["ac"] = { query = "@class.outer", desc = "Around class" },
-						["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
-						-- You can also use captures from other query groups like `locals.scm`
-						["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
-					},
-					-- You can choose the select mode (default is charwise 'v')
-					--
-					-- Can also be a function which gets passed a table with the keys
-					-- * query_string: eg '@function.inner'
-					-- * method: eg 'v' or 'o'
-					-- and should return the mode ('v', 'V', or '<c-v>') or a table
-					-- mapping query_strings to modes.
-					selection_modes = {
-						["@parameter.outer"] = "v", -- charwise
-						["@function.outer"] = "V", -- linewise
-						["@class.outer"] = "<c-v>", -- blockwise
-					},
-					-- If you set this to `true` (default is `false`) then any textobject is
-					-- extended to include preceding or succeeding whitespace. Succeeding
-					-- whitespace has priority in order to act similarly to eg the built-in
-					-- `ap`.
-					--
-					-- Can also be a function which gets passed a table with the keys
-					-- * query_string: eg '@function.inner'
-					-- * selection_mode: eg 'v'
-					-- and should return true or false
-					include_surrounding_whitespace = true,
-				},
-			},
+			max_lines = 20,
+			multiline_threshold = 10,
 		},
-		config = function(_, opts)
-			require("nvim-treesitter.configs").setup(opts)
-		end,
+	},
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
 	},
 }

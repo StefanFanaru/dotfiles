@@ -164,9 +164,9 @@ return {
 								enable = false,
 								url = "",
 							},
-							schemas = require("schemastore").yaml.schemas()
-						}
-					}
+							schemas = require("schemastore").yaml.schemas(),
+						},
+					},
 				},
 				jsonls = {
 					-- lazy-load schemastore when needed
@@ -176,7 +176,7 @@ return {
 					end,
 					settings = {
 						json = {
-							schemas = require('schemastore').json.schemas(),
+							schemas = require("schemastore").json.schemas(),
 							format = { enable = true },
 							validate = { enable = true },
 						},

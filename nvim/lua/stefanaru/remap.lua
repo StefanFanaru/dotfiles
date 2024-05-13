@@ -68,4 +68,3 @@ end, "Toggle max column line")
 
 -- the max column line that appears on <leader>1 will be grey
 vim.cmd([[highlight ColorColumn ctermbg=grey guibg=grey]])
--- map("i", "<>", "<Esc>o")

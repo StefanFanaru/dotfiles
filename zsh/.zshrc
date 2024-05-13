@@ -51,3 +51,4 @@ eval "$(zoxide init zsh)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # must be sourced before starting tmux
 source $DOT_FILES/scripts/workflow/tmux-autostart.sh
 # fpath+=${ZDOTDIR:-~}/.zsh_functions
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
