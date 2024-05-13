@@ -1,13 +1,8 @@
-local map = function(mode, keys, func, desc)
-	if desc == nil or desc == "" then
-		vim.keymap.set(mode, keys, func)
-	else
-		vim.keymap.set(mode, keys, func, { desc = desc, noremap = true })
-	end
-end
+local utils = require("stefanaru.utils")
+local map = utils.mapkey
 
 -- Show Netrw directory listing when pressing \ twice
-map("n", "\\\\", vim.cmd.Ex, "Show netrw")
+map("n", "\\\\", vim.cmd.Oil, "Show Oil")
 
 -- Move lines when they are visually selected
 map("v", "J", ":m '>+1<CR>gv=gv")
@@ -46,7 +41,7 @@ map("n", "<leader>q", vim.diagnostic.setloclist, "Open diagnostic [Q]uickfix lis
 map("t", "<Esc><Esc>", "<C-\\><C-n>", "Exit terminal mode")
 
 -- Exit hlsearch
-vim.api.nvim_set_keymap('n', '<Esc><Esc>', ':nohlsearch<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Esc><Esc>", ":nohlsearch<CR>", { noremap = true, silent = true })
 
 -- TIP: Disable arrow keys in normal mode
 map("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
@@ -74,16 +69,3 @@ end, "Toggle max column line")
 -- the max column line that appears on <leader>1 will be grey
 vim.cmd([[highlight ColorColumn ctermbg=grey guibg=grey]])
 -- map("i", "<>", "<Esc>o")
-
-
-
-function InsertHello()
-    -- Replace 57348 with the actual keycode of the PUA character E004
-    if vim.fn.getchar() == 118 then
-        -- Insert "hello" into the buffer
-        vim.api.nvim_put({"hello"}, "c", true, true)
-	end
-end
-
-vim.api.nvim_set_keymap('i', '', '<cmd>lua InsertHello()<CR>', {noremap = true, silent = true})
-

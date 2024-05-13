@@ -2,14 +2,23 @@ return {
 	{ "tpope/vim-sleuth", event = { "BufReadPost", "BufNewFile" } },
 	{ "tpope/vim-unimpaired", event = { "BufReadPost", "BufNewFile" } },
 	{ "tpope/vim-surround", event = { "BufReadPre", "BufNewFile" } },
+	{
+		"nvim-pack/nvim-spectre",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			vim.keymap.set("n", "<leader>sp", '<cmd>lua require("spectre").toggle()<CR>', {
+				desc = "Toggle Spectre",
+			})
+		end,
+	},
 	{ "nvim-tree/nvim-web-devicons" },
 	{
 		"Wansmer/treesj",
-		keys = { "<space>bb"},
+		keys = { "<space>bb" },
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		config = function()
 			require("treesj").setup({ use_default_keymaps = false })
-			vim.keymap.set("n", "<leader>bb", require("treesj").toggle, {desc = "Toggle treesj (split / join)"})
+			vim.keymap.set("n", "<leader>bb", require("treesj").toggle, { desc = "Toggle treesj (split / join)" })
 		end,
 	},
 	{
