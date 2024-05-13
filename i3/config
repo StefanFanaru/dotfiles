@@ -51,10 +51,10 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id rofi -show combi -run-command "i3-msg exec '{cmd}'" -show-icons
 
 # change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym $mod+j focus left
+bindsym $mod+l focus down
+bindsym $mod+h focus up
+bindsym $mod+k focus right
 
 # move focused window
 bindsym $mod+Shift+h move left
@@ -146,13 +146,16 @@ bindsym $mod+Shift+u move container to workspace number $ws1, workspace number $
 
 # https://github.com/klaxalk/i3-layout-manager
 # Ultrawide screen layouts
-bindsym $mod+F9 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-ultrawide-layout.sh 1"
-bindsym $mod+F10 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-ultrawide-layout.sh 2"
-bindsym $mod+F11 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-personal-layout.sh"
+bindsym $mod+F9 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-work-layout.sh 1"
+bindsym $mod+F10 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-work-layout.sh 2"
+bindsym $mod+F11 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-personal-layout.sh 1"
+bindsym $mod+F12 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-personal-layout.sh 2"
 
 # Small screen layout
 bindsym $mod+F8 exec --no-startup-id "sh -c '~/dotfiles/i3/i3-layout-manager/apply-fullscreen-layout.sh &'"
 
+# Kill work related
+bindsym $mod+F6 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/kill_work_related.sh"
 
 # NOTE: Window configs
 

@@ -1,0 +1,38 @@
+[
+  {
+    "border": "normal",
+    "floating": "auto_off",
+    "layout": "splith",
+    "marks": [],
+    "percent": null,
+    "rect": {
+      "height": 1440,
+      "width": 1944,
+      "x": 1920,
+      "y": 0
+    },
+    "type": "floating_con",
+    "nodes": [
+      {
+        "border": "pixel",
+        "current_border_width": 2,
+        "floating": "user_on",
+        "geometry": {
+          "height": 1440,
+          "width": 1944,
+          "x": 0,
+          "y": 0
+        },
+        "marks": [],
+        "name": "Alacritty",
+        "percent": 1,
+        "swallows": [
+          {
+            "class": "^Alacritty$"
+          }
+        ],
+        "type": "con"
+      }
+    ]
+  }
+]

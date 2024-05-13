@@ -24,4 +24,3 @@ subscribe_to_window() {
 		fi
 	done
 }
-
