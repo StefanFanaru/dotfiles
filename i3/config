@@ -51,10 +51,10 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id rofi -show combi -run-command "i3-msg exec '{cmd}'" -show-icons
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+l focus down
-bindsym $mod+h focus up
-bindsym $mod+k focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # move focused window
 bindsym $mod+Shift+h move left
@@ -142,7 +142,7 @@ bindsym $mod+Shift+o floating toggle, resize set 1920 px 1080 px, move absolute 
 # better focusing on specific app alocating center of empty workspace
 bindsym $mod+Shift+i move container to workspace number $ws3, workspace number $ws3, floating enable, resize set 2200 px 1440 px, move absolute position center
         # undo the above focusing, going back to workspace 1
-bindsym $mod+Shift+u move container to workspace number $ws1, workspace number $ws1, floating disable, move right, move down, move up, move up
+bindsym $mod+Shift+u move container to workspace number $ws1, workspace number $ws1, floating disable,move down, move right, move right, move down, move up, move up
 
 # https://github.com/klaxalk/i3-layout-manager
 # Ultrawide screen layouts

@@ -10,13 +10,12 @@ alias ls='echo $mistakeMessage; false'
 alias kc='kubectx'
 alias kn='kubens'
 alias k='kubectl'
-alias v='\nvim'
-alias vv='\nvim .'
+alias v='nvim'
+alias vv='nvim .'
 alias cls='\clear'
 alias clear='echo $mistakeMessage; false'
 alias lg='lazygit'
 alias rm='trash-put'
-alias nvim='echo $mistakeMessage; false'
 alias sa='sudo'
 alias so='source'
 
@@ -37,7 +36,9 @@ alias gitnamelectra= 'git config user.email "stefan.fanaru@geminicad.com"'
 alias logoutnow='kill -9 -1'
 alias xsc="xclip -selection clipboard"
 alias seejson="xclip -o -selection clipboard | jless"
-
+alias gvu="nmcli connection up 'Gemini VPN'"
+alias gvd="nmcli connection down 'Gemini VPN'"
+alias vpn="google-chrome-stable 'vpn.lectra.com'"
 
 # NOTE: SSH-ADD
 alias sshgithub='ssh-add ~/.ssh/id_github'

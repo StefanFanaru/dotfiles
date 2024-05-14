@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "$TERM" != "alacritty" ]; then
-	exit
+	return
 fi
 
 # Launch tmux by default
