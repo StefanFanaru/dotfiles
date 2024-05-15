@@ -16,7 +16,10 @@ return {
 			{ "folke/neodev.nvim", opts = {} },
 			-- Experimental rsoly vs code dev kit LSP integration
 			-- https://github.com/jmederosalvarado/roslyn.nvim
+			--
 			"jmederosalvarado/roslyn.nvim",
+			"vigoux/ltex-ls.nvim",
+			--
 			-- Enhanced signature helpers, loaded on LspAttach
 			{
 				"ray-x/lsp_signature.nvim",
@@ -89,14 +92,14 @@ return {
 
 					-- Fuzzy find all the symbols in your current document.
 					--  Symbols are things like variables, functions, types, etc.
-					map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+					map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]symbols")
 
 					-- Fuzzy find all the symbols in your current workspace.
 					--  Similar to document symbols, except searches over your entire project.
 					map(
 						"<leader>ws",
 						require("telescope.builtin").lsp_dynamic_workspace_symbols,
-						"[W]orkspace [S]ymbols"
+						"[W]orkspace [S]symbols"
 					)
 
 					-- Rename the variable under your cursor.
@@ -211,15 +214,9 @@ return {
 						},
 					},
 				},
-				-- Uncomment this if you want default eslint from vscode language server
-				-- and comment the block from above
-				-- eslint = {
-				-- 	settings = {
-				-- 		workingDirectory = {
-				-- 			mode = "location",
-				-- 		},
-				-- 	},
-				-- },
+				pyright = {},
+				vale_ls = {},
+				ltex = {},
 			}
 
 			local groovy_lsp_jar = dot_files_env .. "/dependencies/groovy-lsp/groovy-language-server-all.jar"
@@ -233,14 +230,15 @@ return {
 					groovy_lsp_jar,
 				},
 			})
+
 			-- require('lspconfig').eslint.setup{}
 			-- Install C# LSP
-			require("roslyn").setup({
-				dotnet_cmd = "dotnet", -- this is the default
-				roslyn_version = "4.8.0-3.23475.7", -- this is the default
-				on_attach = function() end, -- required
-				capabilitieivs = capabilities, -- required
-			})
+			-- require("roslyn").setup({
+			-- 	dotnet_cmd = "dotnet", -- this is the default
+			-- 	roslyn_version = "4.8.0-3.23475.7", -- this is the default
+			-- 	on_attach = function() end, -- required
+			-- 	capabilitieivs = capabilities, -- required
+			-- })
 			-- Ensure the servers and tools above are installed
 			--  To check the current status of installed tools and/or manually install
 			--  other tools, you can run
@@ -285,4 +283,75 @@ return {
 			hint_enable = false,
 		},
 	},
+	-- {
+	-- 	"vigoux/ltex-ls.nvim",
+	-- 	requires = "neovim/nvim-lspconfig",
+	-- 	event = "LspAttach",
+	-- 	config = function()
+	-- 		local capabilities = vim.lsp.protocol.make_client_capabilities()
+	-- 		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+	--
+	-- 		require("ltex-ls").setup({
+	-- 			on_attach = function() end, -- required
+	-- 			capabilities = capabilities,
+	-- 			use_spellfile = false,
+	-- 			filetypes = {
+	-- 				"bib",
+	-- 				"gitcommit",
+	-- 				"markdown",
+	-- 				"org",
+	-- 				"plaintex",
+	-- 				"rst",
+	-- 				"rnoweb",
+	-- 				"tex",
+	-- 				"pandoc",
+	-- 				"quarto",
+	-- 				"rmd",
+	-- 				"context",
+	-- 				"html",
+	-- 				"xhtml",
+	-- 				"mail",
+	-- 				"text",
+	-- 			},
+	-- 			settings = {
+	-- 				ltex = {
+	-- 					enabled = { "latex", "tex", "bib", "markdown" },
+	-- 					language = "auto",
+	-- 					diagnosticSeverity = "information",
+	-- 					sentenceCacheSize = 2000,
+	-- 					additionalRules = {
+	-- 						enablePickyRules = true,
+	-- 						motherTongue = "ro",
+	-- 					},
+	-- 					-- disabledRules = {
+	-- 					-- 	fr = { "APOS_TYP", "FRENCH_WHITESPACE" },
+	-- 					-- },
+	-- 					dictionary = (function()
+	-- 						-- For dictionary, search for files in the runtime to have
+	-- 						-- and include them as externals the format for them is
+	-- 						-- dict/{LANG}.txt
+	-- 						--
+	-- 						-- Also add dict/default.txt to all of them
+	-- 						local files = {}
+	-- 						for _, file in ipairs(vim.api.nvim_get_runtime_file("dict/*", true)) do
+	-- 							local lang = vim.fn.fnamemodify(file, ":t:r")
+	-- 							local fullpath = vim.fs.normalize(file, ":p")
+	-- 							files[lang] = { ":" .. fullpath }
+	-- 						end
+	--
+	-- 						if files.default then
+	-- 							for lang, _ in pairs(files) do
+	-- 								if lang ~= "default" then
+	-- 									vim.list_extend(files[lang], files.default)
+	-- 								end
+	-- 							end
+	-- 							files.default = nil
+	-- 						end
+	-- 						return files
+	-- 					end)(),
+	-- 				},
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
 }

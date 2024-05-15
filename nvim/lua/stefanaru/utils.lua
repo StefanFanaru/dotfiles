@@ -32,6 +32,12 @@ autocmd({ "BufWritePre" }, {
 	command = [[%s/\s\+$//e]],
 })
 
+autocmd({ "TermOpen" }, {
+	group = StefanaruGroup,
+	pattern = "*",
+	command = "setlocal nonumber norelativenumber",
+})
+
 M = {}
 
 -- Function to open URL on gx

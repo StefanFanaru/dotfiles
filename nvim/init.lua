@@ -1,7 +1,5 @@
 vim.loader.enable()
 
---TODO: test
-
 local disabled_built_ins = {
 	"matchparen",
 	"tohtml",

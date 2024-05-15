@@ -23,7 +23,7 @@ else
 	find_result=$(append_paths "$find_result" "$tmux_sessions")
 
 	# Pass the combined result to fzf
-	output=$(echo "$find_result" | fzf --query "$query" --print-query)
+	output=$(echo "$find_result" | fzf-tmux -p 80%,60% --query "$query" --print-query)
 	# Count the number of lines in the output
 	line_count=$(echo "$output" | wc -l)
 

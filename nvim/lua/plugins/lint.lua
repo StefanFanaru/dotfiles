@@ -9,14 +9,17 @@ return {
 			--   markdown = { 'markdownlint' },
 			-- }
 
-			lint.linters_by_ft["markdown"] = { "markdownlint" }
-			-- lint.linters_by_ft["json"] = { "jsonlint" }
+			lint.linters_by_ft["markdown"] = { "markdownlint","codespell" }
+			lint.linters_by_ft["json"] = { "jsonlint" }
 			lint.linters_by_ft["dockerfile"] = { "hadolint" }
 			lint.linters_by_ft["terraform"] = { "tflint" }
 			-- If you want  to enable default eslint from vscode language servers, then comment this,
 			-- and go to lsp.lua and uncomment eslint block next to eslint_d
 			lint.linters_by_ft["typescript"] = { "eslint_d" }
 			lint.linters_by_ft["groovy"] = { "npm-groovy-lint" }
+
+			lint.linters_by_ft["dockerfile"] = { "hadolint" }
+			lint.linters_by_ft["terraform"] = { "tflint" }
 
 			local npm_groovy_lint = lint.linters["npm-groovy-lint"]
 			npm_groovy_lint.ignore_exitcode = true
@@ -63,6 +66,7 @@ return {
 				group = lint_augroup,
 				callback = function()
 					require("lint").try_lint()
+					require("lint").try_lint("codespell")
 				end,
 			})
 		end,

@@ -68,3 +68,10 @@ end, "Toggle max column line")
 
 -- the max column line that appears on <leader>1 will be grey
 vim.cmd([[highlight ColorColumn ctermbg=grey guibg=grey]])
+
+map("n", "<leader>mc", function()
+	require("csharp.features.code-builder").execute()
+end)
+map("n", "<leader>mr", function()
+	require("csharp.features.code-runner").execute()
+end)

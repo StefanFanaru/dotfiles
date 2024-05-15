@@ -5,6 +5,7 @@ export PATH="$PATH:/opt/nvim-linux64/bin"
 export PATH="$PATH:~/.local/bin"
 export PATH="$PATH:$HOME/dotfiles/scripts/external/bin"
 export PATH=$PATH:/opt/gradle/gradle-8.7/bin
+export PATH=$PATH:/usr/local/bin/netcoredbg
 
 export LANG=en_US.UTF-8
 export ZSH=$HOME/.oh-my-zsh
@@ -49,6 +50,11 @@ source $DOT_FILES/zsh/sources.sh
 eval "$(zoxide init zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # must be sourced before starting tmux
+source $DOT_FILES/zsh/fzf_env.sh
 source $DOT_FILES/scripts/workflow/tmux-autostart.sh
 # fpath+=${ZDOTDIR:-~}/.zsh_functions
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+export PATH="/home/linuxbrew/.linuxbrew/opt/imagemagick@6/bin:$PATH"
+export MAGICK_HOME="/usr/local/opt/imagemagick@6/lib"
+export MAGICK_HOME="/usr/local/opt/imagemagick@6/lib"
+export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"

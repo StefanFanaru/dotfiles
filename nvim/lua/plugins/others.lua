@@ -36,4 +36,5 @@ return {
 		lazy = true,
 		version = false, -- last release is way too old
 	},
+	{ "folke/neodev.nvim", opts = {} },
 }
