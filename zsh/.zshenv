@@ -3,7 +3,10 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=241"
 export EDITOR=nvim
 export IS_ZSH=true
 export BAT_THEME="CatppuccinMocha"
-export FZF_DEFAULT_COMMAND='rg --files --hidden'
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+# export FZF_DEFAULT_COMMAND="rg --files --hidden
+# --preview 'bat --color=always --style=numbers --line-range=:500 {}'
+# --bind 'ctrl-/:toggle-preview'"
 export FZF_CTRL_T_OPTS="
   --walker-skip .git,node_modules,target
   --preview 'bat -n --color=always {}'

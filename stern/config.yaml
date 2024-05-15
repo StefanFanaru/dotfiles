@@ -1,0 +1,4 @@
+max-log-requests: 100
+since: 90m
+timestamps: short
+template: '{{colorCyan .PodName}} | {{.Message}}{{"\n"}}'

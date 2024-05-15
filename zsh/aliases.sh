@@ -40,6 +40,14 @@ alias gvu="nmcli connection up 'Gemini VPN'"
 alias gvd="nmcli connection down 'Gemini VPN'"
 alias vpn="google-chrome-stable 'vpn.lectra.com'"
 
+# NOTE: BAT
+alias cat='bat --paging=never'
+alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
+alias bathelp='bat --plain --language=help'
+help() {
+    "$@" --help 2>&1 | bathelp
+}
+
 # NOTE: SSH-ADD
 alias sshgithub='ssh-add ~/.ssh/id_github'
 alias sshstefanaru='ssh-add ~/.ssh/id_github'

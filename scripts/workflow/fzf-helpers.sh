@@ -29,7 +29,7 @@ cv() {
 fv() {
 	file=$(fzf --preview 'bat --style=numbers --color=always {}')
 	if [ -n "$file" ]; then
-		\nvim "$file"
+		nvim "$file"
 	fi
 }
 
