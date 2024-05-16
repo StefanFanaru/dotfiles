@@ -3,64 +3,39 @@ return {
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			-- Automatically install LSPs and related tools to stdpath for Neovim
 			{ "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
-			-- Useful status updates for LSP.
-			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-			{ "j-hui/fidget.nvim", opts = {} },
-
-			-- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
-			-- used for completion, annotations and signatures of Neovim apis
 			{ "folke/neodev.nvim", opts = {} },
-			-- Experimental rsoly vs code dev kit LSP integration
+			-- Experimental roslyn vs code dev kit LSP integration
 			-- https://github.com/jmederosalvarado/roslyn.nvim
-			--
-			"jmederosalvarado/roslyn.nvim",
-			"vigoux/ltex-ls.nvim",
-			--
+			-- "jmederosalvarado/roslyn.nvim",
 			-- Enhanced signature helpers, loaded on LspAttach
 			{
 				"ray-x/lsp_signature.nvim",
 				event = "LspAttach",
-				opts = {
-					hint_enable = false,
-					floating_window = false,
-					toggle_key = "<C-k>",
+				opts = {},
+			},
+			{
+				"pmizio/typescript-tools.nvim",
+				dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+				opts = {},
+				ft = {
+					"javascript",
+					"javascriptreact",
+					"javascript.jsx",
+					"typescript",
+					"typescriptreact",
+					"typescript.tsx",
 				},
 			},
 		},
+		opts = {
+			inlay_hints = {
+				enabled = true,
+			},
+		},
 		config = function()
-			-- Brief aside: **What is LSP?**
-			--
-			-- LSP is an initialism you've probably heard, but might not understand what it is.
-			--
-			-- LSP stands for Language Server Protocol. It's a protocol that helps editors
-			-- and language tooling communicate in a standardized fashion.
-			--
-			-- In general, you have a "server" which is some tool built to understand a particular
-			-- language (such as `gopls`, `lua_ls`, `rust_analyzer`, etc.). These Language Servers
-			-- (sometimes called LSP servers, but that's kind of like ATM Machine) are standalone
-			-- processes that communicate with some "client" - in this case, Neovim!
-			--
-			-- LSP provides Neovim with features like:
-			--  - Go to definition
-			--  - Find references
-			--  - Autocompletion
-			--  - Symbol Search
-			--  - and more!
-			--
-			-- Thus, Language Servers are external tools that must be installed separately from
-			-- Neovim. This is where `mason` and related plugins come into play.
-			--
-			-- If you're wondering about lsp vs treesitter, you can check out the wonderfully
-			-- and elegantly composed help section, `:help lsp-vs-treesitter`
-
-			--  This function gets run when an LSP attaches to a particular buffer.
-			--    That is to say, every time a new file is opened that is associated with
-			--    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
-			--    function will be executed to configure the current buffer
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
 				callback = function(event)
@@ -118,47 +93,25 @@ return {
 					--  For example, in C this would take you to the header.
 					map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
-					--Show signature help both in normal and input mode
-					-- vim.keymap.set({ "n", "i" }, "<C-h>", function()
-					-- vim.lsp.buf.signature_help()
-					-- end, { buffer = event.buf, desc = "LSP: Show signature" })
-					--
-					-- Toggle LSP signature help
-					-- vim.keymap.set({ "n", "i" }, "<C-k>", function()
-					-- 	require("lsp_signature").toggle_float_win()
-					-- end, { buffer = event.buf, desc = "Toggle signature" })
+					map("<leader>hi", function()
+						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }))
+					end, "Inlay [H]ints")
+
+					map("<leader>rlsp", ":LspRestart<CR>", "Restart LSP")
+
+					map("<C-k>", require("lsp_signature").toggle_float_win, "Toggle signature help")
+					require("lsp_signature").on_attach({
+						hint_enable = false,
+						floating_window = false,
+						toggle_key = "<C-k>",
+					}, event.buf)
 				end,
 			})
 
-			-- LSP servers and clients are able to communicate to each other what features they support.
-			--  By default, Neovim doesn't support everything that is in the LSP specification.
-			--  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
-			--  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-			-- Enable the following language servers
-			--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-			--
-			--  Add any additional override configuration in the following tables. Available keys are:
-			--  - cmd (table): Override the default command used to start the server
-			--  - filetypes (table): Override the default list of associated filetypes for the server
-			--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-			--  - settings (table): Override the default settings passed when initializing the server.
-			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			local servers = {
-				-- clangd = {},
-				-- gopls = {},
-				-- pyright = {},
-				-- rust_analyzer = {},
-				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-				--
-				-- Some languages (like typescript) have entire language plugins that can be useful:
-				--    https://github.com/pmizio/typescript-tools.nvim
-				--
-				-- But for many setups, the LSP (`tsserver`) will work just fine
-				-- tsserver = {},
-				--
 				cssls = {},
 				yamlls = {
 					settings = {
@@ -186,16 +139,13 @@ return {
 					},
 				},
 				lua_ls = {
-					-- cmd = {...},
-					-- filetypes = { ...},
-					-- capabilities = {},
 					settings = {
 						Lua = {
+							hint = { enable = true },
 							completion = {
 								callSnippet = "Replace",
 							},
-							-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-							-- diagnostics = { disable = { 'missing-fields' } },
+							diagnostics = { disable = { "missing-fields" } },
 						},
 					},
 				},
@@ -216,14 +166,13 @@ return {
 				},
 				pyright = {},
 				vale_ls = {},
-				ltex = {},
 			}
 
 			local groovy_lsp_jar = dot_files_env .. "/dependencies/groovy-lsp/groovy-language-server-all.jar"
 			require("lspconfig").groovyls.setup({
-				on_attach = function() end, -- required
+				on_attach = on_attach,
 				filetypes = { "groovy" },
-				capabilitieivs = capabilities, -- required
+				capabilities = capabilities,
 				cmd = {
 					"java",
 					"-jar",
@@ -231,24 +180,31 @@ return {
 				},
 			})
 
-			-- require('lspconfig').eslint.setup{}
-			-- Install C# LSP
-			-- require("roslyn").setup({
-			-- 	dotnet_cmd = "dotnet", -- this is the default
-			-- 	roslyn_version = "4.8.0-3.23475.7", -- this is the default
-			-- 	on_attach = function() end, -- required
-			-- 	capabilitieivs = capabilities, -- required
-			-- })
-			-- Ensure the servers and tools above are installed
-			--  To check the current status of installed tools and/or manually install
-			--  other tools, you can run
-			--    :Mason
-			--
-			--  You can press `g?` for help in this menu.
+			require("roslyn").setup({
+				dotnet_cmd = "dotnet",
+				roslyn_version = "4.11.0-1.24209.10",
+				on_attach = function() end,
+				capabilities = capabilities,
+				settings = {
+					["csharp|inlay_hints"] = {
+						csharp_enable_inlay_hints_for_lambda_parameter_types = true,
+						csharp_enable_inlay_hints_for_implicit_object_creation = true,
+						csharp_enable_inlay_hints_for_implicit_variable_types = true,
+						csharp_enable_inlay_hints_for_types = true,
+						dotnet_enable_inlay_hints_for_indexer_parameters = true,
+						dotnet_enable_inlay_hints_for_literal_parameters = true,
+						dotnet_enable_inlay_hints_for_object_creation_parameters = true,
+						dotnet_enable_inlay_hints_for_other_parameters = true,
+						dotnet_enable_inlay_hints_for_parameters = true,
+						dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
+						dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
+						dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
+					},
+				},
+			})
+
 			require("mason").setup()
 
-			-- You can add other tools here that you want Mason to install
-			-- for you, so that they are available from within Neovim.
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
 				"stylua", -- Used to format Lua code
@@ -259,9 +215,6 @@ return {
 				handlers = {
 					function(server_name)
 						local server = servers[server_name] or {}
-						-- This handles overriding only values explicitly passed
-						-- by the server configuration above. Useful when disabling
-						-- certain features of an LSP (for example, turning off formatting for tsserver)
 						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
 						require("lspconfig")[server_name].setup(server)
 					end,
@@ -269,89 +222,4 @@ return {
 			})
 		end,
 	},
-	{
-		"pmizio/typescript-tools.nvim",
-		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-		opts = {},
-		ft = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
-	},
-	-- Enhanced signature helpers, loaded on LspAttach
-	{
-		"ray-x/lsp_signature.nvim",
-		event = "LspAttach",
-		opts = {
-			hint_enable = false,
-		},
-	},
-	-- {
-	-- 	"vigoux/ltex-ls.nvim",
-	-- 	requires = "neovim/nvim-lspconfig",
-	-- 	event = "LspAttach",
-	-- 	config = function()
-	-- 		local capabilities = vim.lsp.protocol.make_client_capabilities()
-	-- 		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-	--
-	-- 		require("ltex-ls").setup({
-	-- 			on_attach = function() end, -- required
-	-- 			capabilities = capabilities,
-	-- 			use_spellfile = false,
-	-- 			filetypes = {
-	-- 				"bib",
-	-- 				"gitcommit",
-	-- 				"markdown",
-	-- 				"org",
-	-- 				"plaintex",
-	-- 				"rst",
-	-- 				"rnoweb",
-	-- 				"tex",
-	-- 				"pandoc",
-	-- 				"quarto",
-	-- 				"rmd",
-	-- 				"context",
-	-- 				"html",
-	-- 				"xhtml",
-	-- 				"mail",
-	-- 				"text",
-	-- 			},
-	-- 			settings = {
-	-- 				ltex = {
-	-- 					enabled = { "latex", "tex", "bib", "markdown" },
-	-- 					language = "auto",
-	-- 					diagnosticSeverity = "information",
-	-- 					sentenceCacheSize = 2000,
-	-- 					additionalRules = {
-	-- 						enablePickyRules = true,
-	-- 						motherTongue = "ro",
-	-- 					},
-	-- 					-- disabledRules = {
-	-- 					-- 	fr = { "APOS_TYP", "FRENCH_WHITESPACE" },
-	-- 					-- },
-	-- 					dictionary = (function()
-	-- 						-- For dictionary, search for files in the runtime to have
-	-- 						-- and include them as externals the format for them is
-	-- 						-- dict/{LANG}.txt
-	-- 						--
-	-- 						-- Also add dict/default.txt to all of them
-	-- 						local files = {}
-	-- 						for _, file in ipairs(vim.api.nvim_get_runtime_file("dict/*", true)) do
-	-- 							local lang = vim.fn.fnamemodify(file, ":t:r")
-	-- 							local fullpath = vim.fs.normalize(file, ":p")
-	-- 							files[lang] = { ":" .. fullpath }
-	-- 						end
-	--
-	-- 						if files.default then
-	-- 							for lang, _ in pairs(files) do
-	-- 								if lang ~= "default" then
-	-- 									vim.list_extend(files[lang], files.default)
-	-- 								end
-	-- 							end
-	-- 							files.default = nil
-	-- 						end
-	-- 						return files
-	-- 					end)(),
-	-- 				},
-	-- 			},
-	-- 		})
-	-- 	end,
-	-- },
 }

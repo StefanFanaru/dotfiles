@@ -2,12 +2,22 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		lazy = false,
+		build = ":TSUpdate",
+		event = { "BufReadPre", "VeryLazy" },
+		lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
+		init = function(plugin)
+			-- PERF: add nvim-treesitter queries to the rtp and it's custom query predicates early
+			-- This is needed because a bunch of plugins no longer `require("nvim-treesitter")`, which
+			-- no longer trigger the **nvim-treesitter** module to be loaded in time.
+			-- Luckily, the only things that those plugins need are the custom queries, which we make available
+			-- during startup.
+			require("lazy.core.loader").add_to_rtp(plugin)
+			require("nvim-treesitter.query_predicates")
+		end,
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"neovim/nvim-lspconfig",
 		},
-		build = ":TSUpdate",
 		opts = {
 			ensure_installed = {
 				"bash",
@@ -36,7 +46,7 @@ return {
 				-- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
 				--  If you are experiencing weird indenting issues, add the language to
 				--  the list of additional_vim_regex_highlighting and disabled languages for indent.
-				additional_vim_regex_highlighting = {"bash"},
+				additional_vim_regex_highlighting = { "bash" },
 			},
 			incremental_selection = {
 				enable = true,
@@ -132,6 +142,30 @@ return {
 
 			vim.treesitter.language.register("groovy", "jenkins")
 
+			vim.schedule(function()
+				require("lazy").load({ plugins = { "nvim-treesitter-textobjects" } })
+			end)
+		end,
+	},
+	{
+		"nvim-treesitter/nvim-treesitter-context",
+		event = "BufReadPost",
+		enabled = true,
+		opts = { mode = "cursor", max_lines = 3 },
+		keys = {
+			{
+				"<leader>tu",
+				function()
+					require("treesitter-context").toggle()
+				end,
+				desc = "Toggle Treesitter Context",
+			},
+		},
+	},
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		lazy = true,
+		config = function()
 			-- NOTE: Make more moves repeatable
 			local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
 
@@ -154,15 +188,5 @@ return {
 			vim.keymap.set({ "n", "x", "o" }, "]h", next_hunk_repeat, { desc = "Git Hunk repeat Next" })
 			vim.keymap.set({ "n", "x", "o" }, "[h", prev_hunk_repeat, { desc = "Git Hunk repeat Next" })
 		end,
-	},
-	{
-		"nvim-treesitter/nvim-treesitter-context",
-		opts = {
-			max_lines = 20,
-			multiline_threshold = 10,
-		},
-	},
-	{
-		"nvim-treesitter/nvim-treesitter-textobjects",
 	},
 }

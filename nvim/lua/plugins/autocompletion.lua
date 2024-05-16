@@ -45,8 +45,23 @@ return {
 				-- Accept ([y]es) the completion.
 				--  This will auto-import if yourg LSP supports it.
 				--  This will expand snippets if the LSP sent a snippet.
-				["<C-y>"] = cmp.mapping.confirm({ select = true }),
-				-- ["<Tab>"] = cmp.mapping.confirm({ select = true }),
+				["<C-y>"] = cmp.mapping(function(fallback)
+					local copilot = require("copilot.suggestion")
+					if copilot.is_visible() then
+						copilot.accept()
+					elseif cmp.visible() then
+						cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+					elseif luasnip.expandable() then
+						luasnip.expand()
+					elseif has_words_before() then
+						cmp.complete()
+					else
+						fallback()
+					end
+				end, {
+					"i",
+					"s",
+				}), -- ["<Tab>"] = cmp.mapping.confirm({ select = true }),
 				-- If you prefer more traditional completion keymaps,
 				-- you can uncomment the following lines
 				--['<CR>'] = cmp.mapping.confirm { select = true },
@@ -116,6 +131,16 @@ return {
 				{ name = "path" },
 				{ name = "buffer" },
 			},
+		})
+
+		cmp.setup.cmdline({ "/", "?" }, {
+			mapping = cmp.mapping.preset.cmdline({
+				["<Tab>"] = cmp.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+			}),
+			sources = {
+				{ name = "buffer" },
+			},
+			matching = { disallow_symbol_nonprefix_matching = true, disallow_fullfuzzy_matching = true },
 		})
 	end,
 }

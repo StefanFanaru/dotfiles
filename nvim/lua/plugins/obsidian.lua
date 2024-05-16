@@ -27,8 +27,7 @@ local obsidian = {
 				note_title = "new-" .. spec.id
 			end
 			local file_name = note_title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
-			local path = spec.dir / file_name
-			return path:with_suffix(".md")
+			return "/mnt/f/obsidian/stefanaru-second-brain/Inbox" .. file_name .. ".md"
 		end,
 		note_id_func = function(title)
 			-- Create note IDs in a Zettelkasten format with a timestamp and a suffix.
