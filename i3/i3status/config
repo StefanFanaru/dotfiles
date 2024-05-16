@@ -15,8 +15,8 @@ order += "cpu_usage"
 order += "cpu_temperature 0"
 order += "memory"
 order += "ethernet enp6s0"
-order += "tztime local"
 order += "volume master"
+order += "tztime local"
 
 tztime local {
         format = " %d %b %H:%M "
@@ -32,11 +32,13 @@ cpu_usage {
 
 cpu_temperature "0" {
         format = " %degrees °C "
+        path="/sys/class/hwmon/hwmon2/temp1_input"
 }
 
 ethernet "enp6s0" {
         format_up = " 󰍹 "
         format_down = " 󰍹 "
+        color_good = "#FFFFFF"
 }
 
 volume master {
