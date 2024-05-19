@@ -35,6 +35,7 @@ vim.g.netrw_winsize = 25
 
 vim.g.have_nerd_font = true
 vim.opt.showmode = false
+vim.opt.ruler = false
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true

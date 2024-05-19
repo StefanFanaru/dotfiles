@@ -4,7 +4,6 @@ return {
 	config = function()
 		require("copilot").setup({
 			panel = {
-				--
 				enabled = true,
 				auto_refresh = true,
 				keymap = {
@@ -13,7 +12,7 @@ return {
 					accept = "<CR>",
 				},
 				layout = {
-					position = "bottom", -- | top | left | right
+					position = "bottom",
 					ratio = 0.4,
 				},
 			},
@@ -44,7 +43,7 @@ return {
 				cvs = false,
 				["."] = false,
 			},
-			copilot_node_command = "node", -- Node.js version must be > 18.x
+			copilot_node_command = "node",
 			server_opts_overrides = {},
 		})
 		vim.keymap.set("n", "<leader>co", function()

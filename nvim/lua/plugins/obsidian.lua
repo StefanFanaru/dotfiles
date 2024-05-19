@@ -81,6 +81,10 @@ return {
 		},
 	},
 	config = function(_, opts)
+		if vim.fn.getcwd(0) ~= "/mnt/f/obsidian/stefanaru-second-brain" then
+			return
+		end
+
 		require("obsidian").setup(opts)
 		local utils = require("stefanaru.utils")
 		local map = utils.mapkey

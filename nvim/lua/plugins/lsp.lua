@@ -1,3 +1,4 @@
+local utils = require("stefanaru.utils")
 return {
 	{
 		"neovim/nvim-lspconfig",
@@ -5,12 +6,12 @@ return {
 			{ "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
+			{ "Hoffs/omnisharp-extended-lsp.nvim", ft = { "cs" } },
 			{ "folke/neodev.nvim", opts = {} },
 			-- Experimental roslyn vs code dev kit LSP integration
 			-- https://github.com/jmederosalvarado/roslyn.nvim
 			-- "jmederosalvarado/roslyn.nvim",
 			-- Enhanced signature helpers, loaded on LspAttach
-			{ "Hoffs/omnisharp-extended-lsp.nvim" },
 			{
 				"ray-x/lsp_signature.nvim",
 				event = "LspAttach",
@@ -52,6 +53,11 @@ return {
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
 				callback = function(event)
+					local client_name = utils.get_lsp_client(event.data.client_id)
+					if client_name == "copilot" then
+						return
+					end
+
 					local map = function(keys, func, desc)
 						vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 					end
@@ -59,17 +65,9 @@ return {
 					-- Jump to the definition of the word under your cursor.
 					--  This is where a variable was first declared, or where a function is defined, etc.
 					--  To jump back, press <C-t>.
-					local client = vim.lsp.get_client_by_id(event.data.client_id)
-					local client_name = client and client.name or "Unknown"
-					print("LSP client attached:", client_name)
-
-					if client_name == "copilot" then
-						return
-					end
-
 					map("gd", function()
 						if client_name == "omnisharp" then
-							map("gd", require("omnisharp_extended").lsp_definition, "[G]oto [D]efinition2")
+							require("omnisharp_extended").lsp_definition()
 						elseif require("obsidian").util.cursor_on_markdown_link() then
 							vim.cmd("ObsidianFollowLink")
 						else
@@ -83,18 +81,6 @@ return {
 					--  Useful when your language has ways of declaring types without an actual implementation.
 					map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 
-					-- Jump to the type of the word under your cursor.
-					--  Useful when you're not sure what type a variable is and you want to see
-					--  the definition of its *type*, not where it was *defined*.
-					map("gd", function()
-						if client_name == "omnisharp" then
-							map("gd", require("omnisharp_extended").lsp_definition, "[G]oto [D]efinition2")
-						elseif require("obsidian").util.cursor_on_markdown_link() then
-							vim.cmd("ObsidianFollowLink")
-						else
-							require("telescope.builtin").lsp_definitions()
-						end
-					end, "[G]oto [D]efinition")
 					map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
 
 					-- Fuzzy find all the symbols in your current document.
@@ -143,14 +129,6 @@ return {
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-			local on_attach = function(client, bufnr)
-				if client.name == "omnisharp" then
-					local map = function(keys, func, desc)
-						vim.keymap.set("n", keys, func, { noremap = true, desc = "LSP: " .. desc })
-					end
-					map("gd", require("omnisharp_extended").lsp_definition, "[G]oto [D]efinition2")
-				end
-			end
 			local servers = {
 				cssls = {},
 				yamlls = {
@@ -208,7 +186,6 @@ return {
 				pyright = {},
 				vale_ls = {},
 				omnisharp = {
-					on_attach = on_attach,
 					handlers = {
 						["textDocument/definition"] = require("omnisharp_extended").definition_handler,
 						["textDocument/typeDefinition"] = require("omnisharp_extended").type_definition_handler,
@@ -260,10 +237,13 @@ return {
 
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
-				"stylua", -- Used to format Lua code
+				"stylua",
+				"tflint",
+				"jsonlint",
+				"hadolint",
 			})
-			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
+			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 			require("mason-lspconfig").setup({
 				handlers = {
 					function(server_name)

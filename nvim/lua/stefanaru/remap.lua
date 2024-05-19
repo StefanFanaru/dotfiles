@@ -29,25 +29,13 @@ map("n", "<leader>Y", [["+Y]], "Copy to system registry")
 map("i", "<C-c>", "<Esc>")
 
 -- Search and replace
-map("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], "Seach and replace current word")
-
--- Diagnostic keymaps
-map("n", "[d", vim.diagnostic.goto_prev, "Go to previous [D]iagnostic message")
-map("n", "]d", vim.diagnostic.goto_next, "Go to next [D]iagnostic message")
-map("n", "<leader>e", vim.diagnostic.open_float, "Show diagnostic [E]rror messages")
-map("n", "<leader>q", vim.diagnostic.setloclist, "Open diagnostic [Q]uickfix list")
+map("n", "<leader>*", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], "Search and replace current word")
 
 -- Exit terminal mode easier
 map("t", "<Esc><Esc>", "<C-\\><C-n>", "Exit terminal mode")
 
 -- Exit hlsearch
 vim.api.nvim_set_keymap("n", "<Esc><Esc>", ":nohlsearch<CR>", { noremap = true, silent = true })
-
--- TIP: Disable arrow keys in normal mode
-map("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
-map("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
-map("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
-map("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows

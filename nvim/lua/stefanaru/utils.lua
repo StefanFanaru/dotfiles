@@ -70,7 +70,7 @@ end
 
 M.mapkey = function(mode, keys, func, desc)
 	if desc == nil or desc == "" then
-		vim.keymap.set(mode, keys, func)
+		vim.keymap.set(mode, keys, func, { noremap = true })
 	else
 		vim.keymap.set(mode, keys, func, { desc = desc, noremap = true })
 	end
@@ -88,4 +88,16 @@ function M.printTable(t)
 	end
 	print("}")
 end
+
+function M.load_vimscript(filename)
+	local escaped_filename = vim.fn.fnameescape(filename)
+	vim.cmd("source " .. escaped_filename)
+end
+
+function M.get_lsp_client(client_id)
+	local client = vim.lsp.get_client_by_id(client_id)
+	local client_name = client and client.name or "Unknown"
+	return client_name
+end
+
 return M
