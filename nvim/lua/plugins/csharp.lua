@@ -7,9 +7,7 @@ return {
 			require("csharp").setup()
 		end,
 	},
-
 	{
 		dir = "~/personal/roslyn.nvim",
-		ft = "cs",
 	},
 }

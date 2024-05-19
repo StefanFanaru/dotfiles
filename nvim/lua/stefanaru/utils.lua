@@ -76,4 +76,16 @@ M.mapkey = function(mode, keys, func, desc)
 	end
 end
 
+function M.printTable(t)
+	print("{")
+	for k, v in pairs(t) do
+		if type(v) == "table" then
+			print("\t" .. k .. " = ")
+			M.printTable(v)
+		else
+			print("\t" .. k .. " = " .. tostring(v))
+		end
+	end
+	print("}")
+end
 return M

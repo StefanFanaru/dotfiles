@@ -1,7 +1,6 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
-		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			{ "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
 			"williamboman/mason-lspconfig.nvim",
@@ -11,6 +10,7 @@ return {
 			-- https://github.com/jmederosalvarado/roslyn.nvim
 			-- "jmederosalvarado/roslyn.nvim",
 			-- Enhanced signature helpers, loaded on LspAttach
+			{ "Hoffs/omnisharp-extended-lsp.nvim" },
 			{
 				"ray-x/lsp_signature.nvim",
 				event = "LspAttach",
@@ -34,16 +34,24 @@ return {
 			inlay_hints = {
 				enabled = true,
 			},
+			codelens = {
+				enabled = true,
+			},
+			diagnostics = {
+				underline = true,
+				update_in_insert = false,
+				severity_sort = true,
+				virtual_text = {
+					spacing = 4,
+					prefix = "●",
+					float = { border = "rounded" },
+				},
+			},
 		},
 		config = function()
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
 				callback = function(event)
-					-- NOTE: Remember that Lua is a real programming language, and as such it is possible
-					-- to define small helper and utility functions so you don't have to repeat yourself.
-					--
-					-- In this case, we create a function that lets us more easily define mappings specific
-					-- for LSP related items. It sets the mode, buffer and description for us each time.
 					local map = function(keys, func, desc)
 						vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 					end
@@ -51,11 +59,26 @@ return {
 					-- Jump to the definition of the word under your cursor.
 					--  This is where a variable was first declared, or where a function is defined, etc.
 					--  To jump back, press <C-t>.
-					map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
+					local client = vim.lsp.get_client_by_id(event.data.client_id)
+					local client_name = client and client.name or "Unknown"
+					print("LSP client attached:", client_name)
+
+					if client_name == "copilot" then
+						return
+					end
+
+					map("gd", function()
+						if client_name == "omnisharp" then
+							map("gd", require("omnisharp_extended").lsp_definition, "[G]oto [D]efinition2")
+						elseif require("obsidian").util.cursor_on_markdown_link() then
+							vim.cmd("ObsidianFollowLink")
+						else
+							require("telescope.builtin").lsp_definitions()
+						end
+					end, "[G]oto [D]efinition")
 
 					-- Find references for the word under your cursor.
 					map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-
 					-- Jump to the implementation of the word under your cursor.
 					--  Useful when your language has ways of declaring types without an actual implementation.
 					map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
@@ -63,6 +86,15 @@ return {
 					-- Jump to the type of the word under your cursor.
 					--  Useful when you're not sure what type a variable is and you want to see
 					--  the definition of its *type*, not where it was *defined*.
+					map("gd", function()
+						if client_name == "omnisharp" then
+							map("gd", require("omnisharp_extended").lsp_definition, "[G]oto [D]efinition2")
+						elseif require("obsidian").util.cursor_on_markdown_link() then
+							vim.cmd("ObsidianFollowLink")
+						else
+							require("telescope.builtin").lsp_definitions()
+						end
+					end, "[G]oto [D]efinition")
 					map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
 
 					-- Fuzzy find all the symbols in your current document.
@@ -111,6 +143,14 @@ return {
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
+			local on_attach = function(client, bufnr)
+				if client.name == "omnisharp" then
+					local map = function(keys, func, desc)
+						vim.keymap.set("n", keys, func, { noremap = true, desc = "LSP: " .. desc })
+					end
+					map("gd", require("omnisharp_extended").lsp_definition, "[G]oto [D]efinition2")
+				end
+			end
 			local servers = {
 				cssls = {},
 				yamlls = {
@@ -139,6 +179,7 @@ return {
 					},
 				},
 				lua_ls = {
+					on_attach = on_attach,
 					settings = {
 						Lua = {
 							hint = { enable = true },
@@ -166,12 +207,23 @@ return {
 				},
 				pyright = {},
 				vale_ls = {},
+				omnisharp = {
+					on_attach = on_attach,
+					handlers = {
+						["textDocument/definition"] = require("omnisharp_extended").definition_handler,
+						["textDocument/typeDefinition"] = require("omnisharp_extended").type_definition_handler,
+						["textDocument/references"] = require("omnisharp_extended").references_handler,
+						["textDocument/implementation"] = require("omnisharp_extended").implementation_handler,
+					},
+					cmd = { "dotnet", "/home/stefanaru/bin/omnisharp/OmniSharp.dll" },
+				},
 			}
 
 			local groovy_lsp_jar = dot_files_env .. "/dependencies/groovy-lsp/groovy-language-server-all.jar"
 			require("lspconfig").groovyls.setup({
 				on_attach = on_attach,
 				filetypes = { "groovy" },
+
 				capabilities = capabilities,
 				cmd = {
 					"java",
@@ -180,28 +232,29 @@ return {
 				},
 			})
 
-			require("roslyn").setup({
-				dotnet_cmd = "dotnet",
-				roslyn_version = "4.11.0-1.24209.10",
-				on_attach = function() end,
-				capabilities = capabilities,
-				settings = {
-					["csharp|inlay_hints"] = {
-						csharp_enable_inlay_hints_for_lambda_parameter_types = true,
-						csharp_enable_inlay_hints_for_implicit_object_creation = true,
-						csharp_enable_inlay_hints_for_implicit_variable_types = true,
-						csharp_enable_inlay_hints_for_types = true,
-						dotnet_enable_inlay_hints_for_indexer_parameters = true,
-						dotnet_enable_inlay_hints_for_literal_parameters = true,
-						dotnet_enable_inlay_hints_for_object_creation_parameters = true,
-						dotnet_enable_inlay_hints_for_other_parameters = true,
-						dotnet_enable_inlay_hints_for_parameters = true,
-						dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
-						dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
-						dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
-					},
-				},
-			})
+			-- require("roslyn").setup({
+			-- 	dotnet_cmd = "dotnet",
+			-- 	roslyn_version = "4.11.0-1.24209.10",
+			-- 	on_attach = on_attach,
+			-- 	capabilities = capabilities,
+			-- 	settings = {
+			-- 		["csharp|inlay_hints"] = {
+			-- 			csharp_enable_inlay_hints_for_lambda_parameter_types = true,
+			-- 			csharp_enable_inlay_hints_for_implicit_object_creation = true,
+			-- 			csharp_enable_inlay_hints_for_implicit_variable_types = true,
+			-- 			csharp_enable_inlay_hints_for_types = true,
+			-- 			dotnet_enable_inlay_hints_for_indexer_parameters = true,
+			-- 			dotnet_enable_inlay_hints_for_literal_parameters = true,
+			-- 			dotnet_enable_inlay_hints_for_object_creation_parameters = true,
+			-- 			dotnet_enable_inlay_hints_for_other_parameters = true,
+			-- 			dotnet_enable_inlay_hints_for_parameters = true,
+			-- 			dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
+			-- 			dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
+			-- 			dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
+			-- 		},
+			-- 	},
+			-- })
+			--
 
 			require("mason").setup()
 

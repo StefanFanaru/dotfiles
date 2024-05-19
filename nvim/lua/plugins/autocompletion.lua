@@ -26,6 +26,17 @@ return {
 					luasnip.lsp_expand(args.body)
 				end,
 			},
+			window = {
+				documentation = {
+					border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+					scrollbar = false,
+				},
+				completion = {
+					border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+					scrollbar = false,
+					winhighlight = "Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None",
+				},
+			},
 			completion = { completeopt = "menu,menuone,noinsert" },
 
 			-- For an understanding of why these mappings were
@@ -84,14 +95,15 @@ return {
 						local entry = cmp.get_selected_entry()
 						if not entry then
 							cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+						else
+							cmp.confirm()
 						end
-						cmp.confirm()
-					elseif luasnip.locally_jumpable(1) then
-						luasnip.jump(1)
+					elseif luasnip.expand_or_jumpable() then
+						luasnip.expand_or_jump()
 					else
 						fallback()
 					end
-				end, { "i", "s" }),
+				end, { "i", "s", "c" }),
 
 				["<S-Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
@@ -125,22 +137,26 @@ return {
 				--    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
 			}),
 			sources = {
-				{ name = "nvim_lsp" },
+				{ name = "nvim_lsp", priority = 9 },
 				{ name = "nvim_lsp_signature_help" },
 				{ name = "luasnip" },
 				{ name = "path" },
 				{ name = "buffer" },
+				{ name = "npm", keyword_length = 2 },
 			},
 		})
 
 		cmp.setup.cmdline({ "/", "?" }, {
-			mapping = cmp.mapping.preset.cmdline({
-				["<Tab>"] = cmp.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-			}),
 			sources = {
 				{ name = "buffer" },
 			},
 			matching = { disallow_symbol_nonprefix_matching = true, disallow_fullfuzzy_matching = true },
+		})
+
+		cmp.setup.cmdline(":", {
+			sources = {
+				{ name = "cmdline" },
+			},
 		})
 	end,
 }

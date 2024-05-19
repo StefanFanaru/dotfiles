@@ -23,9 +23,7 @@ function M.get_path_and_tail(filename)
 	return bufname_tail, path_to_display
 end
 ---- Picker functions ----
-
--- Generates a Find File picker but beautified
-function M.prettyFilesPicker()
+function M.get_pretty_file_options()
 	options = {}
 
 	--- //////// item stylish.
@@ -49,13 +47,21 @@ function M.prettyFilesPicker()
 			return displayer({
 				{ icon, iconhl },
 				tail,
-				{path_to_display, "TelescopeResultsComment" },
+				{ path_to_display, "TelescopeResultsComment" },
 			})
 		end
 		return entry
 	end
+	return options
+end
+-- Generates a Find File picker but beautified
+function M.prettyFilesPicker(user_opts)
+	user_opts = user_opts or {}
 	---/// end item stylish
-
+	local options = M.get_pretty_file_options()
+	for k, v in pairs(user_opts) do
+		options[k] = v
+	end
 	require("telescope.builtin").find_files(options)
 end
 

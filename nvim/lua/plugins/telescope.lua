@@ -66,6 +66,10 @@ return { -- Fuzzy Finder (files, lsp, etc)
 					},
 					n = { ["<C-t>"] = trouble.open_with_trouble },
 				},
+				layout_config = {
+					width = 0.8,
+					height = 0.6,
+				},
 				file_ignore_patterns = {
 					".git/",
 					".cache",
@@ -77,7 +81,9 @@ return { -- Fuzzy Finder (files, lsp, etc)
 					"%.zip",
 					"bin/",
 					"obj/",
+					".trash/",
 					".idea",
+					".obsidian/",
 					"node_modules/",
 				},
 				-- path_display = { "filename_first" },
@@ -89,7 +95,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 				git_files = custom_picker_options,
 				find_files = custom_picker_options,
 				live_grep = custom_picker_options,
-				current_buffer_fuzzy_find = custom_picker_options
+				current_buffer_fuzzy_find = custom_picker_options,
 			},
 			-- pickers = {
 			-- 	git_files = require("stefanaru.helpers.telescopePickers").prettyFilesPicker({ picker = "git_files" }),
