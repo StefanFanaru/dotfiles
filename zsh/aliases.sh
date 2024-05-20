@@ -50,7 +50,7 @@ alias pulserestart="pulseaudio -k && pulseaudio --start"
 alias cat='bat --paging=never'
 alias bathelp='bat --plain --language=help'
 help() {
-    "$@" --help 2>&1 | bathelp
+	"$@" --help 2>&1 | bathelp
 }
 
 # NOTE: SSH-ADD

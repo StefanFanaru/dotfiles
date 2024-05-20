@@ -4,3 +4,4 @@ export EDITOR=nvim
 export IS_ZSH=true
 export BAT_THEME="CatppuccinMocha"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export KUBE_EDITOR=nvim
