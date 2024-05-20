@@ -101,8 +101,14 @@ return {
 
 					-- Execute a code action, usually your cursor needs to be on top of an error
 					-- or a suggestion from your LSP for this to activate.
-					map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+					-- map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
+					vim.keymap.set(
+						{ "n", "v" },
+						"<leader>ca",
+						vim.lsp.buf.code_action,
+						{ buffer = event.buf, desc = "LSP: [C]ode [A]ction" }
+					)
 					-- Opens a popup that displays documentation about the word under your cursor
 					--  See `:help K` for why this keymap.
 					map("K", vim.lsp.buf.hover, "Hover Documentation")
@@ -186,13 +192,21 @@ return {
 				pyright = {},
 				vale_ls = {},
 				omnisharp = {
+					cmd = { "/home/stefanaru/bin/omnisharp/OmniSharp" },
 					handlers = {
 						["textDocument/definition"] = require("omnisharp_extended").definition_handler,
 						["textDocument/typeDefinition"] = require("omnisharp_extended").type_definition_handler,
 						["textDocument/references"] = require("omnisharp_extended").references_handler,
 						["textDocument/implementation"] = require("omnisharp_extended").implementation_handler,
 					},
-					cmd = { "dotnet", "/home/stefanaru/bin/omnisharp/OmniSharp.dll" },
+					settings = {
+						FormattingOptions = {
+							OrganizeImports = true,
+						},
+						RoslynExtensionsOptions = {
+							EnableImportCompletion = true,
+						},
+					},
 				},
 			}
 

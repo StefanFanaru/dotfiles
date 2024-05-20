@@ -38,6 +38,16 @@ autocmd({ "TermOpen" }, {
 	command = "setlocal nonumber norelativenumber",
 })
 
+autocmd("BufWritePre", {
+	group = StefanaruGroup,
+	pattern = "*",
+	callback = function(args)
+		require("conform").format({ bufnr = args.buf, lsp_fallback = true })
+		if vim.bo[0].filetype == "cs" then
+			require("csharp").fix_usings()
+		end
+	end,
+})
 M = {}
 
 -- Function to open URL on gx

@@ -6,6 +6,9 @@ return {
 			"<leader>f",
 			function()
 				require("conform").format({ async = true, lsp_fallback = true })
+				if vim.bo[0].filetype == "cs" then
+					require("csharp").fix_usings()
+				end
 			end,
 			mode = "",
 			desc = "[F]ormat buffer",
@@ -13,13 +16,6 @@ return {
 	},
 	opts = {
 		notify_on_error = true,
-		format_on_save = function(bufnr)
-			local disable_filetypes = { c = true, cpp = true }
-			return {
-				timeout_ms = 500,
-				lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
-			}
-		end,
 		formatters_by_ft = {
 			lua = { "stylua" },
 			javascript = { { "prettierd", "prettier" } },
@@ -52,4 +48,5 @@ return {
 			},
 		},
 	},
+	config = function() end,
 }

@@ -1,6 +1,5 @@
 return {
 	{ "tpope/vim-sleuth", event = { "BufReadPost", "BufNewFile" } },
-	{ "tpope/vim-unimpaired", event = { "BufReadPost", "BufNewFile" } },
 	{
 		"nvim-pack/nvim-spectre",
 		event = { "BufReadPre", "BufNewFile" },

@@ -28,26 +28,22 @@ return {
 				"c_sharp",
 				"markdown_inline",
 			},
-			-- Autoinstall languages that are not installed
 			auto_install = true,
 			context_commentstring = { enable = true, enable_autocmd = false },
 			highlight = {
 				enable = true,
-				-- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-				--  If you are experiencing weird indenting issues, add the language to
-				--  the list of additional_vim_regex_highlighting and disabled languages for indent.
-				additional_vim_regex_highlighting = { "bash" },
+				additional_vim_regex_highlighting = false,
 			},
 			incremental_selection = {
 				enable = true,
 				keymaps = {
-					init_selection = "gnn",
-					node_incremental = "grn",
-					scope_incremental = "grc",
-					node_decremental = "grm",
+					init_selection = "gns",
+					node_incremental = "gni",
+					scope_incremental = "gsi",
+					node_decremental = "gnd",
 				},
 			},
-			indent = { enable = true, disable = { "ruby", "bash" } },
+			indent = { enable = true },
 			textobjects = {
 				select = {
 					enable = true,
