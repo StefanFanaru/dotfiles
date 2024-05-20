@@ -1,0 +1,11 @@
+aliases:
+  pd: v1/pods
+  dp: deployments
+  sec: v1/secrets
+  jo: jobs
+  cr: clusterroles
+  crb: clusterrolebindings
+  ro: roles
+  rb: rolebindings
+  np: networkpolicies
+  ctxd: "context aks17-EUW-test-main"
