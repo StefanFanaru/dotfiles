@@ -9,7 +9,7 @@ set $ws4 "4"
 set $ws5 "5"
 
 # NOTE: Settings
-font pango:monospace 13
+font pango:ubuntu 11
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -20,6 +20,7 @@ tiling_drag modifier titlebar
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+        font pango:ubuntu 14
         mode invisible
         status_command i3status
 }
@@ -51,10 +52,11 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id rofi -show combi -run-command "i3-msg exec '{cmd}'" -show-icons
 
 # change focus
-bindsym $mod+h focus left
+bindsym $mod+h exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/focus_right_conditional.sh left"
 bindsym $mod+j focus down
 bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym $mod+l exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/focus_right_conditional.sh right"
+bindsym $mod+Tab exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/toggle_tab.sh"
 
 # move focused window
 bindsym $mod+Shift+h move left
@@ -80,6 +82,9 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
+# window layout types toggle
+# bindsym $mod+s layout tabbed
+
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -100,7 +105,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'Are you shure you want to shudown?' -B 'Yes' 'shutdown now'"
+bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'Are you sure you want to shutdown?' -B 'Yes' 'shutdown now'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -124,8 +129,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # bar toggle, hide or show
-bindsym $mod+m bar mode invisible
-bindsym $mod+Shift+m bar mode dock
+bindsym $mod+m bar mode toggle
 
 # Screenshot
 bindsym --release Print exec --no-startup-id flameshot gui
@@ -158,7 +162,7 @@ bindsym $mod+F6 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/kill_work_
 
 # NOTE: Window configs
 
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 3
                           # class                 border  backgr. text    indicator child_border
 for_window [class="^.*"] client.focused          #77dd77 #285577 #ffffff #2e9ef4   #285577
 

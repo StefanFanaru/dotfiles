@@ -30,7 +30,8 @@ subscribe_to_window 'teams-for-linux'
 i3-msg 'workspace number 4'
 ~/dotfiles/i3/i3-layout-manager/layout_manager.sh ~/dotfiles/i3/i3-layout-manager/layouts/layout-FULLWORKSPACE4.json 4
 sh -c 'google-chrome-stable --profile-directory=Default --app-id=cifhbcnohmdccbgoicgdjpfamggdegmo &'
-sh -c 'google-chrome-stable --profile-directory=Default --app-id=faolnafnngnfdaknnbpnkhgohbobgegn &'
+# sh -c 'google-chrome-stable --profile-directory=Default --app-id=faolnafnngnfdaknnbpnkhgohbobgegn &'
+sh -c 'google-chrome-stable --profile-directory=Default --app-id=pkooggnaalmfkidjmlhoelhdllpphaga &'
 subscribe_to_window "Google-chrome"
 
 if [ $resolution_changed = true ]; then

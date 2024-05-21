@@ -6,7 +6,7 @@ changed_resolution=false
 
 open_apps_workspace_one() {
 	i3-msg 'workspace number 1'
-	~/dotfiles/i3/i3-layout-manager/layout_manager.sh ~/dotfiles/i3/i3-layout-manager/layouts/layout-WORKSPACE1.json
+	~/dotfiles/i3/i3-layout-manager/layout_manager.sh ~/dotfiles/i3/i3-layout-manager/layouts/layout-WORKSPACE1TABS.json
 	sh -c 'alacritty &'
 	subscribe_to_window "Alacritty"
 
@@ -21,13 +21,27 @@ open_apps_workspace_one() {
 	subscribe_to_window "Alacritty"
 	sh -c 'teams-for-linux &'
 	subscribe_to_window 'teams-for-linux'
+	sh -c 'google-chrome-stable --profile-directory="Profile 3" &'
+	subscribe_to_window "Google-chrome"
+	i3-msg title_format 'Gemini'
 	sh -c 'google-chrome-stable --profile-directory=Default &'
 	subscribe_to_window "Google-chrome"
+	i3-msg title_format 'Lectra'
+
+	i3-msg '[class="^teams-for-linux$"] focus; focus left'
 }
 
 open_apps_workspace_two() {
 	i3-msg 'workspace number 2'
-	~/dotfiles/i3/i3-layout-manager/layout_manager.sh ~/dotfiles/i3/i3-layout-manager/layouts/layout-WORKSPACE2.json
+	~/dotfiles/i3/i3-layout-manager/layout_manager.sh ~/dotfiles/i3/i3-layout-manager/layouts/layout-WORKSPACE2TABS.json
+
+	sh -c 'google-chrome-stable --profile-directory=Default --app-id=faolnafnngnfdaknnbpnkhgohbobgegn &'
+	subscribe_to_window "Google-chrome"
+	i3-msg title_format 'Lectra'
+	sh -c 'google-chrome-stable --profile-directory="Profile 3" --app-id=pkooggnaalmfkidjmlhoelhdllpphaga &'
+	subscribe_to_window "Google-chrome"
+	i3-msg title_format 'Gemini'
+	i3-msg move left
 
 	sh -c 'alacritty &'
 	subscribe_to_window "Alacritty"
@@ -35,8 +49,7 @@ open_apps_workspace_two() {
 	subscribe_to_window "Google-chrome"
 	sh -c 'slack &'
 	subscribe_to_window "Slack"
-	sh -c 'google-chrome-stable --profile-directory=Default --app-id=faolnafnngnfdaknnbpnkhgohbobgegn &'
-	subscribe_to_window "Google-chrome"
+	i3-msg 'workspace 2; [class="^Alacritty$"] focus'
 }
 
 open_apps() {
@@ -44,7 +57,7 @@ open_apps() {
 		i3-msg '[class=".*"] kill'
 		open_apps_workspace_one
 		open_apps_workspace_two
-		i3-msg 'workspace number 1'
+		i3-msg 'workspace number 1; [class="^teams-for-linux$"] focus; focus left'
 		return
 	fi
 
@@ -53,7 +66,7 @@ open_apps() {
 	if [ "$num_windows" -eq 0 ]; then
 		open_apps_workspace_one
 		open_apps_workspace_two
-		i3-msg 'workspace number 1'
+		i3-msg 'workspace number 1; [class="^teams-for-linux$"] focus; focus left'
 		return
 	fi
 
@@ -64,8 +77,6 @@ open_apps() {
 	elif [ "$workspace_number" = "2" ]; then
 		open_apps_workspace_two
 	fi
-
-	i3-msg "focus right"
 }
 
 current_resolution=$(xrandr | grep -oP '\d{3,4}x\d{3,4}' | head -n 1)
