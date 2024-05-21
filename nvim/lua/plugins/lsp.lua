@@ -3,14 +3,14 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			{ "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
+			{ "williamboman/mason.nvim",           config = true }, -- NOTE: Must be loaded before dependants
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			{ "Hoffs/omnisharp-extended-lsp.nvim", ft = { "cs" } },
-			{ "folke/neodev.nvim", opts = {} },
+			{ "folke/neodev.nvim",                 opts = {} },
 			-- Experimental roslyn vs code dev kit LSP integration
 			-- https://github.com/jmederosalvarado/roslyn.nvim
-			-- "jmederosalvarado/roslyn.nvim",
+			"jmederosalvarado/roslyn.nvim",
 			-- Enhanced signature helpers, loaded on LspAttach
 			{
 				"ray-x/lsp_signature.nvim",
@@ -101,7 +101,6 @@ return {
 
 					-- Execute a code action, usually your cursor needs to be on top of an error
 					-- or a suggestion from your LSP for this to activate.
-					-- map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
 					vim.keymap.set(
 						{ "n", "v" },
@@ -191,23 +190,23 @@ return {
 				},
 				pyright = {},
 				vale_ls = {},
-				omnisharp = {
-					cmd = { "/home/stefanaru/bin/omnisharp/OmniSharp" },
-					handlers = {
-						["textDocument/definition"] = require("omnisharp_extended").definition_handler,
-						["textDocument/typeDefinition"] = require("omnisharp_extended").type_definition_handler,
-						["textDocument/references"] = require("omnisharp_extended").references_handler,
-						["textDocument/implementation"] = require("omnisharp_extended").implementation_handler,
-					},
-					settings = {
-						FormattingOptions = {
-							OrganizeImports = true,
-						},
-						RoslynExtensionsOptions = {
-							EnableImportCompletion = true,
-						},
-					},
-				},
+				-- omnisharp = {
+				-- 	cmd = { "/home/stefanaru/bin/omnisharp/OmniSharp" },
+				-- 	handlers = {
+				-- 		["textDocument/definition"] = require("omnisharp_extended").definition_handler,
+				-- 		["textDocument/typeDefinition"] = require("omnisharp_extended").type_definition_handler,
+				-- 		["textDocument/references"] = require("omnisharp_extended").references_handler,
+				-- 		["textDocument/implementation"] = require("omnisharp_extended").implementation_handler,
+				-- 	},
+				-- 	settings = {
+				-- 		FormattingOptions = {
+				-- 			OrganizeImports = true,
+				-- 		},
+				-- 		RoslynExtensionsOptions = {
+				-- 			EnableImportCompletion = true,
+				-- 		},
+				-- 	},
+				-- },
 			}
 
 			local groovy_lsp_jar = dot_files_env .. "/dependencies/groovy-lsp/groovy-language-server-all.jar"
@@ -223,29 +222,28 @@ return {
 				},
 			})
 
-			-- require("roslyn").setup({
-			-- 	dotnet_cmd = "dotnet",
-			-- 	roslyn_version = "4.11.0-1.24209.10",
-			-- 	on_attach = on_attach,
-			-- 	capabilities = capabilities,
-			-- 	settings = {
-			-- 		["csharp|inlay_hints"] = {
-			-- 			csharp_enable_inlay_hints_for_lambda_parameter_types = true,
-			-- 			csharp_enable_inlay_hints_for_implicit_object_creation = true,
-			-- 			csharp_enable_inlay_hints_for_implicit_variable_types = true,
-			-- 			csharp_enable_inlay_hints_for_types = true,
-			-- 			dotnet_enable_inlay_hints_for_indexer_parameters = true,
-			-- 			dotnet_enable_inlay_hints_for_literal_parameters = true,
-			-- 			dotnet_enable_inlay_hints_for_object_creation_parameters = true,
-			-- 			dotnet_enable_inlay_hints_for_other_parameters = true,
-			-- 			dotnet_enable_inlay_hints_for_parameters = true,
-			-- 			dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
-			-- 			dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
-			-- 			dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
-			-- 		},
-			-- 	},
-			-- })
-			--
+			require("roslyn").setup({
+				dotnet_cmd = "dotnet",
+				roslyn_version = "4.11.0-1.24209.10",
+				on_attach = function() end,
+				capabilities = capabilities,
+				settings = {
+					["csharp|inlay_hints"] = {
+						csharp_enable_inlay_hints_for_lambda_parameter_types = true,
+						csharp_enable_inlay_hints_for_implicit_object_creation = true,
+						csharp_enable_inlay_hints_for_implicit_variable_types = true,
+						csharp_enable_inlay_hints_for_types = true,
+						dotnet_enable_inlay_hints_for_indexer_parameters = true,
+						dotnet_enable_inlay_hints_for_literal_parameters = true,
+						dotnet_enable_inlay_hints_for_object_creation_parameters = true,
+						dotnet_enable_inlay_hints_for_other_parameters = true,
+						dotnet_enable_inlay_hints_for_parameters = true,
+						dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
+						dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
+						dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
+					},
+				},
+			})
 
 			require("mason").setup()
 

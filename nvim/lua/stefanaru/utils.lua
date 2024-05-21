@@ -48,6 +48,14 @@ autocmd("BufWritePre", {
 		end
 	end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "markdown",
+	callback = function()
+		vim.opt_local.conceallevel = 1
+	end,
+})
+
 M = {}
 
 -- Function to open URL on gx
