@@ -1,0 +1,83 @@
+[
+{
+	"border": "normal",
+		"floating": "auto_off",
+		"fullscreen_mode": 0,
+		"layout": "splitv",
+		"marks": [],
+		"percent": 0.5,
+		"type": "con",
+		"nodes": [
+		{
+			"border": "normal",
+			"floating": "auto_off",
+			"layout": "tabbed",
+			"marks": [],
+			"percent": null,
+			"type": "con",
+			"nodes": [
+			{
+				"border": "pixel",
+				"current_border_width": 3,
+				"floating": "auto_off",
+				"geometry": {
+					"height": 1415,
+					"width": 1915,
+					"x": 3,
+					"y": 22
+				},
+				"marks": [],
+				"name": "Outlook (PWA) - Mail - Stefan FANARU - Outlook",
+				"percent": 0.333333333333333,
+				"swallows": [
+				{
+					"instance": "^crx_pkooggnaalmfkidjmlhoelhdllpphaga$"
+				}
+				],
+				"type": "con"
+			},
+			{
+				"border": "pixel",
+				"current_border_width": 3,
+				"floating": "auto_off",
+				"geometry": {
+					"height": 714,
+					"width": 1245,
+					"x": 1315,
+					"y": 723
+				},
+				"marks": [],
+				"name": "Microsoft Teams - Chat | SANDBOX environment usage for Apogy DP & DEV Azure resources needs | Microsoft Teams",
+				"percent": 0.333333333333333,
+				"swallows": [
+				{
+					"instance": "^crx_cifhbcnohmdccbgoicgdjpfamggdegmo$"
+				}
+				],
+				"type": "con"
+			},
+			{
+				"border": "pixel",
+				"current_border_width": 3,
+				"floating": "auto_off",
+				"geometry": {
+					"height": 714,
+					"width": 1245,
+					"x": 1315,
+					"y": 3
+				},
+				"marks": [],
+				"name": "New message - Lectra - 2 new items - Slack",
+				"percent": 0.333333333333333,
+				"swallows": [
+				{
+					"instance": "^slack$"
+				}
+				],
+				"type": "con"
+			}
+			]
+		}
+		]
+}
+]

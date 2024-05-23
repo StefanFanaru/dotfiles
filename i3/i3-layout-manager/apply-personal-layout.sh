@@ -4,6 +4,8 @@ source ~/dotfiles/i3/i3-layout-manager/layout-helpers.sh
 workspace_number=$1
 changed_resolution=false
 
+i3-msg 'for_window [class="^.*"] border pixel 3'
+
 open_apps_workspace_one() {
 	i3-msg 'workspace number 1'
 	~/dotfiles/i3/i3-layout-manager/layout_manager.sh ~/dotfiles/i3/i3-layout-manager/layouts/layout-PERSONALWORKSPACE1.json

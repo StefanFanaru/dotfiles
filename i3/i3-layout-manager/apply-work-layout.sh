@@ -28,7 +28,7 @@ open_apps_workspace_one() {
 	subscribe_to_window "Google-chrome"
 	i3-msg title_format 'Lectra'
 
-	i3-msg '[class="^teams-for-linux$"] focus; focus left'
+	i3-msg ' [class="^teams-for-linux$"] focus; focus left'
 }
 
 open_apps_workspace_two() {
@@ -45,7 +45,7 @@ open_apps_workspace_two() {
 
 	sh -c 'alacritty &'
 	subscribe_to_window "Alacritty"
-	sh -c 'google-chrome-stable --profile-directory=Default --app-id=cifhbcnohmdccbgoicgdjpfamggdegmo &'
+	sh -c 'google-chrome-stable --profile-directory="Profile 3" --app-id=cifhbcnohmdccbgoicgdjpfamggdegmo &'
 	subscribe_to_window "Google-chrome"
 	sh -c 'slack &'
 	subscribe_to_window "Slack"
@@ -86,3 +86,4 @@ if [ "$current_resolution" != "5120x1440" ]; then
 	changed_resolution=true
 fi
 open_apps
+i3-msg 'border pixel 3'
