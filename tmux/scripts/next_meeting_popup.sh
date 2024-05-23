@@ -23,7 +23,8 @@ json_modified=$(jq --arg starting_at "$starting_at" '{
   title: .title,
   starting: $starting_at,
   organizer: .organizer,
-  attendees: .attendees
+  attendees: .attendees,
+  optionalAttendees: .optionalAttendees
 }' <<<"$json")
 
 result=$(echo "$json_modified" | yq -P eval | sed 's/^/    /')

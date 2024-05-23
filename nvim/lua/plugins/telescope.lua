@@ -85,7 +85,7 @@ return {
 		map("n", "<leader>s.", builtin.oldfiles, '[S]earch Recent Files ("." for repeat)')
 		map("n", "<leader>sl", builtin.lsp_document_symbols, "[S]each [L]sp document symbols")
 		map("n", "<leader>/", builtin.current_buffer_fuzzy_find, "[/] Fuzzily search in current buffer")
-		map("n", "<leader><leader>", builtin.buffers, "[ ] Find existing buffers")
+		map("n", "<leader>sb", builtin.buffers, "[ ] Find existing buffers")
 
 		vim.keymap.set("n", "<leader>s/", function()
 			builtin.live_grep({

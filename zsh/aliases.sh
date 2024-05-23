@@ -45,6 +45,8 @@ alias gvd="nmcli connection down 'Gemini VPN'"
 alias gvp="nmcli connection show --active"
 alias vpn="google-chrome-stable 'vpn.lectra.com'"
 alias pulserestart="pulseaudio -k && pulseaudio --start"
+alias headph="pactl set-default-sink 0"
+alias speakers="pactl set-default-sink 1"
 
 # NOTE: BAT
 alias cat='bat --paging=never'

@@ -31,7 +31,7 @@ return {
 			json = { { "prettierd", "prettier" } },
 			javascriptreact = { { "prettierd", "prettier" } },
 			typescriptreact = { { "prettierd", "prettier" } },
-			markdown = { { "prettierd", "prettier" } },
+			-- markdown = { { "prettierd", "prettier" } },
 			groovy = { "npm_groovy_lint" },
 			sh = { "shfmt" },
 			["*"] = { "codespell" },
