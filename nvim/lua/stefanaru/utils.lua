@@ -49,6 +49,16 @@ autocmd("BufWritePre", {
 	end,
 })
 
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*",
+	callback = function(args)
+		if vim.bo[0].filetype == "cs" then
+			vim.cmd("CSFixUsings")
+		end
+		require("conform").format({ bufnr = args.buf })
+	end,
+})
+
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "markdown",
 	callback = function()
@@ -61,6 +71,9 @@ M = {}
 -- Function to open URL on gx
 M.HandleURL = function()
 	local url = string.match(vim.fn.getline("."), "[a-z]*://[^ >,;]*")
+	if url ~= nil then
+		url = string.gsub(url, '[%)"%]', "")
+	end
 	if url ~= "" then
 		vim.cmd("exec \"!open '" .. url .. "'\"")
 	else

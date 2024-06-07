@@ -7,7 +7,8 @@ return {
 			require("csharp").setup()
 		end,
 	},
+	-- { "seblj/roslyn.nvim" },
 	{
-		dir = "~/personal/roslyn.nvim",
+		dir = "~/personal/fork-roslyn.nvim/roslyn.nvim",
 	},
 }

@@ -3,14 +3,14 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			{ "williamboman/mason.nvim",           config = true }, -- NOTE: Must be loaded before dependants
+			{ "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			{ "Hoffs/omnisharp-extended-lsp.nvim", ft = { "cs" } },
-			{ "folke/neodev.nvim",                 opts = {} },
+			{ "folke/neodev.nvim", opts = {} },
 			-- Experimental roslyn vs code dev kit LSP integration
 			-- https://github.com/jmederosalvarado/roslyn.nvim
-			"jmederosalvarado/roslyn.nvim",
+			-- "jmederosalvarado/roslyn.nvim",
 			-- Enhanced signature helpers, loaded on LspAttach
 			{
 				"ray-x/lsp_signature.nvim",
@@ -122,6 +122,8 @@ return {
 
 					map("<leader>rlsp", ":LspRestart<CR>", "Restart LSP")
 
+					map("<leader>qs", ":CSFixUsings<CR>", "Fix usings")
+
 					map("<C-k>", require("lsp_signature").toggle_float_win, "Toggle signature help")
 					require("lsp_signature").on_attach({
 						hint_enable = false,
@@ -133,7 +135,33 @@ return {
 
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-
+			local on_attach = function(client, bufnr)
+				return
+				-- local fix_usings = function()
+				-- 	local action = {
+				-- 		kind = "quickfix",
+				-- 		data = {
+				-- 			CustomTags = { "RemoveUnnecessaryImports" },
+				-- 			TextDocument = { uri = vim.uri_from_bufnr(bufnr) },
+				-- 			CodeActionPath = { "Remove unnecessary usings" },
+				-- 			Range = {
+				-- 				["start"] = { line = 0, character = 0 },
+				-- 				["end"] = { line = 0, character = 0 },
+				-- 			},
+				-- 			UniqueIdentifier = "Remove unnecessary usings",
+				-- 		},
+				-- 	}
+				-- 	client.request("codeAction/resolve", action, function(err, resolved_action)
+				-- 		print("Resolved code action: " .. vim.inspect(resolved_action))
+				-- 		if err then
+				-- 			print("Error resolving code action: " .. err)
+				-- 			return
+				-- 		end
+				-- 		vim.lsp.util.apply_workspace_edit(resolved_action.edit, client.offset_encoding)
+				-- 	end)
+				-- end
+				-- vim.keymap.set("n", "<leader>qs", fix_usings, { buffer = bufnr, desc = "LSP: " .. "Fix usings" })
+			end
 			local servers = {
 				cssls = {},
 				yamlls = {
@@ -162,7 +190,7 @@ return {
 					},
 				},
 				lua_ls = {
-					on_attach = on_attach,
+					on_attach = function() end,
 					settings = {
 						Lua = {
 							hint = { enable = true },
@@ -225,7 +253,7 @@ return {
 			require("roslyn").setup({
 				dotnet_cmd = "dotnet",
 				roslyn_version = "4.11.0-1.24209.10",
-				on_attach = function() end,
+				on_attach = on_attach,
 				capabilities = capabilities,
 				settings = {
 					["csharp|inlay_hints"] = {

@@ -7,7 +7,6 @@ set $ws2 "2"
 set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
-set $ws6 "6"
 
 # NOTE: Settings
 font pango:ubuntu 11
@@ -50,7 +49,7 @@ bindsym $mod+Return exec --no-startup-id alacritty
 bindsym $mod+Shift+q kill
 
 # launch rofi
-bindsym $mod+d exec --no-startup-id rofi -show combi -run-command "i3-msg exec '{cmd}'" -show-icons
+# bindsym $mod+d exec --no-startup-id rofi -show combi -run-command "i3-msg exec '{cmd}'" -show-icons
 
 # change focus
 bindsym $mod+h exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/focus_right_conditional.sh left"
@@ -72,35 +71,33 @@ bindsym $mod+z split h
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+y  fullscreen toggle
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+t floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+# bindsym $mod+a focus parent
 
 # window layout types toggle
-bindsym $mod+s layout tabbed
+# bindsym $mod+s layout tabbed
 
 # switch to workspace
-bindsym $mod+1 workspace number $ws1
-bindsym $mod+2 workspace number $ws2
-bindsym $mod+3 workspace number $ws3
-bindsym $mod+4 workspace number $ws4
-bindsym $mod+5 workspace number $ws5
-bindsym $mod+6 workspace number $ws6
+bindsym $mod+a workspace number $ws1
+bindsym $mod+s workspace number $ws2
+bindsym $mod+d workspace number $ws3
+bindsym $mod+f workspace number $ws4
+bindsym $mod+g workspace number $ws5
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $ws1, workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2, workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3, workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4, workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5, workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6, workspace number $ws6
+bindsym $mod+Shift+a move container to workspace number $ws1, workspace number $ws1
+bindsym $mod+Shift+s move container to workspace number $ws2, workspace number $ws2
+bindsym $mod+Shift+d move container to workspace number $ws3, workspace number $ws3
+bindsym $mod+Shift+f move container to workspace number $ws4, workspace number $ws4
+bindsym $mod+Shift+g move container to workspace number $ws5, workspace number $ws5
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -131,10 +128,11 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # bar toggle, hide or show
-bindsym $mod+m bar mode toggle
+bindsym $mod+b bar mode toggle
+bindsym $mod+Shift+b bar mode invisible
 
 # Screenshot
-bindsym --release Print exec --no-startup-id flameshot gui
+bindcode --release $mod+48 exec --no-startup-id flameshot gui
 
 # Clipboard manager
 bindsym $super+v  exec --no-startup-id diodon
@@ -143,24 +141,24 @@ bindsym $super+v  exec --no-startup-id diodon
 # NOTE: Layouts
 
 # resize to Full HD for better screen sharing
-bindsym $mod+Shift+o floating toggle, resize set 1920 px 1080 px, move absolute position center
+bindsym $mod+u floating toggle, resize set 1920 px 1080 px, move absolute position center
 # better focusing on specific app allocating center of empty workspace
-bindsym $mod+Shift+i move container to workspace number $ws3, workspace number $ws3, floating enable, resize set 2200 px 1440 px, move absolute position center
+bindsym $mod+o move container to workspace number $ws3, workspace number $ws3, floating enable, resize set 2200 px 1440 px, move absolute position center
 # undo the above focusing, going back to workspace 1
-bindsym $mod+Shift+u move container to workspace number $ws1, workspace number $ws1, floating disable, move right, move right, move right, exec --no-startup-id "sleep 0.2 && i3-msg 'move up, move down'"
+bindsym $mod+i move container to workspace number $ws1, workspace number $ws1, floating disable, move right, move right, move right, exec --no-startup-id "sleep 0.2 && i3-msg 'move up, move down'"
 
 # https://github.com/klaxalk/i3-layout-manager
 # Ultrawide screen layouts
-bindsym $mod+F9 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-work-layout.sh 1"
-bindsym $mod+F10 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-work-layout.sh 2"
-bindsym $mod+F11 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-personal-layout.sh 1"
-bindsym $mod+F12 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-personal-layout.sh 2"
+bindsym $mod+1 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-work-layout.sh 1"
+bindsym $mod+2 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-work-layout.sh 2"
+bindsym $mod+4 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-personal-layout.sh 1"
+bindsym $mod+5 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-personal-layout.sh 2"
 
 # Small screen layout
-bindsym $mod+F8 exec --no-startup-id "sh -c '~/dotfiles/i3/i3-layout-manager/apply-fullscreen-layout.sh &'"
+bindsym $mod+8 exec --no-startup-id "sh -c '~/dotfiles/i3/i3-layout-manager/apply-fullscreen-layout.sh &'"
 
 # Kill work related
-bindsym $mod+F6 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/kill_work_related.sh"
+bindsym $mod+6 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/kill_work_related.sh"
 
 # NOTE: Window configs
 

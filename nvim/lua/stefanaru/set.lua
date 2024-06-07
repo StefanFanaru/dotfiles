@@ -1,4 +1,4 @@
-dot_files_env = os.getenv("DOT_FILES")
+dot_files_env = os.getenv("DOT_FILES") or ""
 
 vim.opt.nu = true
 vim.opt.relativenumber = true

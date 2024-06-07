@@ -36,4 +36,25 @@ return {
 		version = false, -- last release is way too old
 	},
 	{ "folke/neodev.nvim", opts = {} },
+	-- { "subnut/nvim-ghost.nvim" },
+	-- {
+	-- 	"glacambre/firenvim",
+	--
+	-- 	-- Lazy load firenvim
+	-- 	-- Explanation: https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
+	-- 	lazy = not vim.g.started_by_firenvim,
+	-- 	build = function()
+	-- 		vim.fn["firenvim#install"](0)
+	-- 	end,
+	-- },
+	--
+	{
+		"realprogrammersusevim/md-to-html.nvim",
+		cmd = { "MarkdownToHTML", "NewMarkdownToHTML" },
+	},
+	-- {
+	-- 	"m4xshen/hardtime.nvim",
+	-- 	dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+	-- 	opts = {},
+	-- },
 }

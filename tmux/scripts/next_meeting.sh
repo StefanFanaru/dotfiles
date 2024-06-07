@@ -5,6 +5,7 @@ LOCK_FILE="$CACHE_FILE.lock"
 
 NERD_FONT_FREE=""
 NERD_FONT_MEETING=""
+NERD_FONT_ERROR=""
 
 is_cache_fresh() {
 	if [ ! -f "$CACHE_FILE" ]; then
@@ -25,7 +26,16 @@ read_from_cache() {
 }
 
 fetch_json() {
-	curl -sk "https://localhost:7048/api/Meetings/next"
+	if is_cache_fresh; then
+		cached_result=$(read_from_cache)
+		echo "$cached_result"
+		# Release lock before exiting
+		release_lock
+		exit 0
+	fi
+	response=$(curl -sk "https://localhost:7048/api/Meetings/next")
+	write_to_cache "$response"
+	echo "$response"
 }
 
 write_to_cache() {
@@ -48,15 +58,13 @@ release_lock() {
 
 acquire_lock
 
-if is_cache_fresh; then
-	cached_result=$(read_from_cache)
-	echo "$cached_result"
-	# Release lock before exiting
+json=$(fetch_json)
+# if json is empty, exit
+if [ -z "$json" ]; then
 	release_lock
+	echo "$NERD_FONT_ERROR;ERROR;#8aadf4"
 	exit 0
 fi
-
-json=$(fetch_json)
 
 # Parse JSON and extract time field
 time=$(echo "$json" | jq -r '.time')
@@ -70,13 +78,17 @@ time_diff=$((meeting_time - current_time))
 
 # Calculate hours and minutes
 hours=$((time_diff / 3600))
-minutes=$(((time_diff % 3600) / 60))
+minutes=$(((time_diff + 59) / 60))
 
 # Choose the icon based on the time left
-if [ "$hours" -eq 0 ] && [ "$minutes" -lt 31 ]; then
+if [ "$hours" -eq 0 ] && [ "$minutes" -le 5 ]; then
 	icon="$NERD_FONT_MEETING"
 else
 	icon="$NERD_FONT_FREE"
+fi
+
+if [ $time_diff -le 0 ]; then
+	customText="NOW"
 fi
 
 result=""
@@ -91,7 +103,6 @@ else
 	result="$icon;$customText;$color"
 fi
 
-write_to_cache "$result"
 echo "$result"
 
 release_lock
