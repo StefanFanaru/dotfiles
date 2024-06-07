@@ -21,3 +21,4 @@ sudo ln -s ~/dotfiles/nvim ~/.config/nvim
 sudo ln -s ~/dotfiles/misc/.xprofile ~/.xprofile
 sudo ln -s ~/dotfiles/stern ~/.config/stern
 sudo ln -s ~/dotfiles/k9s ~/.config/k9s
+sudo ln -s ~/dotfiles/bat ~/.config/bat
