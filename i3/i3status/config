@@ -9,6 +9,7 @@
 general {
         colors = true
         interval = 10
+        output_format = "i3bar"
 }
 
 order += "cpu_usage"
@@ -23,7 +24,7 @@ tztime local {
 }
 
 memory {
-        format = "  RAM %percentage_used "
+        format = "   RAM %percentage_used "
 }
 
 cpu_usage {
@@ -42,8 +43,8 @@ ethernet "enp6s0" {
 }
 
 volume master {
-        format = "   %volume"
-        format_muted = "   muted %volume"
+        format = "   %volume "
+        format_muted = "   muted %volume "
         device = "default"
         mixer = "Master"
         mixer_idx = 0

@@ -4,11 +4,14 @@ sudo apt install build-essential -y
 sudo apt install fswatch -y
 sudo apt install shellcheck -y
 sudo apt install fd -y
-sudo apt install xclip -y   # to make system cliboard work in nvim
+sudo apt install xclip -y   # to make system clipboard work in nvim
 sudo apt install fzf -y     # fuzzy finder
 sudo apt install ripgrep -y # multi threaded grepping
+sudo apt install feh compton diodon flameshot -y
+sudo apt install jq yq gpick -y
+
 echo "Install lsd manually from here https://github.com/lsd-rs/lsd/releases"
-echo "Install bad https://github.com/sharkdp/bat/releases/tag/v0.24.0"
+echo "Install bat https://github.com/sharkdp/bat/releases/tag/v0.24.0"
 
 printf "\nLinux packages where installed"
 
@@ -51,12 +54,12 @@ echo 'dotnet was installed'
 
 # Make LSP happy
 cp /etc/sysctl.conf /tmp/
-echo 'fs.inotify.max_user_watches=200000' >>  /tmp/sysctl.conf
-echo 'fs.inotify.max_queued_events=200000' >>  /tmp/sysctl.conf
+echo 'fs.inotify.max_user_watches=200000' >>/tmp/sysctl.conf
+echo 'fs.inotify.max_queued_events=200000' >>/tmp/sysctl.conf
 sudo cp /tmp/sysctl.conf /etc/
 
-echo "SCRIP IS DONE!"
+echo "SCRIPT IS DONE!"
 
 # DCONF settings - GNOME only
-gsettings set org.gnome.nm-applet disable-disconnected-notifications "true"
-gsettings set org.gnome.nm-applet disable-connected-notifications "true"
+# gsettings set org.gnome.nm-applet disable-disconnected-notifications "true"
+# gsettings set org.gnome.nm-applet disable-connected-notifications "true"

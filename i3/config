@@ -22,7 +22,7 @@ tiling_drag modifier titlebar
 bar {
         font pango:ubuntu 14
         mode invisible
-        status_command i3status
+        status_command /home/stefanaru/dotfiles/i3/i3status/custom-i3status.sh
 }
 
 focus_follows_mouse no
@@ -31,8 +31,8 @@ focus_follows_mouse no
 # NOTE: Bindings
 
 # Screen locking & Suspend
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork --show-failed-attempts --ignore-empty-password --tiling --image='/home/stefanaru/dotfiles/misc/lock_wallpaper.png'
-bindsym $mod+Shift+comma exec i3lock --ignore-empty-password --tiling --image='/home/stefanaru/dotfiles/misc/lock_wallpaper.png' 2>/dev/null, mode "default"
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork --show-failed-attempts --ignore-empty-password --tiling --image='/home/stefanaru/dotfiles/misc/lock_wallpaper.png'
+# bindsym $mod+Shift+comma exec i3lock --ignore-empty-password --tiling --image='/home/stefanaru/dotfiles/misc/lock_wallpaper.png' 2>/dev/null, mode "default"
 bindsym $mod+Shift+period exec systemctl suspend
 
 # Use pactl to adjust volume in PulseAudio.
@@ -128,7 +128,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # bar toggle, hide or show
-bindsym $mod+b bar mode toggle
+bindsym $mod+b bar mode dock
 bindsym $mod+Shift+b bar mode invisible
 
 # Screenshot
@@ -137,6 +137,8 @@ bindcode --release $mod+48 exec --no-startup-id flameshot gui
 # Clipboard manager
 bindsym $super+v  exec --no-startup-id diodon
 
+bindsym $mod+Shift+n exec --no-startup-id dunstctl history-pop
+bindsym $mod+n exec --no-startup-id dunstctl close-all
 
 # NOTE: Layouts
 

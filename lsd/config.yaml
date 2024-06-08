@@ -9,7 +9,6 @@ date: '+%d %b %y %H:%M'
 size: short
 sorting:
   dir-grouping: first
-literal: true
 dereference: true
 layout: oneline
 icons:

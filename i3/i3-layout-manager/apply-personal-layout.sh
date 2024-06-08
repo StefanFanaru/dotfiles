@@ -10,6 +10,9 @@ open_apps_workspace_one() {
 	i3-msg 'workspace number 1'
 	~/dotfiles/i3/i3-layout-manager/layout_manager.sh ~/dotfiles/i3/i3-layout-manager/layouts/layout-PERSONALWORKSPACE1.json
 
+	sh -c 'google-chrome-stable --profile-directory="Default" &'
+	subscribe_to_window "Google-chrome"
+
 	sh -c 'alacritty &'
 	subscribe_to_window "Alacritty"
 
@@ -22,9 +25,6 @@ open_apps_workspace_one() {
 
 	sh -c 'alacritty &'
 	subscribe_to_window "Alacritty"
-
-	sh -c 'google-chrome-stable --profile-directory="Profile 2" &'
-	subscribe_to_window "Google-chrome"
 }
 
 open_apps_workspace_two() {

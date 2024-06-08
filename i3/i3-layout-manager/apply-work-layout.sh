@@ -7,8 +7,20 @@ changed_resolution=false
 open_apps_workspace_one() {
 	i3-msg 'workspace number 1'
 	~/dotfiles/i3/i3-layout-manager/layout_manager.sh ~/dotfiles/i3/i3-layout-manager/layouts/layout-WORKSPACE1TABS.json
+
+	sh -c 'google-chrome-stable --profile-directory="Profile 3" &'
+	subscribe_to_window "Google-chrome"
+	i3-msg title_format 'Gemini'
+
+	sh -c 'google-chrome-stable --profile-directory="Profile 2" &'
+	subscribe_to_window "Google-chrome"
+	i3-msg title_format 'Lectra'
+
 	sh -c 'alacritty &'
 	subscribe_to_window "Alacritty"
+
+	sh -c 'google-chrome-stable --profile-directory="Profile 3" --app-id=cifhbcnohmdccbgoicgdjpfamggdegmo &'
+	subscribe_to_window 'Google-chrome'
 
 	session_count=$(tmux list-sessions | wc -l)
 	if [ "$session_count" -gt 1 ]; then
@@ -19,23 +31,14 @@ open_apps_workspace_one() {
 
 	sh -c 'alacritty &'
 	subscribe_to_window "Alacritty"
-	sh -c 'teams-for-linux &'
-	subscribe_to_window 'teams-for-linux'
-	sh -c 'google-chrome-stable --profile-directory="Profile 3" &'
-	subscribe_to_window "Google-chrome"
-	i3-msg title_format 'Gemini'
-	sh -c 'google-chrome-stable --profile-directory=Default &'
-	subscribe_to_window "Google-chrome"
-	i3-msg title_format 'Lectra'
-
-	i3-msg ' [class="^teams-for-linux$"] focus; focus left'
+	i3-msg ' [class="^alacritty$"] focus; focus left'
 }
 
 open_apps_workspace_two() {
 	i3-msg 'workspace number 2'
 	~/dotfiles/i3/i3-layout-manager/layout_manager.sh ~/dotfiles/i3/i3-layout-manager/layouts/layout-WORKSPACE2TABS.json
 
-	sh -c 'google-chrome-stable --profile-directory=Default --app-id=faolnafnngnfdaknnbpnkhgohbobgegn &'
+	sh -c 'google-chrome-stable --profile-directory="Profile 2" --app-id=faolnafnngnfdaknnbpnkhgohbobgegn &'
 	subscribe_to_window "Google-chrome"
 	i3-msg title_format 'Lectra'
 	sh -c 'google-chrome-stable --profile-directory="Profile 3" --app-id=pkooggnaalmfkidjmlhoelhdllpphaga &'
@@ -45,10 +48,12 @@ open_apps_workspace_two() {
 
 	sh -c 'alacritty &'
 	subscribe_to_window "Alacritty"
-	sh -c 'google-chrome-stable --profile-directory="Profile 3" --app-id=cifhbcnohmdccbgoicgdjpfamggdegmo &'
+	# Teams Lectra
+	sh -c 'google-chrome-stable --profile-directory="Profile 4" --app-id=cifhbcnohmdccbgoicgdjpfamggdegmo &'
 	subscribe_to_window "Google-chrome"
-	sh -c 'slack &'
-	subscribe_to_window "Slack"
+	# Slack
+	sh -c 'google-chrome-stable --profile-directory="Profile 2" --app-id=gbgeipnpfoilbpmicolehcbfkeoapdjd &'
+	subscribe_to_window "Google-chrome"
 	i3-msg 'workspace 2; [class="^Alacritty$"] focus'
 }
 

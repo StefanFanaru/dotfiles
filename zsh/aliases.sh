@@ -47,6 +47,10 @@ alias vpn="google-chrome-stable 'vpn.lectra.com'"
 alias pulserestart="pulseaudio -k && pulseaudio --start"
 alias headph="pactl set-default-sink 0"
 alias speakers="pactl set-default-sink 1"
+alias sudonvim='sudo /opt/nvim-linux64/bin/nvim'
+alias btpw='/home/stefanaru/dotfiles/scripts/workflow/check-bt-battery.sh "JBL LIVE PRO 2 TWS"'
+alias btu='/home/stefanaru/dotfiles/scripts/workflow/connect-jbl-pro.sh'
+alias btd='/home/stefanaru/dotfiles/scripts/workflow/disconnect-jbl-pro.sh'
 
 # NOTE: BAT
 alias cat='bat --paging=never'

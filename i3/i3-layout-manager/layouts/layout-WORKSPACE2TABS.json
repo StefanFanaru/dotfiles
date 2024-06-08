@@ -121,11 +121,11 @@
                           "y": 0
                         },
                         "marks": [],
-                        "name": "New message - Lectra - Slack",
+                        "name": "Slack",
                         "percent": 0.5,
                         "swallows": [
                           {
-                            "class": "^Slack$"
+                            "instance": "^crx_gbgeipnpfoilbpmicolehcbfkeoapdjd$"
                           }
                         ],
                         "type": "con"
@@ -141,7 +141,7 @@
                           "y": 0
                         },
                         "marks": [],
-                        "name": "Microsoft Teams - (1) Activity | Restore point manager / versioning coverage | Microsoft Teams",
+                        "name": "Teams",
                         "percent": 0.5,
                         "swallows": [
                           {

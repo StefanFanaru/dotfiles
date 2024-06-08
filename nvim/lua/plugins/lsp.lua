@@ -10,7 +10,7 @@ return {
 			{ "folke/neodev.nvim", opts = {} },
 			-- Experimental roslyn vs code dev kit LSP integration
 			-- https://github.com/jmederosalvarado/roslyn.nvim
-			-- "jmederosalvarado/roslyn.nvim",
+			"jmederosalvarado/roslyn.nvim",
 			-- Enhanced signature helpers, loaded on LspAttach
 			{
 				"ray-x/lsp_signature.nvim",
@@ -124,11 +124,11 @@ return {
 
 					map("<leader>qs", ":CSFixUsings<CR>", "Fix usings")
 
-					map("<C-k>", require("lsp_signature").toggle_float_win, "Toggle signature help")
+					map("<C-s>", require("lsp_signature").toggle_float_win, "Toggle signature help")
 					require("lsp_signature").on_attach({
 						hint_enable = false,
 						floating_window = false,
-						toggle_key = "<C-k>",
+						toggle_key = "<C-s>",
 					}, event.buf)
 				end,
 			})
@@ -239,7 +239,7 @@ return {
 
 			local groovy_lsp_jar = dot_files_env .. "/dependencies/groovy-lsp/groovy-language-server-all.jar"
 			require("lspconfig").groovyls.setup({
-				on_attach = on_attach,
+
 				filetypes = { "groovy" },
 
 				capabilities = capabilities,
@@ -253,7 +253,59 @@ return {
 			require("roslyn").setup({
 				dotnet_cmd = "dotnet",
 				roslyn_version = "4.11.0-1.24209.10",
-				on_attach = on_attach,
+				on_attach = function(client)
+					-- make sure this happens once per client, not per buffer
+					if not client.is_hacked then
+						client.is_hacked = true
+
+						-- let the runtime know the server can do semanticTokens/full now
+						client.server_capabilities = vim.tbl_deep_extend("force", client.server_capabilities, {
+							semanticTokensProvider = {
+								full = true,
+							},
+						})
+
+						-- monkey patch the request proxy
+						local request_inner = client.request
+						client.request = function(method, params, handler)
+							if method ~= vim.lsp.protocol.Methods.textDocument_semanticTokens_full then
+								return request_inner(method, params, handler)
+							end
+
+							local function find_buf_by_uri(search_uri)
+								local bufs = vim.api.nvim_list_bufs()
+								for _, buf in ipairs(bufs) do
+									local name = vim.api.nvim_buf_get_name(buf)
+									local uri = "file://" .. name
+									if uri == search_uri then
+										return buf
+									end
+								end
+							end
+
+							local doc_uri = params.textDocument.uri
+
+							local target_bufnr = find_buf_by_uri(doc_uri)
+							local line_count = vim.api.nvim_buf_line_count(target_bufnr)
+							local last_line =
+								vim.api.nvim_buf_get_lines(target_bufnr, line_count - 1, line_count, true)[1]
+
+							return request_inner("textDocument/semanticTokens/range", {
+								textDocument = params.textDocument,
+								range = {
+									["start"] = {
+										line = 0,
+										character = 0,
+									},
+									["end"] = {
+										line = line_count - 1,
+										character = string.len(last_line) - 1,
+									},
+								},
+							}, handler)
+						end
+					end
+				end,
 				capabilities = capabilities,
 				settings = {
 					["csharp|inlay_hints"] = {

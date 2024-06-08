@@ -22,7 +22,7 @@ return {
 			hidden = true,
 		}
 
-		local trouble = require("trouble.providers.telescope")
+		local trouble = require("trouble.sources.telescope")
 
 		require("telescope").setup({
 			defaults = {
@@ -31,9 +31,9 @@ return {
 						["<esc>"] = actions.close,
 						["<c-enter>"] = "to_fuzzy_refine",
 						["<C-e>"] = require("telescope.actions.layout").toggle_preview,
-						["<C-t>"] = trouble.open_with_trouble,
+						["<C-t>"] = trouble.open,
 					},
-					n = { ["<C-t>"] = trouble.open_with_trouble },
+					n = { ["<C-t>"] = trouble.open },
 				},
 				layout_config = {
 					width = 0.8,

@@ -5,7 +5,7 @@ current_resolution=$(xrandr | grep -oP '\d{3,4}x\d{3,4}' | head -n 1)
 resolution_changed=false
 if [ "$current_resolution" != "2560x1440" ]; then
 	xrandr --output DP-0 --mode 2560x1440
-	feh --bg-center /mnt/x/CLI/terminal-config/wallpaper_leaves.png
+	feh --bg-center /home/stefanaru/dotfiles/misc/wallpaper_leaves.png
 	# sleep 1
 	resolution_changed=true
 fi
@@ -19,22 +19,25 @@ i3-msg 'workspace number 1'
 sh -c 'alacritty &'
 subscribe_to_window "Alacritty"
 
+# Browsers
 i3-msg 'workspace number 2'
 ~/dotfiles/i3/i3-layout-manager/layout_manager.sh ~/dotfiles/i3/i3-layout-manager/layouts/layout-FULLWORKSPACE2TABBED.json
 sh -c 'google-chrome-stable --profile-directory="Profile 3" &'
 subscribe_to_window "Google-chrome"
 i3-msg 'border none'
 i3-msg title_format 'Gemini'
-sh -c 'google-chrome-stable --profile-directory=Default &'
+sh -c 'google-chrome-stable --profile-directory="Profile 2" &'
 subscribe_to_window "Google-chrome"
 i3-msg 'border none'
 i3-msg title_format 'Lectra'
 
+# Teams Gemini
 i3-msg 'workspace number 3'
 ~/dotfiles/i3/i3-layout-manager/layout_manager.sh ~/dotfiles/i3/i3-layout-manager/layouts/layout-FULLWORKSPACE3.json
-sh -c 'teams-for-linux &'
-subscribe_to_window 'teams-for-linux'
+sh -c 'google-chrome-stable --profile-directory="Profile 3" --app-id=cifhbcnohmdccbgoicgdjpfamggdegmo &'
+subscribe_to_window 'Google-chrome'
 
+# Outlook Gemini, Teams Lectra, Slack
 i3-msg 'workspace number 4'
 ~/dotfiles/i3/i3-layout-manager/layout_manager.sh ~/dotfiles/i3/i3-layout-manager/layouts/layout-FULLWORKSPACE4TABBED.json
 
@@ -43,17 +46,15 @@ subscribe_to_window "Google-chrome"
 i3-msg 'border none'
 i3-msg title_format 'Outlook Gemini'
 
-sh -c 'google-chrome-stable --profile-directory="Profile 3" --app-id=cifhbcnohmdccbgoicgdjpfamggdegmo &'
+sh -c 'google-chrome-stable --profile-directory="Profile 4" --app-id=cifhbcnohmdccbgoicgdjpfamggdegmo &'
 subscribe_to_window "Google-chrome"
 i3-msg 'border none'
 i3-msg title_format 'Teams Lectra'
 
-sh -c 'slack &'
-subscribe_to_window "Slack"
+sh -c 'google-chrome-stable --profile-directory="Profile 2" --app-id=gbgeipnpfoilbpmicolehcbfkeoapdjd &'
+subscribe_to_window "Google-chrome"
 i3-msg 'border none'
 i3-msg title_format 'Slack'
-
-i3-msg 'workspace 2; [instance="^crx_pkooggnaalmfkidjmlhoelhdllpphaga$"] focus'
 
 if [ $resolution_changed = true ]; then
 	i3-msg 'workspace number 3'
