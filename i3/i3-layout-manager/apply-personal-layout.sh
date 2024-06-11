@@ -50,6 +50,7 @@ open_apps() {
 		open_apps_workspace_one
 		open_apps_workspace_two
 		i3-msg 'workspace number 1'
+		i3-msg '[class="Google-chrome"] focus; focus right'
 		return
 	fi
 
@@ -61,7 +62,7 @@ open_apps() {
 		open_apps_workspace_two
 	fi
 
-	i3-msg "focus right"
+	i3-msg '[class="Google-chrome"] focus; focus right'
 }
 
 current_resolution=$(xrandr | grep -oP '\d{3,4}x\d{3,4}' | head -n 1)

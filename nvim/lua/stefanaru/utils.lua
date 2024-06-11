@@ -52,9 +52,9 @@ autocmd("BufWritePre", {
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",
 	callback = function(args)
-		if vim.bo[0].filetype == "cs" then
-			vim.cmd("CSFixUsings")
-		end
+		-- if vim.bo[0].filetype == "cs" then
+		-- 	vim.cmd("CSFixUsings")
+		-- end
 		require("conform").format({ bufnr = args.buf })
 	end,
 })
@@ -130,5 +130,19 @@ function M.get_lsp_client(client_id)
 	local client_name = client and client.name or "Unknown"
 	return client_name
 end
+
+-- Function to copy the current file path to the clipboard
+function CopyFilePathToClipboard()
+	local file_path = vim.fn.expand("%:p")
+	if file_path == "" then
+		print("No file path to copy")
+		return
+	end
+	vim.fn.system("echo -n " .. vim.fn.shellescape(file_path) .. " | xclip -selection clipboard")
+	print("File path copied to clipboard: " .. file_path)
+end
+
+-- Command to copy the file path
+vim.api.nvim_create_user_command("FilePathCopy", CopyFilePathToClipboard, {})
 
 return M

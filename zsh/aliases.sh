@@ -43,7 +43,7 @@ alias seejson="xclip -o -selection clipboard | jless"
 alias gvu="nmcli connection up 'Gemini VPN'"
 alias gvd="nmcli connection down 'Gemini VPN'"
 alias gvp="nmcli connection show --active"
-alias vpn="google-chrome-stable 'vpn.lectra.com'"
+alias vpn="google-chrome-stable --profile-directory="Profile 2" vpn.lectra.com"
 alias pulserestart="pulseaudio -k && pulseaudio --start"
 alias headph="pactl set-default-sink 0"
 alias speakers="pactl set-default-sink 1"
@@ -61,7 +61,7 @@ help() {
 
 # NOTE: SSH-ADD
 alias sshgithub='ssh-add ~/.ssh/id_github'
-alias sshstefanaru='ssh-add ~/.ssh/id_github'
+alias sshstefanaru='ssh-add ~/.ssh/id_devops_stefanaru'
 alias sshlectra='ssh-add ~/.ssh/s.fanaru_ed25519_key'
 
 # NOTE: Kubectl

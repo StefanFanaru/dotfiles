@@ -46,7 +46,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 bindsym $mod+Return exec --no-startup-id alacritty
 
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+e kill
 
 # launch rofi
 # bindsym $mod+d exec --no-startup-id rofi -show combi -run-command "i3-msg exec '{cmd}'" -show-icons
@@ -74,7 +74,7 @@ bindsym $mod+v split v
 bindsym $mod+y  fullscreen toggle
 
 # toggle tiling / floating
-bindsym $mod+t floating toggle
+bindsym $mod+x floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -137,8 +137,13 @@ bindcode --release $mod+48 exec --no-startup-id flameshot gui
 # Clipboard manager
 bindsym $super+v  exec --no-startup-id diodon
 
+# Popup windows
 bindsym $mod+Shift+n exec --no-startup-id dunstctl history-pop
 bindsym $mod+n exec --no-startup-id dunstctl close-all
+bindsym $mod+m exec --no-startup-id "~/dotfiles/i3/misc/meetings-popup.sh"
+bindsym $mod+t exec --no-startup-id "~/dotfiles/i3/misc/quick-todo.sh"
+bindsym $mod+c exec --no-startup-id "zenity --calendar"
+bindsym $mod+w exec --no-startup-id  "~/dotfiles/i3/i3-layout-manager/meeting-note.sh"
 
 # NOTE: Layouts
 
@@ -171,9 +176,11 @@ for_window [class="^.*"] client.focused          #77dd77 #285577 #ffffff #2e9ef4
 for_window [class="Emote"] floating enable, border pixel 0, move position mouse
 
 for_window [class="Ulauncher"] floating enable, border pixel 0
+for_window [class="zenity"] floating enable, border pixel 0
 
 
 # NOTE:  Startup jobs
 
 # hide ulauncher pop-up
 exec --no-startup-id "sleep 0.2 && xdotool windowunmap \"$(xdotool getactivewindow)\""
+# exec --no-startup-id /usr/libexec/gsd-xsettings

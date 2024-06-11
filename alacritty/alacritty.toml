@@ -36,5 +36,6 @@ bindings = [
     { key = "H", mods = "Control|Shift", chars = "\uE000" },
     { key = "J", mods = "Control|Shift", chars = "\uE001" },
     { key = "K", mods = "Control|Shift", chars = "\uE002" },
-    { key = "L", mods = "Control|Shift", chars = "\uE003" }
+    { key = "L", mods = "Control|Shift", chars = "\uE003" },
+    { key = ";", mods = "Control", chars = "&" }
 ]

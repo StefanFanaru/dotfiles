@@ -7,6 +7,10 @@
 /snap/bin/emote &
 /usr/bin/unclutter &
 /usr/bin/nm-applet &
-#/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 & # sudo pass popup
-#/usr/bin/setxkbmap real-prog-qwerty &
-# /opt/Citrix/NSGClient/bin/NSGClient &
+/usr/libexec/gsd-xsettings &
+
+# Set screen blanking to 60 minutes
+xset s 3600
+
+# Set DPMS standby, suspend, and off to 60 minutes
+xset dpms 3600 3600 3600
