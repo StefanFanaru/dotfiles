@@ -2,9 +2,13 @@ return {
 	{
 		"iamcco/markdown-preview.nvim",
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-		ft = { "markdown", "md" },
+		ft = { "markdown" },
 		build = "cd app && yarn install",
-		lazy = true
+		init = function()
+			vim.g.mkdp_filetypes = { "markdown" }
+			vim.g.mkdp_refresh_slow = true
+			vim.g.mkdp_port = 8199
+		end,
 	},
 	{
 		"ellisonleao/glow.nvim",

@@ -79,6 +79,7 @@ time_diff=$((meeting_time - current_time))
 # Calculate hours and minutes
 hours=$((time_diff / 3600))
 minutes=$(((time_diff + 59) / 60))
+minutes=$((minutes % 60))
 
 # Choose the icon based on the time left
 if [ "$hours" -eq 0 ] && [ "$minutes" -le 5 ]; then

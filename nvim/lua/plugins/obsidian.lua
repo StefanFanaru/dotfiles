@@ -106,6 +106,11 @@ return {
 			vim.cmd("normal! h")
 		end
 
+		local function create_new_note(title)
+			vim.cmd("ObsidianNew " .. title)
+			insert_template()
+		end
+
 		-- New note.
 		-- Help to verify that there is no other similar note
 		-- before creating a new one.
@@ -122,13 +127,16 @@ return {
 					map_telescope("i", "<C-y>", function()
 						local current_input = action_state.get_current_line()
 						actions.close(prompt_bufnr)
-						-- Create a new note with the selected file name
-						vim.cmd("ObsidianNew " .. current_input)
-						insert_template()
+						create_new_note(current_input)
 					end)
 					actions.select_default:replace(function()
+						local current_input = action_state.get_current_line()
 						actions.close(prompt_bufnr)
 						local selection = action_state.get_selected_entry()
+						if selection == nil then
+							create_new_note(current_input)
+							return
+						end
 						-- Open selected file in a buffer
 						vim.api.nvim_command("edit " .. selection[1])
 					end)

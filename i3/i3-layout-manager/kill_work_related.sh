@@ -1,5 +1,7 @@
 #!/bin/bash
 
-killall slack
-killall teams-for-linux
 killall chrome
+killall NSGClient
+nmcli connection down "Gemini VPN"
+i3-msg '[class=".*"] kill'
+tmux kill-server

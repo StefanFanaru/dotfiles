@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Get text with zenity
-text=$(zenity --entry --text="" --title="TODO" --width=400 --height=100)
+text=$(zenity --entry --text="" --title="TODO" --width=500 --height=100)
 
 # If text is not empty, append it to the todo file
 if [ -n "$text" ]; then
