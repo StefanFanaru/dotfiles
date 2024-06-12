@@ -25,15 +25,31 @@ read_from_cache() {
 	cat "$CACHE_FILE"
 }
 
+meeting_started_notification() {
+	title="$1"
+	# if [ "$title" == "ERROR" ]; then
+	# 	return
+	# fi
+	play /usr/share/sounds/freedesktop/stereo/dialog-warning.oga
+	zenity --info --title="Meeting stared" --text="$title" &
+}
+
 fetch_json() {
 	if is_cache_fresh; then
-		cached_result=$(read_from_cache)
-		echo "$cached_result"
-		# Release lock before exiting
-		release_lock
+		cached_response=$(read_from_cache)
+		echo "$cached_response"
 		exit 0
 	fi
 	response=$(curl -sk "https://localhost:7048/api/Meetings/next")
+	customText=$(echo "$response" | jq -r '.customText')
+	if [ "$customText" == "NOW" ]; then
+		cached_response=$(read_from_cache)
+		customTextCached=$(echo "$cached_response" | jq -r '.customText')
+		if [ -z "$customTextCached" ]; then
+			title=$(echo "$response" | jq -r '.title')
+			meeting_started_notification "$title"
+		fi
+	fi
 	write_to_cache "$response"
 	echo "$response"
 }
@@ -67,6 +83,7 @@ if [ -z "$json" ]; then
 fi
 
 # Parse JSON and extract time field
+title=$(echo "$json" | jq -r '.title')
 time=$(echo "$json" | jq -r '.time')
 color=$(echo "$json" | jq -r '.color')
 customText=$(echo "$json" | jq -r '.customText')
@@ -88,8 +105,12 @@ else
 	icon="$NERD_FONT_FREE"
 fi
 
-if [ $time_diff -le 0 ]; then
+if [ $time_diff -le 0 ] && [ "$customText" != "NOW" ] && [ "$title" != "ERROR" ]; then
 	customText="NOW"
+	meeting_started_notification "$title"
+	# rewire the cache to have and updated json with customText = "NOW"
+	json=$(echo "$json" | jq ".customText = \"NOW\"")
+	write_to_cache "$json"
 fi
 
 result=""

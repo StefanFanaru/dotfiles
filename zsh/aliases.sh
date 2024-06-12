@@ -51,6 +51,7 @@ alias sudonvim='sudo /opt/nvim-linux64/bin/nvim'
 alias btpw='/home/stefanaru/dotfiles/scripts/workflow/check-bt-battery.sh "JBL LIVE PRO 2 TWS"'
 alias btu='/home/stefanaru/dotfiles/scripts/workflow/connect-jbl-pro.sh'
 alias btd='/home/stefanaru/dotfiles/scripts/workflow/disconnect-jbl-pro.sh'
+alias utcnow='date -u +"%H:%M:%S"'
 
 # NOTE: BAT
 alias cat='bat --paging=never'
