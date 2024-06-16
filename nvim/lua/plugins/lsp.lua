@@ -216,6 +216,7 @@ return {
 						},
 					},
 				},
+				gopls = {},
 				pyright = {},
 				vale_ls = {},
 				-- omnisharp = {

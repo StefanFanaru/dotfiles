@@ -11,7 +11,6 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
 	eval "$(ssh-agent -s)" &>/dev/null
 	unlink "$HOME/.ssh/agent_sock" 2>/dev/null
 	ln -sf "$SSH_AUTH_SOCK" "$HOME/.ssh/agent_sock"
-	echo "SSH agent started"
 elif [ "$SSH_AUTH_SOCK" != "$HOME/.ssh/agent_sock" ]; then
 	ln -sf "$SSH_AUTH_SOCK" "$HOME/.ssh/agent_sock"
 fi

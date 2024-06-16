@@ -52,6 +52,8 @@ alias btpw='/home/stefanaru/dotfiles/scripts/workflow/check-bt-battery.sh "JBL L
 alias btu='/home/stefanaru/dotfiles/scripts/workflow/connect-jbl-pro.sh'
 alias btd='/home/stefanaru/dotfiles/scripts/workflow/disconnect-jbl-pro.sh'
 alias utcnow='date -u +"%H:%M:%S"'
+alias quickrr='sudo systemctl restart lightdm'
+alias tt='tasktango'
 
 # NOTE: BAT
 alias cat='bat --paging=never'

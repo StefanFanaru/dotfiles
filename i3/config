@@ -141,7 +141,7 @@ bindsym $super+v  exec --no-startup-id diodon
 bindsym $mod+Shift+n exec --no-startup-id dunstctl history-pop
 bindsym $mod+n exec --no-startup-id dunstctl close-all
 bindsym $mod+m exec --no-startup-id "~/dotfiles/i3/misc/meetings-popup.sh"
-bindsym $mod+t exec --no-startup-id "~/dotfiles/i3/misc/quick-todo.sh"
+bindsym $mod+t exec --no-startup-id "/mnt/x/Stefan/TaskTango/src/quick-todo.sh"
 bindsym $mod+c exec --no-startup-id "zenity --calendar"
 bindsym $mod+w exec --no-startup-id  "~/dotfiles/i3/i3-layout-manager/meeting-note.sh"
 
