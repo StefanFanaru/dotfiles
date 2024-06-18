@@ -1,0 +1,13 @@
+[Unit]
+Description=Fix Teams PWA status
+After=graphical-session.target
+
+[Service]
+ExecStart=/home/stefanaru/dotfiles/scripts/workflow/teams-status-fix.sh
+Type=simple
+StandardOutput=journal
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target

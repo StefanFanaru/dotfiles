@@ -32,7 +32,6 @@ return {
 	},
 	{
 		"b0o/SchemaStore.nvim",
-		lazy = true,
 		version = false, -- last release is way too old
 	},
 	{ "folke/neodev.nvim", opts = {} },
@@ -51,6 +50,23 @@ return {
 	{
 		"realprogrammersusevim/md-to-html.nvim",
 		cmd = { "MarkdownToHTML", "NewMarkdownToHTML" },
+	},
+	{
+		"Equilibris/nx.nvim",
+
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+		},
+
+		opts = {
+			-- See below for config options
+			nx_cmd_root = "npx nx",
+		},
+
+		-- Plugin will load when you use these keys
+		keys = {
+			{ "<leader>nx", "<cmd>Telescope nx actions<CR>", desc = "nx actions" },
+		},
 	},
 	-- {
 	-- 	"m4xshen/hardtime.nvim",

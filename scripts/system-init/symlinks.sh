@@ -27,3 +27,4 @@ sudo ln -s ~/dotfiles/bat ~/.config/bat
 sudo ln -s ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
 sudo ln -s ~/dotfiles/tmux/resurrect ~/.tmux/resurrect
 sudo ln -s ~/dotfiles/lazygitconfig ~/.config/lazygit
+sudo ln -s ~/dotfiles/user-services ~/.config/systemd/user
