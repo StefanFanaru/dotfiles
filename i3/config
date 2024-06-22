@@ -102,7 +102,7 @@ bindsym $mod+Shift+g move container to workspace number $ws5, workspace number $
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $super+Shift+r restart
+bindsym $mod+Shift+z restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'Are you sure you want to shutdown?' -B 'Yes' 'shutdown now'"
 
@@ -151,18 +151,22 @@ bindsym $mod+p exec --no-startup-id  "~/dotfiles/i3/i3-layout-manager/add-to-bro
 # NOTE: Layouts
 
 # resize to Full HD for better screen sharing
-bindsym $mod+u floating toggle, resize set 1920 px 1080 px, move absolute position center
+bindsym $mod+u floating toggle, resize set 1920 px 1080 px, move absolute position center, mark floating
 # better focusing on specific app allocating center of empty workspace
 bindsym $mod+o move container to workspace number $ws3, workspace number $ws3, floating enable, resize set 2200 px 1440 px, move absolute position center
 # undo the above focusing, going back to workspace 1
 bindsym $mod+i exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/move-teams-to-workspace1.sh"
 # https://github.com/klaxalk/i3-layout-manager
 # Ultrawide screen layouts
-bindsym $mod+1 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-work-layout.sh 1"
-bindsym $mod+2 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-work-layout.sh 2"
-bindsym $mod+4 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-personal-layout.sh 1"
-bindsym $mod+5 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-personal-layout.sh 2"
-
+bindsym $mod+1 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/layout_manager.sh ~/dotfiles/i3/i3-layout-manager/layouts/layout-WORKSPACE1TABS.json"
+bindsym $mod+2 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/layout_manager.sh ~/dotfiles/i3/i3-layout-manager/layouts/layout-WORKSPACE2TABS.json"
+bindsym $mod+4 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/layout_manager.sh ~/dotfiles/i3/i3-layout-manager/layouts/layout-PERSONALWORKSPACE1.json"
+bindsym $mod+5 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/layout_manager.sh ~/dotfiles/i3/i3-layout-manager/layouts/layout-PERSONALWORKSPACE2.json"
+bindsym $mod+Semicolon exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-work-layout.sh 1"
+bindsym $mod+Shift+2 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-work-layout.sh 2"
+bindsym $mod+Shift+4 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-personal-layout.sh 1"
+bindsym $mod+Shift+5 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/apply-personal-layout.sh 2"
+bindcode $mod+47 exec --no-startup-id "~/dotfiles/i3/i3-layout-manager/focus-teams.sh"
 # Small screen layout
 bindsym $mod+8 exec --no-startup-id "sh -c '~/dotfiles/i3/i3-layout-manager/apply-fullscreen-layout.sh &'"
 
