@@ -1,38 +1,37 @@
-local map = require("stefanaru.utils").mapkey
 return {
-	{
-		"folke/trouble.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		event = "VimEnter",
-		config = function()
-			local trouble = require("trouble")
-			map("n", "]t", function()
-				trouble.next({ skip_groups = true, jump = true })
-			end, "Next Trouble")
-			map("n", "[t", function()
-				trouble.previous({ skip_groups = true, jump = true })
-			end, "Previous Trouble")
-			map("n", "<leader>xx", function()
-				trouble.toggle()
-			end, "Toggle Trouble")
-			map("n", "<leader>xw", function()
-				trouble.toggle("workspace_diagnostics")
-			end, "Toggle Workspace Diagnostics")
-			map("n", "<leader>xd", function()
-				trouble.toggle("document_diagnostics")
-			end, "Toggle Document Diagnostics")
-			map("n", "<leader>xq", function()
-				trouble.toggle("quickfix")
-			end, "Toggle Quickfix")
-			map("n", "<leader>xl", function()
-				trouble.toggle("loclist")
-			end, "Toggle Loclist")
-			map("n", "<leader>xr", function()
-				trouble.refresh()
-			end, "Refresh Trouble")
-			map("n", "gR", function()
-				trouble.toggle("lsp_references")
-			end, "Toggle LSP References")
-		end,
+	"folke/trouble.nvim",
+	opts = {}, -- for default options, refer to the configuration section for custom setup.
+	cmd = "Trouble",
+	keys = {
+		{
+			"<leader>xx",
+			"<cmd>Trouble diagnostics toggle<cr>",
+			desc = "Diagnostics (Trouble)",
+		},
+		{
+			"<leader>xX",
+			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+			desc = "Buffer Diagnostics (Trouble)",
+		},
+		{
+			"<leader>cs",
+			"<cmd>Trouble symbols toggle focus=false<cr>",
+			desc = "Symbols (Trouble)",
+		},
+		{
+			"<leader>cl",
+			"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+			desc = "LSP Definitions / references / ... (Trouble)",
+		},
+		{
+			"<leader>xL",
+			"<cmd>Trouble loclist toggle<cr>",
+			desc = "Location List (Trouble)",
+		},
+		{
+			"<leader>xQ",
+			"<cmd>Trouble qflist toggle<cr>",
+			desc = "Quickfix List (Trouble)",
+		},
 	},
 }
