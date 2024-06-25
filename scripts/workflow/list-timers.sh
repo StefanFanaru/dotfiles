@@ -36,4 +36,4 @@ done
 IFS=$'\n'
 
 # display the list of active timers in a zenity list
-zenity --list --title="Active Timers" --text="List of active timers and their remaining time" --column="Text" --column="Remaining Time" "${formatted_timers[@]}"
+zenity --list --title="Active Timers" --text="" --column="Text" --column="Remaining Time" "${formatted_timers[@]}"
