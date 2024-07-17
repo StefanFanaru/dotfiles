@@ -31,7 +31,7 @@ meeting_started_notification() {
 	# 	return
 	# fi
 	play /usr/share/sounds/freedesktop/stereo/dialog-warning.oga
-	zenity --info --title="Meeting stared" --text="$title" &
+	zenity --info --title="Meeting stared" --text="Title: $title" &
 }
 
 fetch_json() {

@@ -62,3 +62,7 @@ export MAGICK_HOME="/usr/local/opt/imagemagick@6/lib"
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 export PATH="$PATH:/opt/mssql-tools18/bin"
 fpath+=${ZDOTDIR:-~}/.zsh_functions
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)

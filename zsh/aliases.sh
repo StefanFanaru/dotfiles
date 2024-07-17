@@ -69,3 +69,8 @@ alias kgp='kubectl get pods'
 alias kc='kubectx'
 alias kn='kubens'
 alias k='kubectl'
+
+# NOTE: Dotnet
+alias nb='dotnet build'
+alias nr='dotnet run'
+alias nt='dotnet test'

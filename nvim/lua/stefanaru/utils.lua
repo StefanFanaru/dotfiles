@@ -52,9 +52,9 @@ autocmd("BufWritePre", {
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",
 	callback = function(args)
-		-- if vim.bo[0].filetype == "cs" then
-		-- 	vim.cmd("CSFixUsings")
-		-- end
+		if vim.bo[0].filetype == "cs" then
+			vim.cmd("CSFixUsings")
+		end
 		require("conform").format({ bufnr = args.buf })
 	end,
 })

@@ -8,7 +8,7 @@ return {
 		end,
 	},
 	-- { "seblj/roslyn.nvim" },
-	-- {
-	-- 	dir = "~/personal/fork-roslyn.nvim/roslyn.nvim",
-	-- },
+	{
+		dir = "~/personal/fork-roslyn.nvim/roslyn.nvim",
+	},
 }

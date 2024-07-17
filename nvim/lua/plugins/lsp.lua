@@ -10,7 +10,7 @@ return {
 			{ "folke/neodev.nvim", opts = {} },
 			-- Experimental roslyn vs code dev kit LSP integration
 			-- https://github.com/jmederosalvarado/roslyn.nvim
-			"jmederosalvarado/roslyn.nvim",
+			-- "jmederosalvarado/roslyn.nvim",
 			-- Enhanced signature helpers, loaded on LspAttach
 			{
 				"ray-x/lsp_signature.nvim",
@@ -203,6 +203,7 @@ return {
 				},
 				prettier = {},
 
+				angularls = {},
 				bashls = {
 					cmd = { "bash-language-server", "start" },
 					filetypes = { "sh", "bash" },
