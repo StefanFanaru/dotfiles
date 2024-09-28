@@ -7,7 +7,7 @@ return {
 			lint.linters_by_ft["markdown"] = { "markdownlint", "codespell" }
 			lint.linters_by_ft["json"] = { "jsonlint" }
 			lint.linters_by_ft["terraform"] = { "tflint" }
-			lint.linters_by_ft["typescript"] = { "eslint_d" }
+			lint.linters_by_ft["typescript"] = { "eslint" }
 			lint.linters_by_ft["groovy"] = { "npm-groovy-lint" }
 			lint.linters_by_ft["dockerfile"] = { "hadolint" }
 

@@ -210,13 +210,6 @@ return {
 				},
 				shfmt = {},
 				shellcheck = {},
-				eslint_d = {
-					settings = {
-						workingDirectory = {
-							mode = "location",
-						},
-					},
-				},
 				gopls = {},
 				pyright = {},
 				vale_ls = {},
