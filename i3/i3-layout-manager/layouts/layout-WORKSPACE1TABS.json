@@ -133,11 +133,11 @@
                       "y": 0
                     },
                     "marks": [],
-                    "name": "Alacritty",
+                    "name": "Calendar",
                     "percent": 0.5,
                     "swallows": [
                       {
-                        "class": "^Alacritty$"
+                        "instance": "^crx_pkooggnaalmfkidjmlhoelhdllpphaga$"
                       }
                     ],
                     "type": "con"

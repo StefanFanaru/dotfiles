@@ -30,3 +30,8 @@ killtimers() {
 
 	rm $HOME/.timers_state.csv
 }
+
+gitsync() {
+	CURRENT_DIR=$(pwd)
+	~/dotfiles/scripts/workflow/sync-work-projects.sh "$CURRENT_DIR" "true"
+}

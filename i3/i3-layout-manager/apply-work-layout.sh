@@ -22,16 +22,22 @@ open_apps_workspace_one() {
 	sh -c 'google-chrome-stable --profile-directory="Profile 3" --app-id=cifhbcnohmdccbgoicgdjpfamggdegmo &'
 	subscribe_to_window 'Google-chrome'
 
-	session_count=$(tmux list-sessions | wc -l)
-	if [ "$session_count" -gt 1 ]; then
-		sleep 0.1
-	else
-		sleep 3
-	fi
+	sh -c 'google-chrome-stable --profile-directory="Profile 3" --app-id=pkooggnaalmfkidjmlhoelhdllpphaga &'
+	subscribe_to_window "Google-chrome"
 
-	sh -c 'alacritty &'
-	subscribe_to_window "Alacritty"
-	i3-msg ' [class="^alacritty$"] focus; focus left'
+	sleep 5
+	# session_count=$(tmux list-sessions | wc -l)
+	# if [ "$session_count" -gt 1 ]; then
+	# 	sleep 0.1
+	# else
+	# 	sleep 3
+	# fi
+
+	xdotool mousemove 3898 871
+	xdotool click 1
+	xdotool mousemove 3954 819
+	xdotool click 1
+	xdotool mousemove 2560 720
 }
 
 open_apps_workspace_two() {

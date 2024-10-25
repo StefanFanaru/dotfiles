@@ -33,6 +33,7 @@ alias top='btop'
 alias rzsh='source ~/.zshrc'
 alias gitnamelectra= 'git config user.email "stefan.fanaru@geminicad.com"'
 alias gitnamegithub= 'git config user.email "stefan.fanaru@outlook.com"'
+alias syncproj="~/dotfiles/scripts/workflow/sync-work-projects.sh"
 alias logoutnow='kill -9 -1'
 alias myip='curl ipinfo.io/ip'
 alias xsc="xclip -selection clipboard"
@@ -41,6 +42,7 @@ alias gvu="nmcli connection up 'Gemini VPN'"
 alias gvd="nmcli connection down 'Gemini VPN'"
 alias gvp="nmcli connection show --active"
 alias vpn="google-chrome-stable --profile-directory=\"Profile 2\" vpn.lectra.com"
+alias vpnp="pritunl-client start btag7jlsucbrt2uc --mode=ovpn"
 alias pulserestart="pulseaudio -k && pulseaudio --start"
 alias headph="pactl set-default-sink 0"
 alias speakers="pactl set-default-sink 1"

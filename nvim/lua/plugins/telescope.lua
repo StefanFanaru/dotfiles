@@ -18,7 +18,7 @@ return {
 	config = function()
 		local actions = require("telescope.actions")
 		local custom_picker_options = {
-			previewer = false,
+			previewer = true,
 			hidden = true,
 		}
 
@@ -35,9 +35,9 @@ return {
 					},
 					n = { ["<C-t>"] = trouble.open },
 				},
+				layout_strategy = "vertical",
 				layout_config = {
-					width = 0.8,
-					height = 0.6,
+					prompt_position = "top",
 				},
 				file_ignore_patterns = {
 					".git/",
