@@ -53,6 +53,7 @@ alias btd='/home/stefanaru/dotfiles/scripts/workflow/disconnect-jbl-pro.sh'
 alias utcnow='date -u +"%H:%M:%S"'
 alias quickrr='sudo systemctl restart lightdm'
 alias tt='tasktango'
+alias mmr='/home/stefanaru/dotfiles/scripts/workflow/make-mr.sh'
 
 # NOTE: BAT
 alias cat='bat --paging=never'

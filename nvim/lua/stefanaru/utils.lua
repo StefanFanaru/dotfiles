@@ -43,18 +43,18 @@ autocmd("BufWritePre", {
 	pattern = "*",
 	callback = function(args)
 		require("conform").format({ bufnr = args.buf, lsp_fallback = true })
-		if vim.bo[0].filetype == "cs" then
-			require("csharp").fix_usings()
-		end
+		-- if vim.bo[0].filetype == "cs" then
+		-- 	require("csharp").fix_usings()
+		-- end
 	end,
 })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",
 	callback = function(args)
-		if vim.bo[0].filetype == "cs" then
-			vim.cmd("CSFixUsings")
-		end
+		-- if vim.bo[0].filetype == "cs" then
+		-- 	vim.cmd("CSFixUsings")
+		-- end
 		require("conform").format({ bufnr = args.buf })
 	end,
 })

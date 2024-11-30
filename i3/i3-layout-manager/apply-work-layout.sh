@@ -35,6 +35,7 @@ open_apps_workspace_one() {
 
 	xdotool mousemove 3898 871
 	xdotool click 1
+	sleep 0.5
 	xdotool mousemove 3954 819
 	xdotool click 1
 	xdotool mousemove 2560 720

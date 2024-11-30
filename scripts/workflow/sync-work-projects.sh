@@ -67,7 +67,7 @@ sync_repo() {
 			GIT_PULL_SUCCESS_COUNT=$((GIT_PULL_SUCCESS_COUNT + 1))
 			return
 		fi
-		git checkout -b stefan/delivery-next &>/dev/null
+		git checkout stefan/delivery-next &>/dev/null
 		git merge main-next &>/dev/null
 		if [ $? -ne 0 ]; then
 			echo "Failed to sync stefan/delivery branch in $dir" >>$GIT_LOG_FILE

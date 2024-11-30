@@ -47,7 +47,8 @@
                     "percent": 0.5,
                     "swallows": [
                       {
-                        "class": "^Google-chrome$"
+                        "class": "^Google-chrome$",
+                        "window_role": "browser"
                       }
                     ],
                     "type": "con"
@@ -67,7 +68,8 @@
                     "percent": 0.5,
                     "swallows": [
                       {
-                        "class": "^Google-chrome$"
+                        "class": "^Google-chrome$",
+                        "window_role": "browser"
                       }
                     ],
                     "type": "con"
