@@ -54,6 +54,7 @@ return {
 				group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
 				callback = function(event)
 					local client_name = utils.get_lsp_client(event.data.client_id)
+					-- print client name
 					if client_name == "copilot" then
 						return
 					end
@@ -135,33 +136,61 @@ return {
 
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-			local on_attach = function(client, bufnr)
-				return
-				-- local fix_usings = function()
-				-- 	local action = {
-				-- 		kind = "quickfix",
-				-- 		data = {
-				-- 			CustomTags = { "RemoveUnnecessaryImports" },
-				-- 			TextDocument = { uri = vim.uri_from_bufnr(bufnr) },
-				-- 			CodeActionPath = { "Remove unnecessary usings" },
-				-- 			Range = {
-				-- 				["start"] = { line = 0, character = 0 },
-				-- 				["end"] = { line = 0, character = 0 },
-				-- 			},
-				-- 			UniqueIdentifier = "Remove unnecessary usings",
-				-- 		},
-				-- 	}
-				-- 	client.request("codeAction/resolve", action, function(err, resolved_action)
-				-- 		print("Resolved code action: " .. vim.inspect(resolved_action))
-				-- 		if err then
-				-- 			print("Error resolving code action: " .. err)
-				-- 			return
-				-- 		end
-				-- 		vim.lsp.util.apply_workspace_edit(resolved_action.edit, client.offset_encoding)
-				-- 	end)
-				-- end
-				-- vim.keymap.set("n", "<leader>qs", fix_usings, { buffer = bufnr, desc = "LSP: " .. "Fix usings" })
-			end
+			-- local on_attach = function(client, bufnr)
+			-- return
+			-- local fix_usings = function()
+			-- 	local action = {
+			-- 		kind = "quickfix",
+			-- 		data = {
+			-- 			CustomTags = { "RemoveUnnecessaryImports" },
+			-- 			TextDocument = { uri = vim.uri_from_bufnr(bufnr) },
+			-- 			CodeActionPath = { "Remove unnecessary usings" },
+			-- 			Range = {
+			-- 				["start"] = { line = 0, character = 0 },
+			-- 				["end"] = { line = 0, character = 0 },
+			-- 			},
+			-- 			UniqueIdentifier = "Remove unnecessary usings",
+			-- 		},
+			-- 	}
+			-- 	client.request("codeAction/resolve", action, function(err, resolved_action)
+			-- 		print("Resolved code action: " .. vim.inspect(resolved_action))
+			-- 		if err then
+			-- 			print("Error resolving code action: " .. err)
+			-- 			return
+			-- 		end
+			-- 		vim.lsp.util.apply_workspace_edit(resolved_action.edit, client.offset_encoding)
+			-- 	end)
+			-- end
+			-- vim.keymap.set("n", "<leader>qs", fix_usings, { buffer = bufnr, desc = "LSP: " .. "Fix usings" })
+			-- end
+
+			require("roslyn").setup({
+				args = {
+					"--logLevel=Information",
+					"--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
+					"--razorSourceGenerator=" .. vim.fs.joinpath(
+						vim.fn.stdpath("data") --[[@as string]],
+						"mason",
+						"packages",
+						"roslyn",
+						"libexec",
+						"Microsoft.CodeAnalysis.Razor.Compiler.dll"
+					),
+					"--razorDesignTimePath=" .. vim.fs.joinpath(
+						vim.fn.stdpath("data") --[[@as string]],
+						"mason",
+						"packages",
+						"rzls",
+						"libexec",
+						"Targets",
+						"Microsoft.NET.Sdk.Razor.DesignTime.targets"
+					),
+				},
+				config = {
+					capabilities = capabilities,
+					handlers = require("rzls.roslyn_handlers"),
+				},
+			})
 			local servers = {
 				cssls = {},
 				yamlls = {
@@ -213,6 +242,7 @@ return {
 				gopls = {},
 				pyright = {},
 				vale_ls = {},
+				rzls = {},
 				-- omnisharp = {
 				-- 	cmd = { "/home/stefanaru/bin/omnisharp/OmniSharp" },
 				-- 	handlers = {
@@ -245,82 +275,77 @@ return {
 				},
 			})
 
-			require("roslyn").setup({
-				dotnet_cmd = "dotnet",
-				roslyn_version = "4.11.0-1.24209.10",
-				on_attach = function(client)
-					-- make sure this happens once per client, not per buffer
-					if not client.is_hacked then
-						client.is_hacked = true
+			-- require("roslyn").setup({
+			-- 	-- dotnet_cmd = "dotnet",
+			-- 	-- roslyn_version = "4.11.0-1.24209.10",
+			-- 	config = {
+			-- 		on_attach = function(client)
+			-- 			if client.is_hacked then
+			-- 				return
+			-- 			end
+			-- 			client.is_hacked = true
+			--
+			-- 			-- let the runtime know the server can do semanticTokens/full now
+			-- 			client.server_capabilities = vim.tbl_deep_extend("force", client.server_capabilities, {
+			-- 				semanticTokensProvider = {
+			-- 					full = true,
+			-- 				},
+			-- 			})
+			--
+			-- 			-- monkey patch the request proxy
+			-- 			local request_inner = client.request
+			-- 			function client:request(method, params, handler, req_bufnr)
+			-- 				if method ~= vim.lsp.protocol.Methods.textDocument_semanticTokens_full then
+			-- 					return request_inner(self, method, params, handler)
+			-- 				end
+			--
+			-- 				local target_bufnr = vim.uri_to_bufnr(params.textDocument.uri)
+			-- 				local line_count = vim.api.nvim_buf_line_count(target_bufnr)
+			-- 				local last_line =
+			-- 					vim.api.nvim_buf_get_lines(target_bufnr, line_count - 1, line_count, true)[1]
+			--
+			-- 				return request_inner(self, "textDocument/semanticTokens/range", {
+			-- 					textDocument = params.textDocument,
+			-- 					range = {
+			-- 						["start"] = {
+			-- 							line = 0,
+			-- 							character = 0,
+			-- 						},
+			-- 						["end"] = {
+			-- 							line = line_count - 1,
+			-- 							character = string.len(last_line) - 1,
+			-- 						},
+			-- 					},
+			-- 				}, handler, req_bufnr)
+			-- 			end
+			-- 		end,
+			-- 	},
+			--
+			-- 	capabilities = capabilities,
+			-- 	settings = {
+			-- 		["csharp|inlay_hints"] = {
+			-- 			csharp_enable_inlay_hints_for_lambda_parameter_types = true,
+			-- 			csharp_enable_inlay_hints_for_implicit_object_creation = true,
+			-- 			csharp_enable_inlay_hints_for_implicit_variable_types = true,
+			-- 			csharp_enable_inlay_hints_for_types = true,
+			-- 			dotnet_enable_inlay_hints_for_indexer_parameters = true,
+			-- 			dotnet_enable_inlay_hints_for_literal_parameters = true,
+			-- 			dotnet_enable_inlay_hints_for_object_creation_parameters = true,
+			-- 			dotnet_enable_inlay_hints_for_other_parameters = true,
+			-- 			dotnet_enable_inlay_hints_for_parameters = true,
+			-- 			dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
+			-- 			dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
+			-- 			dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
+			-- 		},
+			-- 	},
+			-- })
 
-						-- let the runtime know the server can do semanticTokens/full now
-						client.server_capabilities = vim.tbl_deep_extend("force", client.server_capabilities, {
-							semanticTokensProvider = {
-								full = true,
-							},
-						})
-
-						-- monkey patch the request proxy
-						local request_inner = client.request
-						client.request = function(method, params, handler)
-							if method ~= vim.lsp.protocol.Methods.textDocument_semanticTokens_full then
-								return request_inner(method, params, handler)
-							end
-
-							local function find_buf_by_uri(search_uri)
-								local bufs = vim.api.nvim_list_bufs()
-								for _, buf in ipairs(bufs) do
-									local name = vim.api.nvim_buf_get_name(buf)
-									local uri = "file://" .. name
-									if uri == search_uri then
-										return buf
-									end
-								end
-							end
-
-							local doc_uri = params.textDocument.uri
-
-							local target_bufnr = find_buf_by_uri(doc_uri)
-							local line_count = vim.api.nvim_buf_line_count(target_bufnr)
-							local last_line =
-								vim.api.nvim_buf_get_lines(target_bufnr, line_count - 1, line_count, true)[1]
-
-							return request_inner("textDocument/semanticTokens/range", {
-								textDocument = params.textDocument,
-								range = {
-									["start"] = {
-										line = 0,
-										character = 0,
-									},
-									["end"] = {
-										line = line_count - 1,
-										character = string.len(last_line) - 1,
-									},
-								},
-							}, handler)
-						end
-					end
-				end,
-				capabilities = capabilities,
-				settings = {
-					["csharp|inlay_hints"] = {
-						csharp_enable_inlay_hints_for_lambda_parameter_types = true,
-						csharp_enable_inlay_hints_for_implicit_object_creation = true,
-						csharp_enable_inlay_hints_for_implicit_variable_types = true,
-						csharp_enable_inlay_hints_for_types = true,
-						dotnet_enable_inlay_hints_for_indexer_parameters = true,
-						dotnet_enable_inlay_hints_for_literal_parameters = true,
-						dotnet_enable_inlay_hints_for_object_creation_parameters = true,
-						dotnet_enable_inlay_hints_for_other_parameters = true,
-						dotnet_enable_inlay_hints_for_parameters = true,
-						dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
-						dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
-						dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
-					},
+			require("mason").setup({
+				registries = {
+					"github:mason-org/mason-registry",
+					"github:crashdummyy/mason-registry",
 				},
 			})
-
-			require("mason").setup()
 
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {

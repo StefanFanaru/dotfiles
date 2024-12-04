@@ -4,7 +4,7 @@ rm -rf ~/Downloads/nvim-linux64
 
 echo "Downloading nvim"
 # wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
-wget https://github.com/neovim/neovim/releases/download/v0.10.0/nvim-linux64.tar.gz
+wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
 tar xzvf nvim-linux64.tar.gz
 
 printf "\n\nVersion before update:\n$(/opt/nvim-linux64/bin/nvim --version)\n"
