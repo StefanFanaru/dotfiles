@@ -42,7 +42,9 @@ return {
 				file_ignore_patterns = {
 					".git/",
 					".cache",
+					".angular/",
 					"build/",
+					"dist/",
 					"%.class",
 					"%.pdf",
 					"%.mkv",
@@ -51,6 +53,7 @@ return {
 					"bin/",
 					"obj/",
 					".trash/",
+					"assets/",
 					".idea",
 					".obsidian/",
 					"node_modules/",

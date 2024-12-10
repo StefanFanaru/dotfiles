@@ -4,9 +4,9 @@ return {
 	lazy = true,
 	cmd = { "ObsidianNew", "ObsidianSearch", "ObsidianQuickSearch", "ObsidianTemplate" },
 	event = {
-		"BufReadPre oil:///mnt/f/obsidian/second-brain/*",
-		"BufReadPre /mnt/f/obsidian/second-brain/*.md",
-		"BufNewFile /mnt/f/obsidian/second-brain/**.md",
+		"BufReadPre oil:///mnt/s/obsidian/second-brain/*",
+		"BufReadPre /mnt/s/obsidian/second-brain/*.md",
+		"BufNewFile /mnt/s/obsidian/second-brain/**.md",
 	},
 	dependencies = {
 		"nvim-lua/plenary.nvim",
@@ -15,7 +15,7 @@ return {
 		workspaces = {
 			{
 				name = "second-brain",
-				path = "/mnt/f/obsidian/second-brain",
+				path = "/mnt/s/obsidian/second-brain",
 			},
 		},
 		ui = {
@@ -48,7 +48,7 @@ return {
 		note_path_func = function(spec)
 			-- This is equivalent to the default behavior.
 			local note_title = spec.title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
-			return "/mnt/f/obsidian/second-brain/Inbox/" .. note_title .. ".md"
+			return "/mnt/s/obsidian/second-brain/Inbox/" .. note_title .. ".md"
 		end,
 		note_id_func = function(title)
 			-- Create note IDs in a Zettelkasten format with a timestamp and a suffix.
@@ -81,7 +81,7 @@ return {
 		},
 	},
 	config = function(_, opts)
-		if vim.fn.getcwd(0) ~= "/mnt/f/obsidian/second-brain" then
+		if vim.fn.getcwd(0) ~= "/mnt/s/obsidian/second-brain" then
 			return
 		end
 

@@ -31,6 +31,10 @@ map("i", "<C-c>", "<Esc>")
 -- Search and replace
 map("n", "<leader>*", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], "Search and replace current word")
 
+-- map q: to :q
+-- nnoremap q: <nop>
+vim.api.nvim_set_keymap("n", "q:", ":q<CR>", { noremap = true, silent = true })
+
 -- Exit terminal mode easier
 map("t", "<Esc><Esc>", "<C-\\><C-n>", "Exit terminal mode")
 

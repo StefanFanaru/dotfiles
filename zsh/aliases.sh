@@ -44,7 +44,7 @@ alias gvp="nmcli connection show --active"
 alias vpn="google-chrome-stable --profile-directory=\"Profile 2\" vpn.lectra.com"
 alias vpnp="pritunl-client start btag7jlsucbrt2uc --mode=ovpn"
 alias pulserestart="pulseaudio -k && pulseaudio --start"
-alias headph="pactl set-default-sink 0"
+alias headphones="pactl set-default-sink 0"
 alias speakers="pactl set-default-sink 1"
 alias sudonvim='sudo /opt/nvim-linux64/bin/nvim'
 alias btpw='/home/stefanaru/dotfiles/scripts/workflow/check-bt-battery.sh "JBL LIVE PRO 2 TWS"'
@@ -54,6 +54,7 @@ alias utcnow='date -u +"%H:%M:%S"'
 alias quickrr='sudo systemctl restart lightdm'
 alias tt='tasktango'
 alias mmr='/home/stefanaru/dotfiles/scripts/workflow/make-mr.sh'
+alias sus='systemctl suspend'
 
 # NOTE: BAT
 alias cat='bat --paging=never'
@@ -74,6 +75,11 @@ alias kn='kubens'
 alias k='kubectl'
 
 # NOTE: Dotnet
-alias nb='dotnet build'
-alias nr='dotnet run'
-alias nt='dotnet test'
+alias db='dotnet build'
+alias dr='dotnet run'
+alias dt='dotnet test'
+alias dres='dotnet restore'
+
+# NOTE: NPM
+alias ni='npm install'
+alias ns='npm run start'
