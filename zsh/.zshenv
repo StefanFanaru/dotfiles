@@ -5,3 +5,4 @@ export IS_ZSH=true
 export BAT_THEME="CatppuccinMocha"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export KUBE_EDITOR=nvim
+export K9S_CONFIG_DIR=~/dotfiles/k9s

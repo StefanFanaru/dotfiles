@@ -1,12 +1,36 @@
+local function insert_template()
+	vim.cmd("ObsidianTemplate " .. "main-template")
+	-- Take care of the references first!
+	vim.cmd("normal! ddi[[]]")
+	vim.cmd("normal! h")
+end
+
+local function create_new_note(title)
+	vim.cmd("ObsidianNew " .. title)
+	insert_template()
+end
+
+local function quick_note_title()
+	-- Get the current date and time in the desired format
+	local datetime = os.date("%H-%M-%S-%d-%m-%Y")
+	-- Concatenate "QuickNote" with the datetime
+	local quickNote = "QuickNote_" .. datetime
+	return quickNote
+end
+
+require("stefanaru.utils").mapkey("n", "<leader>on", function()
+	create_new_note(quick_note_title())
+end, "Create a new quick note")
+
 return {
 	"epwalsh/obsidian.nvim",
 	version = "*", -- recommended, use latest release instead of latest commit
 	lazy = true,
 	cmd = { "ObsidianNew", "ObsidianSearch", "ObsidianQuickSearch", "ObsidianTemplate" },
 	event = {
-		"BufReadPre oil:///mnt/s/obsidian/second-brain/*",
-		"BufReadPre /mnt/s/obsidian/second-brain/*.md",
-		"BufNewFile /mnt/s/obsidian/second-brain/**.md",
+		"BufReadPre oil:///Users/stefanaru/Data/second-brain/*",
+		"BufReadPre /Users/stefanaru/Data/second-brain/*.md",
+		"BufNewFile /Users/stefanaru/Data/second-brain/**.md",
 	},
 	dependencies = {
 		"nvim-lua/plenary.nvim",
@@ -15,7 +39,7 @@ return {
 		workspaces = {
 			{
 				name = "second-brain",
-				path = "/mnt/s/obsidian/second-brain",
+				path = "/Users/stefanaru/Data/second-brain",
 			},
 		},
 		ui = {
@@ -48,7 +72,7 @@ return {
 		note_path_func = function(spec)
 			-- This is equivalent to the default behavior.
 			local note_title = spec.title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
-			return "/mnt/s/obsidian/second-brain/Inbox/" .. note_title .. ".md"
+			return "/Users/stefanaru/Data/second-brain/Inbox/" .. note_title .. ".md"
 		end,
 		note_id_func = function(title)
 			-- Create note IDs in a Zettelkasten format with a timestamp and a suffix.
@@ -81,7 +105,7 @@ return {
 		},
 	},
 	config = function(_, opts)
-		if vim.fn.getcwd(0) ~= "/mnt/s/obsidian/second-brain" then
+		if vim.fn.getcwd(0) ~= "/Users/stefanaru/Data/second-brain" then
 			return
 		end
 

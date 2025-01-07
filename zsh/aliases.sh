@@ -21,7 +21,7 @@ alias ...='cd ../../'
 alias dtf='cd ~/dotfiles'
 
 # NOTE: HELPERS
-alias rm='trash-put -iv'
+# alias rm='trash'
 alias cp='cp -iv'
 alias mv='mv -iv'
 alias modx='chmod +x'
@@ -55,6 +55,7 @@ alias quickrr='sudo systemctl restart lightdm'
 alias tt='tasktango'
 alias mmr='/home/stefanaru/dotfiles/scripts/workflow/make-mr.sh'
 alias sus='systemctl suspend'
+alias font='$HOME/dotfiles/scripts/workflow/toggle-font.sh'
 
 # NOTE: BAT
 alias cat='bat --paging=never'
@@ -83,3 +84,9 @@ alias dres='dotnet restore'
 # NOTE: NPM
 alias ni='npm install'
 alias ns='npm run start'
+
+# NOTE: SSH
+alias sshpve='ssh root@192.168.34.190'
+alias sshnas='ssh truenas_admin@192.168.34.144'
+alias sshopenwrt='ssh root@192.168.34.1'
+alias sshwazuh='ssh stefanaru@192.168.34.131'

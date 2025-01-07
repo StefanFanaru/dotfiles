@@ -13,13 +13,22 @@ if [[ $# -eq 1 ]]; then
 	selected=$1
 else
 	# Find directories in specified paths
-	find_result=$(find ~/work/digital-platform ~/work/ ~/personal/ ~/dotfiles/ -mindepth 1 -maxdepth 1 -type d)
+	find_result=$(find ~/Code/Lectra/digital-platform ~/Code/Stefan ~/dotfiles -mindepth 1 -maxdepth 1 -type d)
 
 	# Append paths to the find results
-	find_result=$(append_paths "$find_result" "/home/stefanaru/dotfiles")
+	find_result=$(append_paths "$find_result" "$HOME/dotfiles")
+
+	# From file Results each line, remove "/Users/stefanaru" but leave the starting slash
+	find_result=$(echo "$find_result" | sed "s|$HOME||")
 
 	# Retrieve names of tmux sessions and append them to find_result
 	tmux_sessions=$(tmux list-sessions -F "#S")
+
+	#remove from find_result the lines that have pattern /tmux_session_name
+	for session in $tmux_sessions; do
+		find_result=$(echo "$find_result" | grep -v "$session$")
+	done
+
 	find_result=$(append_paths "$find_result" "$tmux_sessions")
 
 	# Pass the combined result to fzf
@@ -38,6 +47,11 @@ fi
 
 if [[ -z $selected ]]; then
 	exit 0
+fi
+
+# if $selected starts with / append $HOME to it
+if [[ $selected == /* ]]; then
+	selected="$HOME$selected"
 fi
 
 selected_name=$(basename "$selected" | tr . _ | tr " " _)

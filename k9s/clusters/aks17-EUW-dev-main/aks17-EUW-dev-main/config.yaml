@@ -1,0 +1,13 @@
+k9s:
+  cluster: aks17-EUW-dev-main
+  namespace:
+    active: apogy-cloud
+    lockFavorites: false
+    favorites:
+    - apogy-cloud
+    - default
+  view:
+    active: pods
+  featureGates:
+    nodeShell: false
+  portForwardAddress: localhost

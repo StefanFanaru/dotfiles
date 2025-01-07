@@ -1,10 +1,10 @@
-import = [
+general.import = [
     "~/.config/alacritty/themes/catppuccin.toml"
 ]
 
 [window]
-opacity= 0.88
-decorations= "None"
+# opacity= 0.98
+# decorations="none"
 
 [window.padding]
 x = 0
@@ -19,7 +19,7 @@ background = "#000000"
 
 
 [font]
-size = 14.0
+size = 18.0
 
 [font.normal]
 family = "JetBrainsMono Nerd Font"
@@ -27,9 +27,9 @@ family = "JetBrainsMono Nerd Font"
 [cursor]
 style = "Block"
 
-
-[shell]
-program = "/usr/bin/zsh"
+[terminal.shell]
+program = "/opt/homebrew/bin/tmux" # <- Set your path
+args = ["new-session", "-A", "-D", "-s", "main"]
 
 [keyboard]
 bindings = [

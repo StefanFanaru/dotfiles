@@ -1,7 +1,7 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$PATH:/home/stefanaru/.local/bin
 export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
-export PATH="$PATH:/opt/nvim-linux64/bin"
+export PATH="$PATH:$HOME/nvim-macos-arm64/bin"
 export PATH="$PATH:~/.local/bin"
 export PATH="$PATH:$HOME/dotfiles/scripts/external/bin"
 export PATH=$PATH:/opt/gradle/gradle-8.7/bin
@@ -18,12 +18,14 @@ export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 export FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git/'"
 export FZF_COMPLETION_TRIGGER='~~'
 
+
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
 
 # Launch ssh-agent and persist it across tmux sessions
-source $DOT_FILES/scripts/workflow/ssh-agent-autostart.sh
+# source $DOT_FILES/scripts/workflow/ssh-agent-autostart.sh
 
 ZSH_THEME="custom-agnoster"
 HYPHEN_INSENSITIVE="true"
@@ -34,7 +36,7 @@ HYPHEN_INSENSITIVE="true"
 zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
-zstyle ':omz:update' frequency 13
+zstyle ':omz:update' frequency 30
 
 plugins=(
     zsh-autosuggestions
@@ -51,11 +53,7 @@ eval "$(zoxide init zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # must be sourced before starting tmux
 source $DOT_FILES/zsh/fzf_env.sh
-source /usr/share/doc/fzf/examples/key-bindings.zsh
-source /usr/share/doc/fzf/examples/completion.zsh
 source $DOT_FILES/scripts/workflow/tmux-autostart.sh
-# fpath+=${ZDOTDIR:-~}/.zsh_functions
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 export PATH="/home/linuxbrew/.linuxbrew/opt/imagemagick@6/bin:$PATH"
 export MAGICK_HOME="/usr/local/opt/imagemagick@6/lib"
 export MAGICK_HOME="/usr/local/opt/imagemagick@6/lib"
