@@ -56,3 +56,16 @@ if os.getenv("IS_BASH") == "true" then
 end
 
 vim.opt.smoothscroll = true
+
+local banned_messages = { "Initializing Roslyn client" }
+
+local notify = vim.notify
+
+vim.notify = function(msg, ...)
+	for _, banned in ipairs(banned_messages) do
+		if msg:find(banned) then
+			return
+		end
+	end
+	notify(msg, ...)
+end

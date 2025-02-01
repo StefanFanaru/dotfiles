@@ -18,3 +18,6 @@ else
 	SwitchAudioSource -t input -s "MacBook Air Microphone" >/dev/null
 fi
 SwitchAudioSource -m toggle -t input >/dev/null
+
+# Set volume to 75%
+osascript -e "set volume output volume 75"

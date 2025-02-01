@@ -20,6 +20,9 @@ end
 
 require("stefanaru.utils").mapkey("n", "<leader>on", function()
 	create_new_note(quick_note_title())
+	vim.cmd("normal! gg3j")
+	-- enter insert mode
+	vim.cmd("startinsert")
 end, "Create a new quick note")
 
 return {

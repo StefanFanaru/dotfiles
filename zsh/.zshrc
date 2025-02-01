@@ -65,3 +65,4 @@ fpath+=${ZDOTDIR:-~}/.zsh_functions
 # Load Angular CLI autocompletion.
 source <(ng completion script)
 export PATH="$PATH:/opt/mssql-tools18/bin"
+export DOTNET_ROOT=/usr/local/share/dotnet

@@ -2,7 +2,7 @@
 
 # Required parameters:
 # @raycast.schemaVersion 1
-# @raycast.title Open Obsidian
+# @raycast.title storage
 # @raycast.mode silent
 
 # Optional parameters:
@@ -11,4 +11,4 @@
 # Documentation:
 # @raycast.author Stefan Fanaru
 
-./open-session.sh "obsidian" "~/Data/second-brain/"
+./open-session.sh storage ~/Code/Lectra/digital-platform/storage/

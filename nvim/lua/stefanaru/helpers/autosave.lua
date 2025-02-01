@@ -7,7 +7,7 @@ AUTOSAVE_LAST_ACTIVITY_TIME = os.time()
 AUTOSAVE_TIMER_ID = vim.loop.new_timer()
 
 -- Compare last activity time recorded with current time
--- and check if it exceedes the treshold
+-- and check if it exceedes the threshold
 local check_user_is_inactive = function()
 	local current_time = os.time()
 	local inactive_duration = current_time - AUTOSAVE_LAST_ACTIVITY_TIME
@@ -66,6 +66,8 @@ end
 -- This is the entry point
 -- Every time the cursor is moved in normal mode,
 -- update the time when the user has last been seen
-vim.api.nvim_command("autocmd InsertLeave,TextChanged * lua require('stefanaru.helpers.autosave').update_last_activity()")
+vim.api.nvim_command(
+	"autocmd InsertLeave,TextChanged * lua require('stefanaru.helpers.autosave').update_last_activity()"
+)
 
 return M

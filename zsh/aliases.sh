@@ -86,7 +86,9 @@ alias ni='npm install'
 alias ns='npm run start'
 
 # NOTE: SSH
-alias sshpve='ssh root@192.168.34.190'
+alias sshserviable='ssh root@192.168.34.190'
+alias sshrobbie='ssh root@192.168.34.191'
 alias sshnas='ssh truenas_admin@192.168.34.144'
 alias sshopenwrt='ssh root@192.168.34.1'
 alias sshwazuh='ssh stefanaru@192.168.34.131'
+alias sshha='ssh root@10.20.40.132 -p22222'
