@@ -28,6 +28,16 @@ return {
 						dotnet_show_name_completion_suggestions = true,
 					},
 				},
+				args = {
+					"--logLevel=Information",
+					"--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
+					"--stdio",
+				},
+			},
+			args = {
+				"--logLevel=Information",
+				"--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
+				"--stdio",
 			},
 		},
 	},

@@ -74,7 +74,13 @@ return {
 						else
 							require("telescope.builtin").lsp_definitions()
 						end
-					end, "[G]oto [D]efinition")
+					end, "[G]oto [D]definition")
+
+					-- if client is roslyn call the monkey patch
+					if client_name == "roslyn" then
+						local lsp_client = vim.lsp.get_client_by_id(event.data.client_id)
+						utils.monkey_patch_semantic_tokens(lsp_client)
+					end
 
 					-- Find references for the word under your cursor.
 					map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
@@ -82,7 +88,7 @@ return {
 					--  Useful when your language has ways of declaring types without an actual implementation.
 					map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 
-					map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+					map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]definition")
 
 					-- Fuzzy find all the symbols in your current document.
 					--  Symbols are things like variables, functions, types, etc.
@@ -166,6 +172,7 @@ return {
 
 			require("roslyn").setup({
 				args = {
+					"--stdio",
 					"--logLevel=Information",
 					"--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
 					"--razorSourceGenerator=" .. vim.fs.joinpath(

@@ -76,7 +76,7 @@ sync_repo() {
 		fi
 
 		had_changes_on_origin=$(
-			git pull origin main-next 2>&1 | grep -q 'up-to-date'
+			git pull origin main-next 2>&1 | grep -q 'up to date'
 			echo $?
 		)
 
@@ -154,7 +154,8 @@ sync_repo() {
 					echo "Running npm run build in $dir$npm_dir..."
 					# if $dir ends with nx-apps, run nx build
 					if [[ $dir == *nx-apps ]]; then
-						nx run-many --targets=build &>/dev/null 2>&1
+						# nx run-many --targets=build &>/dev/null 2>&1
+						nx run-many --targets=build -p fabricscaaner capture
 					else
 						npm run build &>/dev/null 2>&1
 					fi
