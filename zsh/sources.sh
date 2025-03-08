@@ -6,3 +6,6 @@ if [ -f ~/.zshprivatealiases ]; then
     source ~/.zshprivatealiases
 fi
 
+if [ -f ~/.zshprivatenv ]; then
+    source ~/.zshprivatenv
+fi

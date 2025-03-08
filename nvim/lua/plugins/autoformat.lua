@@ -29,6 +29,7 @@ return {
 			typescriptreact = { "prettierd", "prettier", stop_after_first = true },
 			-- markdown = { { "prettierd", "prettier" } },
 			groovy = { "npm_groovy_lint" },
+			terraform = { "terraform_fmt" },
 			sh = { "shfmt" },
 			["*"] = { "codespell" },
 			["_"] = { "trim_whitespace" },

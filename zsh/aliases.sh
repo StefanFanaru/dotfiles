@@ -7,6 +7,7 @@ alias lt='\lsd --tree'
 
 # Renames
 alias v='nvim'
+alias vi='nvim'
 alias vv='nvim .'
 alias cls='\clear'
 alias clear='echo $mistakeMessage; false'
@@ -37,7 +38,7 @@ alias syncproj="~/dotfiles/scripts/workflow/sync-work-projects.sh"
 alias logoutnow='kill -9 -1'
 alias myip='curl ipinfo.io/ip'
 alias xsc="xclip -selection clipboard"
-alias seejson="xclip -o -selection clipboard | jless"
+alias seejson="pbpaste | jless"
 alias gvu="nmcli connection up 'Gemini VPN'"
 alias gvd="nmcli connection down 'Gemini VPN'"
 alias gvp="nmcli connection show --active"
@@ -76,19 +77,21 @@ alias kn='kubens'
 alias k='kubectl'
 
 # NOTE: Dotnet
-alias db='dotnet build'
-alias dr='dotnet run'
-alias dt='dotnet test'
-alias dres='dotnet restore'
+alias db='/Users/stefanaru/dotfiles/scripts/workflow/dotnet_command.sh build'
+alias dr='/Users/stefanaru/dotfiles/scripts/workflow/dotnet_command.sh run'
+alias dt='/Users/stefanaru/dotfiles/scripts/workflow/dotnet_command.sh test'
+alias dres='/Users/stefanaru/dotfiles/scripts/workflow/dotnet_command.sh restore'
+alias dw='/Users/stefanaru/dotfiles/scripts/workflow/dotnet_command.sh watch'
 
 # NOTE: NPM
 alias ni='npm install'
 alias ns='npm run start'
 
 # NOTE: SSH
-alias sshserviable='ssh root@192.168.34.190'
-alias sshrobbie='ssh root@192.168.34.191'
+alias sshserviable='ssh root@serviable'
+alias sshrobbie='ssh root@robbie'
 alias sshnas='ssh truenas_admin@192.168.34.144'
 alias sshopenwrt='ssh root@192.168.34.1'
 alias sshwazuh='ssh stefanaru@192.168.34.131'
 alias sshha='ssh root@10.20.40.132 -p22222'
+alias sqlstart='ssh root@serviable "pct start 114"'

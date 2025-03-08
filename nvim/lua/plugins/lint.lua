@@ -8,6 +8,7 @@ return {
 			lint.linters_by_ft["json"] = { "jsonlint" }
 			lint.linters_by_ft["terraform"] = { "tflint" }
 			lint.linters_by_ft["typescript"] = { "eslint" }
+			lint.linters_by_ft["typescriptreact"] = { "eslint" }
 			lint.linters_by_ft["groovy"] = { "npm-groovy-lint" }
 			lint.linters_by_ft["dockerfile"] = { "hadolint" }
 

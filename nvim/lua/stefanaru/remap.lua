@@ -18,6 +18,15 @@ map("n", "<C-u>", "<C-u>zz")
 map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
 
+-- map ]t to do require("trouble").next({ jump = true })
+--
+map("n", "]t", function()
+	require("trouble").next({ jump = true })
+end, "Jump to next trouble item")
+
+map("n", "[t", function()
+	require("trouble").previous({ jump = true })
+end, "Jump to next trouble item")
 -- When pasting over preserve initial yanked value
 map("x", "<leader>p", [["_dP]], "Paste while keeping registry")
 
@@ -67,3 +76,6 @@ end)
 map("n", "<leader>mr", function()
 	require("csharp.features.code-runner").execute()
 end)
+
+local bufopts = { noremap = true, silent = true, buffer = bufnr }
+vim.keymap.set("n", "<space>rr", vim.diagnostic.open_float, bufopts)

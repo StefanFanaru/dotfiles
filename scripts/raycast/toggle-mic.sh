@@ -14,10 +14,11 @@
 
 if [ $(SwitchAudioSource -t input -a | grep -c "HyperX SoloCast") -eq 1 ]; then
 	SwitchAudioSource -t input -s "HyperX SoloCast" >/dev/null
+	SwitchAudioSource -m toggle -t input >/dev/null
 else
 	SwitchAudioSource -t input -s "MacBook Air Microphone" >/dev/null
+	SwitchAudioSource -m toggle -t input >/dev/null
 fi
-SwitchAudioSource -m toggle -t input >/dev/null
 
 # Set volume to 75%
 osascript -e "set volume output volume 75"

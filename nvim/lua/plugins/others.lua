@@ -2,9 +2,26 @@ return {
 	{ "tpope/vim-sleuth", event = { "BufReadPost", "BufNewFile" } },
 	{ "tpope/vim-unimpaired", event = { "BufReadPost", "BufNewFile" } },
 	{
+		"m4xshen/hardtime.nvim",
+		dependencies = { "MunifTanjim/nui.nvim" },
+		opts = {},
+	},
+	{
 		"nvim-pack/nvim-spectre",
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
+			require("spectre").setup({
+				replace_engine = {
+					["sed"] = {
+						cmd = "sed",
+						args = {
+							"-i",
+							"",
+							"-E",
+						},
+					},
+				},
+			})
 			vim.keymap.set("n", "<leader>sp", '<cmd>lua require("spectre").toggle()<CR>', {
 				desc = "Toggle Spectre",
 			})

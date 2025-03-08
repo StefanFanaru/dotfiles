@@ -225,6 +225,7 @@ return {
 						},
 					},
 				},
+				eslint = {},
 				lua_ls = {
 					on_attach = function() end,
 					settings = {
@@ -238,7 +239,7 @@ return {
 					},
 				},
 				prettier = {},
-
+				terraformls = {},
 				angularls = {},
 				bashls = {
 					cmd = { "bash-language-server", "start" },

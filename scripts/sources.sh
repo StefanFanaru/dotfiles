@@ -6,3 +6,4 @@ source "$DOT_FILES"/scripts/utils.sh
 source "$DOT_FILES"/scripts/workflow/kubernetes.sh
 source "$DOT_FILES"/scripts/workflow/azure.sh
 source "$DOT_FILES"/scripts/workflow/misc.sh
+source "$DOT_FILES"/scripts/sdeploy.sh

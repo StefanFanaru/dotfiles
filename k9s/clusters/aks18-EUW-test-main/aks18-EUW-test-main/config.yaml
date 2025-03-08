@@ -1,14 +1,12 @@
 k9s:
-  cluster: aks17-EUW-dev-main
+  cluster: aks18-EUW-test-main
   namespace:
-    active: apogy-digital-platform
+    active: default
     lockFavorites: false
     favorites:
-    - apogy-digital-platform
-    - apogy-cloud
     - default
   view:
-    active: ns
+    active: po
   featureGates:
     nodeShell: false
   portForwardAddress: localhost
