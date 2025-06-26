@@ -1,6 +1,8 @@
 session=$1
 path=$2
-open -b "org.alacritty"
+
+# run applescript to open app Ghostty
+osascript -e 'tell application "Ghostty" to activate'
 
 # if session does not exist, create it at path
 if ! tmux has-session -t "$session" 2>/dev/null; then

@@ -47,4 +47,8 @@ if [ "$found" = false ]; then
     if [ -f "Program.cs" ]; then
         dotnet "$command" $args
     fi
+
+    if ls *.sln 1>/dev/null 2>&1; then
+        dotnet "$command" $args
+    fi
 fi

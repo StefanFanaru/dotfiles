@@ -57,6 +57,7 @@ alias tt='tasktango'
 alias mmr='/home/stefanaru/dotfiles/scripts/workflow/make-mr.sh'
 alias sus='systemctl suspend'
 alias font='$HOME/dotfiles/scripts/workflow/toggle-font.sh'
+alias rrray='$HOME/dotfiles/scripts/utils/raycast_restart.sh'
 
 # NOTE: BAT
 alias cat='bat --paging=never'

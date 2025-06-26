@@ -18,6 +18,11 @@ map("n", "<C-u>", "<C-u>zz")
 map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
 
+map("n", "m", "q", "Start recording macro")
+map("n", "M", "@q", "Play recorded macro")
+-- unmap q to avoid recording a macro by mistake
+map("n", "q", "<Nop>")
+
 -- map ]t to do require("trouble").next({ jump = true })
 --
 map("n", "]t", function()

@@ -4,7 +4,12 @@ return {
 	{
 		"m4xshen/hardtime.nvim",
 		dependencies = { "MunifTanjim/nui.nvim" },
-		opts = {},
+		opts = {
+			disabled_keys = {
+				["<Left>"] = {},
+				["<Right>"] = {},
+			},
+		},
 	},
 	{
 		"nvim-pack/nvim-spectre",

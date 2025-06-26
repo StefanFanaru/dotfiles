@@ -28,10 +28,10 @@ return {
 			javascriptreact = { "prettierd", "prettier", stop_after_first = true },
 			typescriptreact = { "prettierd", "prettier", stop_after_first = true },
 			-- markdown = { { "prettierd", "prettier" } },
-			groovy = { "npm_groovy_lint" },
+			-- groovy = { "npm_groovy_lint" },
 			terraform = { "terraform_fmt" },
 			sh = { "shfmt" },
-			["*"] = { "codespell" },
+			-- ["*"] = { "codespell" },
 			["_"] = { "trim_whitespace" },
 		},
 		formatters = {

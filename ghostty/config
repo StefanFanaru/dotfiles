@@ -1,0 +1,10 @@
+command=/opt/homebrew/bin/tmux new-session -A -D -s main
+macos-titlebar-proxy-icon = hidden
+title = " "
+macos-titlebar-style = hidden
+keybind = cmd+t=unbind
+quit-after-last-window-closed = true
+shell-integration = zsh
+window-save-state = always
+auto-update = download
+auto-update-channel = stable

@@ -249,7 +249,7 @@ return {
 				shellcheck = {},
 				gopls = {},
 				pyright = {},
-				vale_ls = {},
+				-- vale_ls = {},
 				rzls = {},
 				-- omnisharp = {
 				-- 	cmd = { "/home/stefanaru/bin/omnisharp/OmniSharp" },
@@ -270,18 +270,18 @@ return {
 				-- },
 			}
 
-			local groovy_lsp_jar = dot_files_env .. "/dependencies/groovy-lsp/groovy-language-server-all.jar"
-			require("lspconfig").groovyls.setup({
-
-				filetypes = { "groovy" },
-
-				capabilities = capabilities,
-				cmd = {
-					"java",
-					"-jar",
-					groovy_lsp_jar,
-				},
-			})
+			-- local groovy_lsp_jar = dot_files_env .. "/dependencies/groovy-lsp/groovy-language-server-all.jar"
+			-- require("lspconfig").groovyls.setup({
+			--
+			-- 	filetypes = { "groovy" },
+			--
+			-- 	capabilities = capabilities,
+			-- 	cmd = {
+			-- 		"java",
+			-- 		"-jar",
+			-- 		groovy_lsp_jar,
+			-- 	},
+			-- })
 
 			-- require("roslyn").setup({
 			-- 	-- dotnet_cmd = "dotnet",
