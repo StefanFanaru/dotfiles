@@ -4,6 +4,7 @@ mistakeMessage='This is not the command you are looking for'
 alias l='\lsd'
 alias ll='\lsd -la'
 alias lt='\lsd --tree'
+alias ls='\lsd -la'
 
 # Renames
 alias v='nvim'
