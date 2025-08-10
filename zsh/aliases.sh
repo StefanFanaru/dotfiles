@@ -2,6 +2,7 @@ mistakeMessage='This is not the command you are looking for'
 # NOTE: LSD-RS
 # https://github.com/lsd-rs/lsd
 alias l='\lsd'
+alias ll='echo $mistakeMessage; false'
 alias la='\lsd -la'
 alias lt='\lsd --tree'
 alias ls='\lsd -la'
@@ -11,13 +12,13 @@ alias ls='\lsd -la'
 if command -v nvim &>/dev/null; then
 	alias vim='nvim'
 	alias vi='nvim'
-	alias v='nvim .'
-	alias vv='nvim'
+	alias v='nvim'
+	alias vv='nvim .'
 else
 	alias vim='vim'
 	alias vi='vim'
-	alias v='vim .'
-	alias vv='vim'
+	alias v='vim'
+	alias vv='vim .'
 fi
 
 alias cls='\clear'
