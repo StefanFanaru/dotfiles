@@ -18,7 +18,7 @@ else
 	alias v='vim'
 fi
 
-alias cls='clear'
+alias cls='\clear'
 alias clear='echo $mistakeMessage; false'
 alias lg='lazygit'
 alias sa='sudo'
@@ -67,7 +67,6 @@ alias mmr='/home/stefanaru/dotfiles/scripts/workflow/make-mr.sh'
 alias sus='systemctl suspend'
 alias font='$HOME/dotfiles/scripts/workflow/toggle-font.sh'
 alias rrray='$HOME/dotfiles/scripts/utils/raycast_restart.sh'
-alias shutdownnow='sudo shutdown -h now'
 
 # NOTE: BAT
 alias cat='bat --paging=never'
