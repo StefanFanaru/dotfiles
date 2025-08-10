@@ -67,8 +67,13 @@ fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 
 # Load Angular CLI autocompletion.
-source <(ng completion script)
-export PATH="$PATH:/opt/mssql-tools18/bin"
-export DOTNET_ROOT=/usr/local/share/dotnet
+# check if ng is in path / installed
+if command -v ng &> /dev/null; then
+    source <(ng completion script)
+    export PATH="$PATH:/opt/mssql-tools18/bin"
+    export DOTNET_ROOT=/usr/local/share/dotnet
+else
+    echo "Angular CLI (ng) is not installed. Skipping autocompletion setup."
+fi
 
 setopt VI
