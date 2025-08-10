@@ -17,7 +17,8 @@ else
 	alias vi='vim'
 	alias v='vim'
 fi
-alias cls='\clear'
+
+alias cls='clear'
 alias clear='echo $mistakeMessage; false'
 alias lg='lazygit'
 alias sa='sudo'
