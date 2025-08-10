@@ -1,11 +1,16 @@
 # Install linux packages
-sudo apt install zsh
-sudo apt install build-essential -y
+sudo apt install zsh -y
+sudo apt install git -y
 sudo apt install fzf -y # fuzzy finder
 sudo apt install jq yq -y
 sudo apt install lsd -y
 sudo apt install bat -y
-sudo apt install lazygit -y
+
+# install lazygit
+LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
+curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+tar xf lazygit.tar.gz lazygit
+sudo install lazygit -D -t /usr/local/bin/
 
 echo "Install lsd manually from here https://github.com/lsd-rs/lsd/releases"
 echo "Install bat https://github.com/sharkdp/bat/releases/tag/v0.24.0"
