@@ -2,7 +2,7 @@ mistakeMessage='This is not the command you are looking for'
 # NOTE: LSD-RS
 # https://github.com/lsd-rs/lsd
 alias l='\lsd'
-alias ll='\lsd -la'
+alias la='\lsd -la'
 alias lt='\lsd --tree'
 alias ls='\lsd -la'
 
