@@ -1,7 +1,7 @@
 mistakeMessage='This is not the command you are looking for'
 # NOTE: LSD-RS
 # https://github.com/lsd-rs/lsd
-alias l='\lsd'
+alias l='\lsd -l'
 alias ll='echo $mistakeMessage; false'
 alias la='\lsd -la'
 alias lt='\lsd --tree'
