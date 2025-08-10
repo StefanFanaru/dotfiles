@@ -13,7 +13,6 @@ if command -v nvim &>/dev/null; then
 	alias vi='nvim'
 	alias v='nvim'
 else
-	echo "nvim is not installed, using vim instead"
 	alias vim='vim'
 	alias vi='vim'
 	alias v='vim'
@@ -67,6 +66,7 @@ alias mmr='/home/stefanaru/dotfiles/scripts/workflow/make-mr.sh'
 alias sus='systemctl suspend'
 alias font='$HOME/dotfiles/scripts/workflow/toggle-font.sh'
 alias rrray='$HOME/dotfiles/scripts/utils/raycast_restart.sh'
+alias shutdownnow='sudo shutdown -h now'
 
 # NOTE: BAT
 alias cat='bat --paging=never'
