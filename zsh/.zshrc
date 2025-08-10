@@ -13,10 +13,8 @@ export LANG=en_US.UTF-8
 export ZSH=$HOME/.oh-my-zsh
 export DOTNET_ROOT=$HOME/.dotnet
 
+export DOT_FILES="$HOME/dotfiles"
 if [ ! -d "$DOT_FILES" ]; then
-    export DOT_FILES="$HOME/dotfiles"
-fi
-if [ ! -d "$HOME/.dotfiles" ]; then
     export DOT_FILES="$HOME/.dotfiles"
 fi
 
