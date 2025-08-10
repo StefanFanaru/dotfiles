@@ -11,13 +11,13 @@ alias ls='\lsd -la'
 if command -v nvim &>/dev/null; then
 	alias vim='nvim'
 	alias vi='nvim'
-	alias v='nvim'
-	alias vv='echo $mistakeMessage; false'
+	alias v='nvim .'
+	alias vv='nvim'
 else
 	alias vim='vim'
 	alias vi='vim'
-	alias v='vim'
-	alias vv='echo $mistakeMessage; false'
+	alias v='vim .'
+	alias vv='vim'
 fi
 
 alias cls='\clear'
