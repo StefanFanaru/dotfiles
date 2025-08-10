@@ -1,3 +1,4 @@
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$PATH:/home/stefanaru/.local/bin
 export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
@@ -18,6 +19,9 @@ export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
 export FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git/'"
 export FZF_COMPLETION_TRIGGER='~~'
 
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export GHOSTTY_SHELL_FEATURES="cursor,title"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
