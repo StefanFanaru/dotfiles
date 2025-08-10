@@ -7,9 +7,17 @@ alias lt='\lsd --tree'
 alias ls='\lsd -la'
 
 # Renames
-alias v='nvim'
-alias vi='nvim'
-alias vv='nvim .'
+# check if command nvim works
+if command -v nvim &>/dev/null; then
+	alias vim='nvim'
+	alias vi='nvim'
+	alias v='nvim'
+else
+	echo "nvim is not installed, using vim instead"
+	alias vim='vim'
+	alias vi='vim'
+	alias v='vim'
+fi
 alias cls='\clear'
 alias clear='echo $mistakeMessage; false'
 alias lg='lazygit'
