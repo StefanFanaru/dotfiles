@@ -66,3 +66,5 @@ fpath+=${ZDOTDIR:-~}/.zsh_functions
 source <(ng completion script)
 export PATH="$PATH:/opt/mssql-tools18/bin"
 export DOTNET_ROOT=/usr/local/share/dotnet
+
+setopt VI

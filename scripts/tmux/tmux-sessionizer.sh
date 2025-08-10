@@ -13,7 +13,7 @@ if [[ $# -eq 1 ]]; then
 	selected=$1
 else
 	# Find directories in specified paths
-	find_result=$(find ~/Code/Lectra/digital-platform ~/Code/Stefan ~/Code/Lectra ~/Code/Lectra/lectra-repos ~/dotfiles ~/Code/Lectra/apogy-cloud -mindepth 1 -maxdepth 1 -type d)
+	find_result=$(find ~/Code/Lectra/digital-platform ~/Code/Stefan ~/Code/Lectra ~/Code/Lectra/lectra-repos ~/dotfiles ~/Code/Lectra/apogy-cloud ~/Data -mindepth 1 -maxdepth 1 -type d)
 
 	# Append paths to the find results
 	find_result=$(append_paths "$find_result" "$HOME/dotfiles")

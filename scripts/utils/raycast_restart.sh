@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Force quit Raycast
-osascript -e 'quit app "Raycast"'
+# Force quit Raycast but force it!
+osascript -e 'tell application "Raycast" to quit'
 
 # Wait for a few seconds to ensure it has quit
 sleep 3

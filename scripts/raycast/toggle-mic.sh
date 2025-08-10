@@ -20,5 +20,5 @@ else
 	SwitchAudioSource -m toggle -t input >/dev/null
 fi
 
-# Set volume to 75%
-osascript -e "set volume output volume 75"
+# # Set volume to 75%
+# osascript -e "set volume output volume 75"

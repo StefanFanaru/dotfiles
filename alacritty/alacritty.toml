@@ -39,3 +39,6 @@ bindings = [
     { key = "L", mods = "Control|Shift", chars = "\uE003" },
     { key = ";", mods = "Control", chars = "&" }
 ]
+
+[terminal]
+osc52 = "CopyPaste"

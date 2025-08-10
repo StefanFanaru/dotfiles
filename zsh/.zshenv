@@ -8,3 +8,4 @@ export KUBE_EDITOR=nvim
 export K9S_CONFIG_DIR=~/dotfiles/k9s
 export DOCKER_HOST="tcp://192.168.34.195:2375"
 export DOTNET_WATCH_SUPPRESS_BROWSER_REFRESH=1
+export APP_ENVIRONMENT="s-fanaru"
