@@ -1,4 +1,4 @@
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+# export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$PATH:/home/stefanaru/.local/bin
 export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
@@ -72,8 +72,6 @@ if command -v ng &> /dev/null; then
     source <(ng completion script)
     export PATH="$PATH:/opt/mssql-tools18/bin"
     export DOTNET_ROOT=/usr/local/share/dotnet
-else
-    echo "Angular CLI (ng) is not installed. Skipping autocompletion setup."
 fi
 
 setopt VI

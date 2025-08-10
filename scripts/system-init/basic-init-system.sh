@@ -27,15 +27,40 @@ git clone https://github.com/StefanFanaru/dotfiles.git
 echo "Creating symlinks for dotfiles"
 sleep 2
 
-sudo ln -s ~/dotfiles/lsd ~/.config/lsd
-sudo ln -s ~/dotfiles/zsh/.profile ~/.profile
-sudo ln -s ~/dotfiles/zsh/.zshenv ~/.zshenv
-sudo ln -s ~/dotfiles/zsh/.zshrc ~/.zshrc
-sudo ln -s ~/dotfiles/bat ~/.config/bat
-sudo ln -s ~/dotfiles/lazygitconfig ~/.config/lazygit
+create_symlink() {
+    # Check if the correct number of arguments is provided
+    if [ "$#" -ne 2 ]; then
+        echo "Usage: create_symlink <target_file> <link_name>"
+        return 1
+    fi
+
+    # Assign arguments to variables
+    local TARGET="$1"
+    local LINK="$2"
+
+    # Check if the symbolic link already exists
+    if [ -e "$LINK" ]; then
+        echo "File exists: $LINK"
+
+        # Optionally remove or rename the existing file
+        echo "Removing or renaming the existing file..."
+        mv "$LINK" "$LINK.backup" # Rename the existing file to .zshenv.backup
+    fi
+
+    # Create the symbolic link
+    ln -s "$TARGET" "$LINK"
+    echo "Symbolic link created: $LINK -> $TARGET"
+}
+
+create_symlink ~/dotfiles/lsd ~/.config/lsd
+create_symlink ~/dotfiles/zsh/.profile ~/.profile
+create_symlink ~/dotfiles/zsh/.zshenv ~/.zshenv
+create_symlink ~/dotfiles/zsh/.zshrc ~/.zshrc
+create_symlink ~/dotfiles/bat ~/.config/bat
+create_symlink ~/dotfiles/lazygitconfig ~/.config/lazygit
 
 # Ask user if ghostty zsh should be setup
-read -p "Do you want to setup ghostty zsh? (y/n): " setup_ghostty
+read -r -p "Do you want to setup ghostty zsh? (y/n): " setup_ghostty
 if [[ "$setup_ghostty" == "y" || "$setup_ghostty" == "Y" ]]; then
     echo "Setting up ghostty zsh..."
     # add a line to .zshenv to source ~/dotfiles/zsh/.zshenvghostty
