@@ -12,7 +12,14 @@ export PATH=$PATH:/usr/local/go/bin
 export LANG=en_US.UTF-8
 export ZSH=$HOME/.oh-my-zsh
 export DOTNET_ROOT=$HOME/.dotnet
-export DOT_FILES="$HOME/dotfiles"
+
+if [ ! -d "$DOT_FILES" ]; then
+    export DOT_FILES="$HOME/dotfiles"
+fi
+if [ ! -d "$HOME/.dotfiles" ]; then
+    export DOT_FILES="$HOME/.dotfiles"
+fi
+
 # Disable ugly colors for folders with Others access
 # https://askubuntu.com/questions/881949/ugly-color-for-directories-in-gnome-terminal
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
